@@ -1,0 +1,140 @@
+/**
+ * Ishori Brand Colors
+ * Centralized color system based on brand guidelines
+ * Updated: 2025-10-23
+ */
+
+:root {
+  /* ===== PRIMARY BRAND COLORS ===== */
+  --brand-blood-red: #D00000;
+  --brand-lava-falls: #A52A2A;
+  --brand-deep-burgundy: #680C09;
+  --brand-vanilla: #FFD8D9;
+  
+  /* ===== NEUTRAL COLORS ===== */
+  --neutral-white: #FFFFFF;
+  --neutral-off-white: #F7F3EF;
+  --neutral-beige: #DACBB7;
+  --neutral-black: #010101;
+  --neutral-gray-light: #F5F5F5;
+  --neutral-gray-medium: #9CA3AF;
+  --neutral-gray-dark: #4B5563;
+  
+  /* ===== SPRING PALETTE (ACCENTS) ===== */
+  --accent-olive: #8E8B63;
+  --accent-sage: #D6D4AD;
+  --accent-blush-pink: #EDDADA;
+  --accent-dusty-rose: #CB8587;
+  
+  /* ===== MODERN ACCENTS ===== */
+  --accent-yimm-blue: #2EAC88;
+  --accent-old-lace: #FFF3E1;
+  --accent-red: #FA2D1A;
+  
+  /* ===== FUNCTIONAL COLORS ===== */
+  --color-success: #10B981;
+  --color-error: #D00000;
+  --color-warning: #F59E0B;
+  --color-info: #2EAC88;
+  
+  /* ===== NEUMORPHISM ===== */
+  --neu-bg-base: #F7F3EF;
+  --neu-bg-raised: #FFFFFF;
+  --neu-bg-pressed: #E8E4E0;
+  
+  /* Neumorphism Shadows */
+  --neu-shadow-light: -8px -8px 16px rgba(255, 255, 255, 0.8);
+  --neu-shadow-dark: 8px 8px 16px rgba(0, 0, 0, 0.1);
+  --neu-shadow-inset-light: inset -4px -4px 8px rgba(255, 255, 255, 0.8);
+  --neu-shadow-inset-dark: inset 4px 4px 8px rgba(0, 0, 0, 0.1);
+  
+  /* Combined Neumorphism Effects */
+  --neu-raised: var(--neu-shadow-light), var(--neu-shadow-dark);
+  --neu-pressed: var(--neu-shadow-inset-light), var(--neu-shadow-inset-dark);
+  --neu-flat: 4px 4px 8px rgba(0, 0, 0, 0.1), -4px -4px 8px rgba(255, 255, 255, 0.8);
+  
+  /* ===== SPACING SYSTEM ===== */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-2xl: 48px;
+  --spacing-3xl: 64px;
+  --spacing-4xl: 96px;
+  
+  /* ===== TYPOGRAPHY ===== */
+  --font-size-xs: 12px;
+  --font-size-sm: 14px;
+  --font-size-base: 16px;
+  --font-size-lg: 18px;
+  --font-size-xl: 20px;
+  --font-size-2xl: 24px;
+  --font-size-3xl: 32px;
+  --font-size-4xl: 40px;
+  --font-size-5xl: 48px;
+  --font-size-6xl: 64px;
+  
+  --line-height-tight: 1.2;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.75;
+  
+  /* ===== BORDER RADIUS ===== */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-2xl: 24px;
+  --radius-full: 9999px;
+  
+  /* ===== TRANSITIONS ===== */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 500ms cubic-bezier(0.4, 0, 0.2, 1);
+  
+  /* ===== SHADOWS ===== */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.15);
+  --shadow-2xl: 0 25px 50px rgba(0, 0, 0, 0.25);
+}
+
+/* ===== SEMANTIC COLOR ALIASES ===== */
+:root {
+  /* Primary Actions */
+  --color-primary: var(--brand-blood-red);
+  --color-primary-hover: var(--brand-lava-falls);
+  --color-primary-dark: var(--brand-deep-burgundy);
+  
+  /* Secondary Actions */
+  --color-secondary: var(--brand-vanilla);
+  --color-secondary-hover: var(--accent-blush-pink);
+  
+  /* Text Colors */
+  --color-text-primary: var(--neutral-black);
+  --color-text-secondary: var(--neutral-gray-dark);
+  --color-text-muted: var(--neutral-gray-medium);
+  --color-text-inverse: var(--neutral-white);
+  
+  /* Background Colors */
+  --color-bg-primary: var(--neutral-white);
+  --color-bg-secondary: var(--neutral-off-white);
+  --color-bg-tertiary: var(--neutral-beige);
+  
+  /* Border Colors */
+  --color-border-light: rgba(0, 0, 0, 0.05);
+  --color-border-medium: rgba(0, 0, 0, 0.1);
+  --color-border-dark: rgba(0, 0, 0, 0.2);
+}
+
+/* ===== DARK MODE (Optional) ===== */
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Override colors for dark mode if needed */
+    --color-bg-primary: #1a1a1a;
+    --color-bg-secondary: #2a2a2a;
+    --color-text-primary: #ffffff;
+    --color-text-secondary: #e0e0e0;
+  }
+}

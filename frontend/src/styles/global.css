@@ -1,0 +1,192 @@
+/* Ishori - Global Styles */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  /* Refined Color Palette - Inspired by Indian Textiles */
+  --primary-deep-plum: #4A1942;
+  --primary-royal-purple: #6B2D5C;
+  --accent-rose: #D8737F;
+  --accent-blush: #F4C2C2;
+  --soft-cream: #FFF9F0;
+  --warm-ivory: #FFFAF5;
+  --dusty-mauve: #C5A3BD;
+  --golden-shimmer: #E8D5B7;
+  --silk-white: #FEFEFE;
+  --charcoal-text: #2B2B2B;
+  /* Common tokens used across component styles */
+  --color-primary-black: #0a0a0a;
+  --color-rose-gold: #B76E79;
+  --glass-bg: rgba(255, 255, 255, 0.12);
+  --glass-border: rgba(255, 255, 255, 0.25);
+  --color-shadow: rgba(107, 45, 92, 0.10);
+  --neumorphic-shadow: 8px 8px 16px rgba(0,0,0,0.05), -8px -8px 16px rgba(255,255,255,0.6);
+  --transition-normal: 300ms ease;
+  --color-blush: #F4C2C2;
+  
+  /* Subtle Gradients */
+  --gradient-silk: linear-gradient(135deg, #FFF9F0 0%, #FFFAF5 50%, #F9F1E8 100%);
+  --gradient-sunset: linear-gradient(120deg, #F4C2C2 0%, #D8737F 50%, #C5A3BD 100%);
+  --gradient-royal: linear-gradient(135deg, #6B2D5C 0%, #4A1942 100%);
+  
+  /* Glassmorphism - Refined */
+  --glass-light: rgba(255, 255, 255, 0.45);
+  --glass-shadow: 0 8px 32px 0 rgba(107, 45, 92, 0.08);
+  
+  /* Refined Shadows */
+  --shadow-soft: 0 2px 16px rgba(107, 45, 92, 0.06);
+  --shadow-medium: 0 4px 24px rgba(107, 45, 92, 0.10);
+  --shadow-elevated: 0 8px 48px rgba(107, 45, 92, 0.14);
+  
+  /* Transitions - Natural Movement */
+  --ease-smooth: cubic-bezier(0.4, 0.0, 0.2, 1);
+  --ease-elegant: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --transition-swift: 280ms var(--ease-smooth);
+  --transition-graceful: 450ms var(--ease-elegant);
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: var(--charcoal-text);
+  background: var(--gradient-silk);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Scrollbar Styling - Elegant & Subtle */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--soft-cream);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--dusty-mauve);
+  border-radius: 4px;
+  transition: background var(--transition-swift);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-royal-purple);
+}
+
+/* Selection - Refined */
+::selection {
+  background: var(--accent-blush);
+  color: var(--primary-deep-plum);
+}
+
+/* Links */
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: var(--transition-normal);
+}
+
+/* Images */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Utility Classes */
+.container {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-gradient {
+  background: var(--gradient-sunset);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Glass Card Base */
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(14px) saturate(120%);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 8px 32px 0 var(--color-shadow);
+  border-radius: 24px;
+  transition: var(--transition-normal);
+}
+
+.glass-card:hover {
+  background: rgba(255, 255, 255, 0.18);
+  box-shadow: 0 12px 36px 0 var(--color-shadow);
+  transform: translateY(-2px) scale(1.01);
+}
+
+/* Neumorphic Card Base */
+.neumorphic-card {
+  background: #F8F8F8;
+  box-shadow: var(--neumorphic-shadow);
+  border-radius: 24px;
+  transition: var(--transition-normal);
+}
+
+/* Loading Spinner */
+.loader {
+  width: 48px;
+  height: 48px;
+  border: 5px solid var(--color-blush);
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: rotation 1.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Responsive Typography */
+@media (max-width: 768px) {
+  body {
+    font-size: 15px;
+  }
+}

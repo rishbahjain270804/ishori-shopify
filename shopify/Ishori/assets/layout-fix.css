@@ -1,165 +1,141 @@
-/* ISHORI LAYOUT FIX - Simple & Clean
+/* ISHORI LAYOUT ENHANCEMENTS
+ * Complements existing Shopify sections
  * Based on Moora.in and Pehrin.com
- * Guaranteed to work
  */
 
-/* Reset & Base */
-* { box-sizing: border-box; }
-
-body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
-  line-height: 1.6;
-  color: #333;
-}
-
-/* Container */
-.page-width {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 24px;
-}
-
-/* Section Spacing */
-.section {
-  padding: 60px 0;
-}
-
-/* Section Titles */
-.title,
-h2.title {
+/* Enhanced Section Titles - Works with existing .collection-list-title */
+.collection-list-title,
+.title-wrapper h2,
+h2.h2 {
   font-size: 28px;
   font-weight: 700;
   text-align: center;
   text-transform: uppercase;
   letter-spacing: 2px;
-  margin: 0 0 40px 0;
   color: #333;
 }
 
-/* Product Grid - 4 Columns */
-.grid {
-  display: grid;
+@media (max-width: 749px) {
+  .collection-list-title,
+  .title-wrapper h2 {
+    font-size: 20px;
+    letter-spacing: 1px;
+  }
+}
+
+/* Enhanced Grid Layout - Works with existing .grid classes */
+.grid--4-col-desktop {
   grid-template-columns: repeat(4, 1fr);
   gap: 24px;
 }
 
-@media (max-width: 989px) {
-  .grid {
+.grid--3-col-desktop {
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+@media screen and (min-width: 750px) and (max-width: 989px) {
+  .grid--4-col-desktop {
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
   }
 }
 
-@media (max-width: 749px) {
-  .grid {
+@media screen and (max-width: 749px) {
+  .grid--4-col-desktop,
+  .grid--3-col-desktop {
     grid-template-columns: repeat(2, 1fr);
     gap: 16px;
   }
 }
 
-/* Product Cards */
-.card {
-  background: #fff;
+/* Enhanced Product Cards - Works with existing .card structure */
+.card-wrapper {
+  transition: all 0.3s ease;
+}
+
+.card-wrapper:hover {
+  transform: translateY(-4px);
+}
+
+.card--card {
   border-radius: 8px;
   overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
   transition: all 0.3s ease;
-  border: 1px solid #f0f0f0;
 }
 
-.card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+.card-wrapper:hover .card--card {
+  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
 }
 
-.card__media {
-  position: relative;
-  aspect-ratio: 3/4;
-  overflow: hidden;
-  background: #f9f9f9;
-}
-
-.card__media img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+/* Enhanced Card Media - Works with existing .card__media */
+.card__media img,
+.card .media img {
   transition: transform 0.4s ease;
 }
 
-.card:hover .card__media img {
+.card-wrapper:hover .card__media img,
+.card-wrapper:hover .card .media img {
   transform: scale(1.05);
 }
 
-.card__content,
+/* Enhanced Card Content */
 .card__information {
   padding: 16px;
 }
 
-.card__heading {
+.card__heading,
+.card-information__text h3 {
   font-size: 14px;
   font-weight: 500;
   line-height: 1.4;
   color: #333;
   margin: 0 0 8px 0;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
 }
 
+/* Enhanced Price Display */
 .price {
   font-size: 16px;
   font-weight: 600;
   color: #5f0511;
 }
 
-/* Collection Cards */
-.collection-list {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
+/* Enhanced Collection Cards - Works with existing .collection-list */
+.collection-list.contains-card {
   gap: 24px;
 }
 
-@media (max-width: 989px) {
-  .collection-list {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-.collection-card {
-  position: relative;
-  border-radius: 8px;
-  overflow: hidden;
-  aspect-ratio: 3/4;
-}
-
-.collection-card img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.collection-list__item {
   transition: transform 0.3s ease;
 }
 
-.collection-card:hover img {
+.collection-list__item:hover {
+  transform: translateY(-4px);
+}
+
+.card--collection {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  transition: all 0.3s ease;
+}
+
+.collection-list__item:hover .card--collection {
+  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
+.card--collection .card__media img {
+  transition: transform 0.4s ease;
+}
+
+.collection-list__item:hover .card--collection .card__media img {
   transform: scale(1.05);
 }
 
-/* Multicolumn */
+/* Enhanced Multicolumn - Works with existing .multicolumn */
 .multicolumn-list {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
   gap: 32px;
-}
-
-@media (max-width: 989px) {
-  .multicolumn-list {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 749px) {
-  .multicolumn-list {
-    grid-template-columns: 1fr;
-  }
 }
 
 .multicolumn-card {
@@ -168,34 +144,101 @@ h2.title {
   background: #fff;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  transition: all 0.3s ease;
 }
 
-/* Buttons */
-.button {
-  display: inline-block;
+.multicolumn-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(95, 5, 17, 0.12);
+}
+
+.multicolumn-card__info h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #5f0511;
+  margin-bottom: 12px;
+  text-transform: capitalize;
+}
+
+.multicolumn-card__info p {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #666;
+}
+
+/* Enhanced Buttons - Works with existing .button */
+.button,
+.button--primary {
   padding: 12px 32px;
   background: #5f0511;
   color: #fff;
   border-radius: 6px;
-  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.button:hover,
+.button--primary:hover {
+  background: #3c030b;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(95, 5, 17, 0.3);
+}
+
+/* Enhanced Rich Text Section */
+.rich-text {
+  padding: 80px 24px;
+  background: #fff2f1;
+}
+
+.rich-text__blocks {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.rich-text__heading {
+  font-size: 36px;
+  font-weight: 600;
+  color: #5f0511;
+  margin-bottom: 24px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.rich-text__text {
+  font-size: 17px;
+  line-height: 1.8;
+  color: #555;
+}
+
+@media screen and (max-width: 749px) {
+  .rich-text__heading {
+    font-size: 24px;
+  }
+  
+  .rich-text__text {
+    font-size: 15px;
+  }
+}
+
+/* Newsletter Enhancement */
+.newsletter-form__field-wrapper {
+  display: flex;
+  gap: 12px;
+  max-width: 550px;
+  margin: 0 auto;
+}
+
+.newsletter-form__button {
+  background: #5f0511;
+  color: #fff;
   font-weight: 600;
   transition: all 0.3s ease;
 }
 
-.button:hover {
+.newsletter-form__button:hover {
   background: #3c030b;
   transform: translateY(-2px);
-}
-
-/* Instagram Grid */
-.instagram-feed {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
-}
-
-@media (max-width: 749px) {
-  .instagram-feed {
-    grid-template-columns: repeat(2, 1fr);
-  }
 }

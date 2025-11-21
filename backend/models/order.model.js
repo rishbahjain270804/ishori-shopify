@@ -85,12 +85,57 @@ const orderSchema = new mongoose.Schema(
       enum: ['Pending', 'Processing', 'Shipped', 'Delivered', 'Cancelled'],
       default: 'Pending',
     },
+    coupon: {
+      code: {
+        type: String,
+        uppercase: true,
+      },
+      discount: {
+        type: Number,
+        default: 0,
+      },
+    },
+    timeline: [
+      {
+        status: {
+          type: String,
+          required: true,
+        },
+        timestamp: {
+          type: Date,
+          default: Date.now,
+        },
+        note: String,
+        updatedBy: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: 'User',
+        },
+      },
+    ],
+    cancellation: {
+      reason: String,
+      cancelledBy: {
+        type: String,
+        enum: ['customer', 'admin'],
+      },
+      cancelledAt: Date,
+      refundStatus: {
+        type: String,
+        enum: ['pending', 'processing', 'completed', 'failed'],
+      },
+      refundAmount: Number,
+    },
+    invoice: {
+      invoiceNumber: String,
+      invoiceUrl: String,
+      generatedAt: Date,
+    },
   },
   {
     timestamps: true,
   }
 )
 
-const Order = mongoose.model('Order', orderSchema)
+const Order = mongoose.models.Order || mongoose.model('Order', orderSchema)
 
 export default Order

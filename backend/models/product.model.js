@@ -84,32 +84,37 @@ const productSchema = new mongoose.Schema(
     },
     reviews: [
       {
-        user: {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: 'User',
-        },
-        rating: {
-          type: Number,
-          required: true,
-          min: 1,
-          max: 5,
-        },
-        comment: String,
-        createdAt: {
-          type: Date,
-          default: Date.now,
-        },
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Review',
       },
     ],
+    reviewCount: {
+      type: Number,
+      default: 0,
+      min: 0,
+    },
   },
   {
     timestamps: true,
   }
 )
 
-// Index for search
-productSchema.index({ name: 'text', description: 'text' })
+// Text indexes for advanced search
+productSchema.index({ 
+  name: 'text', 
+  description: 'text', 
+  fabric: 'text', 
+  color: 'text' 
+})
 
-const Product = mongoose.model('Product', productSchema)
+// Additional indexes for filtering performance
+productSchema.index({ category: 1 })
+productSchema.index({ price: 1 })
+productSchema.index({ 'ratings.average': -1 })
+productSchema.index({ createdAt: -1 })
+productSchema.index({ featured: 1 })
+productSchema.index({ isActive: 1 })
+
+const Product = mongoose.models.Product || mongoose.model('Product', productSchema)
 
 export default Product

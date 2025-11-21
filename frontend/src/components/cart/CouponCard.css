@@ -1,0 +1,144 @@
+.coupon-card {
+  margin: 1rem 0;
+  padding: 1rem;
+  background: linear-gradient(135deg, #fff5e6 0%, #ffe6cc 100%);
+  border: 2px dashed #ff9933;
+  border-radius: 12px;
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.coupon-card-content {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.coupon-icon {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  border-radius: 50%;
+  color: #ff9933;
+}
+
+.coupon-details {
+  flex: 1;
+  min-width: 0;
+}
+
+.coupon-code-badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  background: white;
+  border: 1px solid #ff9933;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #ff9933;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.5rem;
+}
+
+.coupon-description {
+  font-size: 0.85rem;
+  color: #666;
+  margin: 0.25rem 0;
+}
+
+.coupon-discount-info {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.discount-badge {
+  padding: 0.25rem 0.5rem;
+  background: #ff9933;
+  color: white;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.discount-amount {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #2d7a2d;
+}
+
+.coupon-remove-btn {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 50%;
+  color: #666;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.coupon-remove-btn:hover {
+  background: #ff4444;
+  border-color: #ff4444;
+  color: white;
+  transform: scale(1.1);
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .coupon-card {
+    padding: 0.875rem;
+  }
+
+  .coupon-card-content {
+    gap: 0.75rem;
+  }
+
+  .coupon-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .coupon-icon svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .coupon-code-badge {
+    font-size: 0.85rem;
+    padding: 0.2rem 0.6rem;
+  }
+
+  .coupon-description {
+    font-size: 0.8rem;
+  }
+
+  .discount-badge {
+    font-size: 0.75rem;
+  }
+
+  .discount-amount {
+    font-size: 0.85rem;
+  }
+}

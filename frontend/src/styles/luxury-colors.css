@@ -1,0 +1,84 @@
+/* FEMININE LUXURY COLOR SYSTEM - LIGHT THEME */
+/* Elegant, sophisticated colors for a women's saree brand */
+
+:root {
+  /* Primary Feminine Colors - Warm & Elegant */
+  --luxury-deep-red: #8B0000;
+  --luxury-burgundy: #6B1B1B;
+  --luxury-wine: #4A0E0E;
+  --luxury-maroon: #800020;
+  
+  /* Rose Gold & Gold - Feminine Metallics */
+  --rose-gold: #B76E79;
+  --rose-gold-light: #E8B4B8;
+  --rose-gold-dark: #9B4F5A;
+  --champagne-gold: #F7E7CE;
+  --luxury-gold: #D4AF37;
+  --luxury-gold-light: #F4D03F;
+  --luxury-gold-dark: #B8860B;
+  
+  /* Light Backgrounds - Beige & Off-White */
+  --luxury-white: #FFFFFF;
+  --luxury-off-white: #F7F3EF;
+  --luxury-cream: #FFF8E7;
+  --luxury-beige: #DACBB7;
+  
+  /* Feminine Accents */
+  --blush-pink: #FFC0CB;
+  --dusty-rose: #DCAE96;
+  --coral: #FF6B6B;
+  --peach: #FFB6A3;
+  
+  /* Jewel Tones - Feminine */
+  --luxury-ruby: #E0115F;
+  --luxury-rose-quartz: #F7CAC9;
+  --luxury-amethyst: #9966CC;
+  --luxury-emerald: #50C878;
+  
+  /* Rich Neutrals - Light Palette */
+  --luxury-ivory: #FFFFF0;
+  --luxury-pearl: #F5F5F0;
+  --luxury-champagne: #F7E7CE;
+  --luxury-sand: #E8DCC4;
+  --luxury-linen: #FAF0E6;
+  --luxury-almond: #EFDECD;
+  
+  /* Text Colors for Light Theme */
+  --text-dark: #2C1810;
+  --text-medium: #5C4A3A;
+  --text-light: #8B7355;
+  
+  /* Gradients - Light & Elegant */
+  --gradient-rose-gold: linear-gradient(135deg, #B76E79 0%, #E8B4B8 50%, #D4AF37 100%);
+  --gradient-gold: linear-gradient(135deg, #D4AF37 0%, #F4D03F 50%, #B8860B 100%);
+  --gradient-burgundy: linear-gradient(135deg, #4A0E0E 0%, #6B1B1B 50%, #8B0000 100%);
+  --gradient-light-beige: linear-gradient(135deg, #F7F3EF 0%, #DACBB7 50%, #E8DCC4 100%);
+  --gradient-cream: linear-gradient(180deg, #FFFFF0 0%, #FFF8E7 100%);
+  --gradient-warm-light: linear-gradient(135deg, #FAF0E6 0%, #F7E7CE 50%, #EFDECD 100%);
+  
+  /* Shadows - Soft & Elegant for Light Theme */
+  --shadow-rose-gold: 0 4px 20px rgba(183, 110, 121, 0.2);
+  --shadow-gold: 0 4px 20px rgba(212, 175, 55, 0.15);
+  --shadow-gold-glow: 0 4px 30px rgba(244, 211, 94, 0.2);
+  --shadow-soft: 0 2px 8px rgba(44, 24, 16, 0.08);
+  --shadow-medium: 0 4px 16px rgba(44, 24, 16, 0.12);
+  --shadow-large: 0 8px 32px rgba(44, 24, 16, 0.16);
+  
+  /* Typography */
+  --font-luxury-display: 'Playfair Display', serif;
+  --font-luxury-body: 'Montserrat', sans-serif;
+  --font-luxury-accent: 'Cormorant Garamond', serif;
+  
+  /* Spacing */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+  --space-3xl: 64px;
+  
+  /* Transitions */
+  --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-fast: all 0.2s ease;
+}

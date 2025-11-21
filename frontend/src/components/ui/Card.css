@@ -1,0 +1,52 @@
+/* Unified Card Component */
+
+.card {
+  background: var(--bg-primary);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-color);
+  transition: all var(--transition-base);
+}
+
+.card-hover:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-4px);
+  border-color: var(--primary-200);
+}
+
+/* Variants */
+.card-default {
+  background: var(--bg-primary);
+}
+
+.card-elevated {
+  box-shadow: var(--shadow-md);
+}
+
+.card-outlined {
+  box-shadow: none;
+  border: 2px solid var(--border-color);
+}
+
+.card-ghost {
+  background: transparent;
+  box-shadow: none;
+  border: none;
+}
+
+/* Padding */
+.card-padding-none {
+  padding: 0;
+}
+
+.card-padding-sm {
+  padding: var(--space-4);
+}
+
+.card-padding-md {
+  padding: var(--space-6);
+}
+
+.card-padding-lg {
+  padding: var(--space-8);
+}

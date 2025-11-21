@@ -5,11 +5,17 @@ import connectDB from './config/database.js'
 
 // Import routes
 import authRoutes from './routes/auth.routes.js'
-import productRoutes from './routes/product.routes.js'
+import productRoutes from './routes/productRoutes.js'
 import orderRoutes from './routes/order.routes.js'
 import userRoutes from './routes/user.routes.js'
 import imageRoutes from './routes/image.routes.js'
 import videoRoutes from './routes/video.routes.js'
+import cartRoutes from './routes/cart.routes.js'
+import wishlistRoutes from './routes/wishlist.routes.js'
+import reviewRoutes from './routes/review.routes.js'
+import couponRoutes from './routes/coupon.routes.js'
+import paymentRoutes from './routes/payment.routes.js'
+import adminRoutes from './routes/admin.routes.js'
 import { getFeatures } from './config/features.js'
 
 // Load environment variables
@@ -55,6 +61,12 @@ app.use('/api/orders', orderRoutes)
 app.use('/api/users', userRoutes)
 app.use('/api/images', imageRoutes)
 app.use('/api/videos', videoRoutes)
+app.use('/api/cart', cartRoutes)
+app.use('/api/wishlist', wishlistRoutes)
+app.use('/api/reviews', reviewRoutes)
+app.use('/api/coupons', couponRoutes)
+app.use('/api/payments', paymentRoutes)
+app.use('/api/admin', adminRoutes)
 
 // Feature flags endpoint (public, cache-friendly)
 app.get('/api/features', (req, res) => {

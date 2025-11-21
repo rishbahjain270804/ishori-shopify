@@ -1,0 +1,123 @@
+.payment-methods {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.payment-methods-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 20px;
+}
+
+.payment-methods-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.payment-method-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 20px;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.payment-method-card:hover {
+  border-color: #9333ea;
+  background-color: #faf5ff;
+}
+
+.payment-method-card.selected {
+  border-color: #9333ea;
+  background-color: #faf5ff;
+  box-shadow: 0 0 0 3px rgba(147, 51, 234, 0.1);
+}
+
+.payment-method-radio input[type='radio'] {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  accent-color: #9333ea;
+}
+
+.payment-method-content {
+  flex: 1;
+}
+
+.payment-method-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.payment-method-icon {
+  font-size: 32px;
+  line-height: 1;
+}
+
+.payment-method-info {
+  flex: 1;
+}
+
+.payment-method-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.recommended-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  background: linear-gradient(135deg, #9333ea 0%, #7c3aed 100%);
+  color: white;
+  font-size: 11px;
+  font-weight: 600;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.payment-method-description {
+  font-size: 14px;
+  color: #6b7280;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .payment-methods {
+    padding: 20px;
+  }
+
+  .payment-methods-title {
+    font-size: 18px;
+  }
+
+  .payment-method-card {
+    padding: 16px;
+  }
+
+  .payment-method-icon {
+    font-size: 28px;
+  }
+
+  .payment-method-name {
+    font-size: 15px;
+  }
+
+  .payment-method-description {
+    font-size: 13px;
+  }
+}

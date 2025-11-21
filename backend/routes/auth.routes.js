@@ -1,12 +1,38 @@
-import express from 'express'
-import { register, login, getMe, updateProfile } from '../controllers/auth.controller.js'
-import { protect } from '../middleware/auth.middleware.js'
+import express from 'express';
+import {
+  register,
+  login,
+  getMe,
+  updateProfile,
+  changePassword,
+  forgotPassword,
+  resetPassword,
+  verifyEmail,
+  logout,
+  sendOTP,
+  verifyOTP,
+  resendOTP
+} from '../controllers/auth.controller.js';
+import { protect } from '../middleware/auth.middleware.js';
 
-const router = express.Router()
+const router = express.Router();
 
-router.post('/register', register)
-router.post('/login', login)
-router.get('/me', protect, getMe)
-router.put('/profile', protect, updateProfile)
+// Public routes
+router.post('/register', register);
+router.post('/login', login);
+router.post('/forgot-password', forgotPassword);
+router.post('/reset-password/:token', resetPassword);
+router.get('/verify-email/:token', verifyEmail);
 
-export default router
+// OTP routes
+router.post('/send-otp', sendOTP);
+router.post('/verify-otp', verifyOTP);
+router.post('/resend-otp', resendOTP);
+
+// Protected routes
+router.get('/me', protect, getMe);
+router.put('/profile', protect, updateProfile);
+router.put('/password', protect, changePassword);
+router.post('/logout', protect, logout);
+
+export default router;

@@ -22,6 +22,11 @@ export default defineConfig(({ mode }) => {
     },
     server: {
       port: 3000,
+      host: true,
+      allowedHosts: [
+        '.loca.lt',
+        'hip-ghosts-laugh.loca.lt'
+      ],
       proxy: hasExplicitBase ? undefined : {
         '/api': 'http://localhost:5000',
       },

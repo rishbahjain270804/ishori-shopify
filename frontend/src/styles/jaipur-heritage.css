@@ -1,0 +1,322 @@
+/**
+ * ISHORI - JAIPUR HERITAGE COLOR SYSTEM
+ * Embracing the glory and heritage of Jaipur
+ * Rose Gold + Maroon Primary | Royal Secondary
+ */
+
+:root {
+  /* ===== PERFECT 5-COLOR PALETTE ===== */
+  --color-primary: #862009;          /* 1. Primary - Sienna (given) */
+  --color-secondary: #D4A574;        /* 2. Secondary - Golden Sand */
+  --color-tertiary: #FFF2F1;         /* 3. Tertiary - Lavender Blush (given) */
+  --color-fourth: #000000;           /* 4. Fourth - Black (given) */
+  --color-fifth: #C9A882;            /* 5. Fifth - Warm Beige (matches secondary) */
+  
+  /* ===== COLOR VARIATIONS ===== */
+  /* Primary (Sienna) Variations */
+  --primary-light: #A63820;
+  --primary-lighter: #C44828;
+  --primary-dark: #6B1907;
+  --primary-darker: #4A1105;
+  
+  /* Secondary (Golden Sand) Variations */
+  --secondary-light: #E0B88A;
+  --secondary-lighter: #ECC9A0;
+  --secondary-dark: #B89460;
+  --secondary-darker: #9C7D4C;
+  
+  /* Tertiary (Lavender) Variations */
+  --tertiary-light: #FFFBFA;
+  --tertiary-lighter: #FFFFFF;
+  --tertiary-dark: #FFE5E3;
+  --tertiary-darker: #FFD8D5;
+  
+  /* Fourth (Black) Variations */
+  --fourth-light: #1A1A1A;
+  --fourth-lighter: #333333;
+  --gray-dark: #4A4A4A;
+  --gray-medium: #6B6B6B;
+  --gray-light: #9B9B9B;
+  --gray-lighter: #CCCCCC;
+  
+  /* Fifth (Warm Beige) Variations */
+  --fifth-light: #D9BC98;
+  --fifth-lighter: #E5CBAA;
+  --fifth-dark: #B39670;
+  --fifth-darker: #9D835E;
+  
+  /* ===== TEXT COLORS (Using Core Palette) ===== */
+  --text-primary: var(--color-black);
+  --text-secondary: var(--black-lighter);
+  --text-muted: var(--gray-medium);
+  --text-light: var(--color-lavender);
+  --text-on-dark: var(--color-lavender);
+  --text-on-teal: var(--color-black);
+  --text-on-sienna: var(--color-lavender);
+  
+  /* ===== BACKGROUND COLORS (Using Core Palette) ===== */
+  --bg-primary: var(--color-lavender);
+  --bg-secondary: var(--lavender-light);
+  --bg-dark: var(--color-black);
+  --bg-sienna: var(--color-sienna);
+  --bg-teal: var(--color-teal);
+  --bg-hunter: var(--color-hunter);
+  
+  /* ===== PERFECT GRADIENTS ===== */
+  --gradient-primary: linear-gradient(135deg, var(--color-primary) 0%, var(--primary-darker) 100%);
+  --gradient-secondary: linear-gradient(135deg, var(--color-secondary) 0%, var(--secondary-darker) 100%);
+  --gradient-warm: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+  --gradient-elegant: linear-gradient(135deg, var(--primary-light) 0%, var(--color-primary) 100%);
+  --gradient-golden: linear-gradient(135deg, var(--secondary-light) 0%, var(--color-fifth) 100%);
+  --gradient-overlay: linear-gradient(135deg, rgba(134, 32, 9, 0.9) 0%, rgba(212, 165, 116, 0.8) 100%);
+  --gradient-subtle: linear-gradient(135deg, rgba(134, 32, 9, 0.05) 0%, rgba(212, 165, 116, 0.05) 100%);
+  
+  /* ===== GOLDEN RATIO & SPIRAL PROPORTIONS ===== */
+  --golden-ratio: 1.618;
+  --golden-ratio-inverse: 0.618;
+  
+  /* Golden Spiral Fibonacci Sequence */
+  --spiral-1: 1;
+  --spiral-2: 1.618;
+  --spiral-3: 2.618;
+  --spiral-5: 4.236;
+  --spiral-8: 6.854;
+  --spiral-13: 11.09;
+  --spiral-21: 17.944;
+  
+  /* Golden Ratio Spacing (based on 16px) */
+  --space-phi-xs: 6px;      /* ~0.382 * 16 */
+  --space-phi-sm: 10px;     /* ~0.618 * 16 */
+  --space-phi-md: 16px;     /* base */
+  --space-phi-lg: 26px;     /* ~1.618 * 16 */
+  --space-phi-xl: 42px;     /* ~2.618 * 16 */
+  --space-phi-2xl: 68px;    /* ~4.236 * 16 */
+  --space-phi-3xl: 110px;   /* ~6.854 * 16 */
+  
+  /* Golden Ratio Typography Scale */
+  --font-phi-xs: 10px;      /* 16 / 1.618 */
+  --font-phi-sm: 12px;      /* 16 / 1.333 */
+  --font-phi-base: 16px;    /* base */
+  --font-phi-md: 20px;      /* 16 * 1.25 */
+  --font-phi-lg: 26px;      /* 16 * 1.618 */
+  --font-phi-xl: 42px;      /* 16 * 2.618 */
+  --font-phi-2xl: 68px;     /* 16 * 4.236 */
+  --font-phi-3xl: 110px;    /* 16 * 6.854 */
+  
+  /* ===== ROYAL TYPOGRAPHY - Indian Heritage Fonts ===== */
+  --font-brand: 'Almendra Display', cursive;
+  --font-royal-display: 'Playfair Display', 'Cormorant Garamond', serif;
+  --font-royal-heading: 'Cinzel', 'Trajan Pro', serif;
+  --font-royal-body: 'Lora', 'Crimson Text', serif;
+  --font-modern: 'Montserrat', 'Inter', sans-serif;
+  --font-hindi: 'Noto Serif Devanagari', serif;
+  
+  /* ===== SHADOWS - Elegant & Subtle ===== */
+  --shadow-soft: 0 2px 8px rgba(128, 0, 32, 0.08);
+  --shadow-medium: 0 4px 16px rgba(128, 0, 32, 0.12);
+  --shadow-large: 0 8px 32px rgba(128, 0, 32, 0.16);
+  --shadow-royal: 0 12px 48px rgba(65, 105, 225, 0.15);
+  --shadow-gold: 0 4px 20px rgba(255, 215, 0, 0.25);
+  
+  /* ===== BORDERS ===== */
+  --border-light: 1px solid rgba(128, 0, 32, 0.1);
+  --border-medium: 1px solid rgba(128, 0, 32, 0.2);
+  --border-royal: 2px solid var(--secondary-royal-gold);
+  
+  /* ===== TRANSITIONS ===== */
+  --transition-fast: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 350ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 500ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-elegant: 600ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  
+  /* ===== BORDER RADIUS ===== */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 24px;
+  --radius-full: 9999px;
+  
+  /* ===== Z-INDEX LAYERS ===== */
+  --z-base: 1;
+  --z-dropdown: 1000;
+  --z-sticky: 1020;
+  --z-fixed: 1030;
+  --z-modal-backdrop: 1040;
+  --z-modal: 1050;
+  --z-popover: 1060;
+  --z-tooltip: 1070;
+}
+
+/* ===== GOLDEN RATIO LAYOUT UTILITIES ===== */
+.golden-section-major {
+  flex: 1.618;
+}
+
+.golden-section-minor {
+  flex: 1;
+}
+
+.golden-width-major {
+  width: 61.8%;
+}
+
+.golden-width-minor {
+  width: 38.2%;
+}
+
+/* ===== HERITAGE PATTERNS ===== */
+.heritage-pattern-overlay {
+  background-image: 
+    repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(183, 110, 121, 0.03) 10px, rgba(183, 110, 121, 0.03) 20px),
+    repeating-linear-gradient(-45deg, transparent, transparent 10px, rgba(128, 0, 32, 0.03) 10px, rgba(128, 0, 32, 0.03) 20px);
+}
+
+.jaipur-motif {
+  background-image: radial-gradient(circle at 20% 50%, rgba(255, 215, 0, 0.1) 0%, transparent 50%),
+                    radial-gradient(circle at 80% 50%, rgba(65, 105, 225, 0.1) 0%, transparent 50%);
+}
+
+/* ===== BRAND NAME STYLING ===== */
+.brand-name-ishori {
+  font-family: var(--font-brand);
+  font-weight: 400;
+  letter-spacing: 2px;
+}
+
+/* Brand name with gradient */
+.brand-name-gradient {
+  font-family: var(--font-brand);
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+
+/* ===== BRAND NAME SIZE VARIATIONS ===== */
+.brand-name-sm {
+  font-family: var(--font-brand);
+  font-size: 20px;
+  letter-spacing: 1.5px;
+}
+
+.brand-name-md {
+  font-family: var(--font-brand);
+  font-size: 32px;
+  letter-spacing: 2px;
+}
+
+.brand-name-lg {
+  font-family: var(--font-brand);
+  font-size: 48px;
+  letter-spacing: 3px;
+}
+
+.brand-name-xl {
+  font-family: var(--font-brand);
+  font-size: 68px;
+  letter-spacing: 4px;
+}
+
+/* ===== BRAND NAME COLOR VARIATIONS ===== */
+.brand-name-rose-gold {
+  font-family: var(--font-brand);
+  color: var(--primary-rose-gold);
+}
+
+.brand-name-maroon {
+  font-family: var(--font-brand);
+  color: var(--primary-maroon);
+}
+
+.brand-name-white {
+  font-family: var(--font-brand);
+  color: var(--text-white);
+}
+
+.brand-name-black {
+  font-family: var(--font-brand);
+  color: var(--text-black);
+}
+
+/* ===== BRAND NAME RESPONSIVE ===== */
+.brand-name-responsive {
+  font-family: var(--font-brand);
+  font-size: 68px;
+  letter-spacing: 4px;
+}
+
+@media (max-width: 1024px) {
+  .brand-name-responsive {
+    font-size: 48px;
+    letter-spacing: 3px;
+  }
+}
+
+@media (max-width: 768px) {
+  .brand-name-responsive {
+    font-size: 32px;
+    letter-spacing: 2px;
+  }
+}
+
+
+/* ===== MODERN GLASSMORPHISM ===== */
+.glass-modern {
+  background: rgba(255, 242, 241, 0.25);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 32px 0 rgba(134, 32, 9, 0.1);
+}
+
+.glass-strong {
+  background: rgba(255, 242, 241, 0.4);
+  backdrop-filter: blur(25px) saturate(200%);
+  -webkit-backdrop-filter: blur(25px) saturate(200%);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 12px 40px 0 rgba(134, 32, 9, 0.15);
+}
+
+.glass-subtle {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(15px) saturate(150%);
+  -webkit-backdrop-filter: blur(15px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 24px 0 rgba(134, 32, 9, 0.08);
+}
+
+/* ===== GOLDEN SPIRAL LAYOUT UTILITIES ===== */
+.spiral-container {
+  display: grid;
+  grid-template-columns: repeat(21, 1fr);
+  grid-template-rows: repeat(13, 1fr);
+  gap: var(--space-phi-md);
+}
+
+.spiral-section-1 {
+  grid-column: span 8;
+  grid-row: span 5;
+}
+
+.spiral-section-2 {
+  grid-column: span 13;
+  grid-row: span 8;
+}
+
+.spiral-section-3 {
+  grid-column: span 5;
+  grid-row: span 3;
+}
+
+/* Modern Component Positioning */
+.modern-float {
+  position: relative;
+  transform: translateZ(0);
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.modern-float:hover {
+  transform: translateY(-8px) translateZ(0);
+}

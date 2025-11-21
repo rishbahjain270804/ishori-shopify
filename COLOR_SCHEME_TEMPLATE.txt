@@ -1,0 +1,46 @@
+🎨 Color Fields (Editable Template)
+Background: [#FFFFFF]
+Headings: [#]
+Text: [#]
+Links: [#]
+Hover Links: [#]
+Borders: [#]
+Shadow: [rgba(0, 0, 0, 0.1)]
+
+🖱️ Primary Button
+Background: [#]
+Text: [#FFFFFF]
+Borders: [#]
+Hover Background: [#]
+Hover Text: [#]
+Hover Borders: [#]
+
+🔲 Secondary Button
+Background: [#FFFFFF]
+Text: [#]
+Borders: [#]
+Hover Background: [#]
+Hover Text: [#]
+Hover Borders: [#]
+
+✏️ Inputs
+Background: [#FFFFFF]
+Text: [#]
+Borders: [#]
+Hover Background: [#]
+
+🧶 Variants
+Background: [#]
+Text: [#]
+Borders: [#]
+Hover Background: [#]
+Hover Text: [#]
+Hover Borders: [#]
+
+🪡 Selected Variants
+Background: [#]
+Text: [#]
+Borders: [#]
+Hover Background: [#]
+Hover Text: [#]
+Hover Borders: [#]

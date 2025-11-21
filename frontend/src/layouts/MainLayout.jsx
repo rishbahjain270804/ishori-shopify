@@ -1,15 +1,15 @@
-import { Outlet } from 'react-router-dom'
-import Navbar from '../components/Navbar'
-import Footer from '../components/Footer'
+import NavbarEnhanced from '../components/NavbarEnhanced'
+import FooterUnified from '../components/FooterUnified'
+import './MainLayout.css'
 
-const MainLayout = () => {
+const MainLayout = ({ children, className = '' }) => {
   return (
     <div className="main-layout">
-      <Navbar />
-      <main>
-        <Outlet />
+      <NavbarEnhanced />
+      <main className={`main-content ${className}`}>
+        {children}
       </main>
-      <Footer />
+      <FooterUnified />
     </div>
   )
 }

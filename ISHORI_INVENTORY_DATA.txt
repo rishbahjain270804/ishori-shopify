@@ -1,0 +1,41 @@
+Handle	Title	Option1 Name	Option1 Value	Option2 Name	Option2 Value	Option3 Name	Option3 Value	SKU	HS Code	COO	Location	Bin name	Incoming (not editable)	Unavailable (not editable)	Committed (not editable)	Available (not editable)	On hand (current)	On hand (new)
+tussar-silk-kalamkari	Ishori Tussar Silk Kalamkari Block Print Saree with Village Motifs	Size	Free Size	Color	Natural Beige	Blouse	With Blouse	TSK-KB-001	5007	India	Warehouse A	A1-01-001	0	0	2	18	20	20
+tussar-silk-kalamkari	Ishori Tussar Silk Kalamkari Block Print Saree with Village Motifs	Size	Free Size	Color	Natural Beige	Blouse	Without Blouse	TSK-KB-002	5007	India	Warehouse A	A1-01-002	0	0	1	14	15	15
+royal-blue-silk-zari	Ishori Royal Blue Silk Saree with Zari Work – Banarasi Style	Size	Free Size	Color	Royal Blue	Blouse	With Blouse	RBS-ZW-001	5007	India	Warehouse A	A1-02-001	0	0	3	22	25	25
+royal-blue-silk-zari	Ishori Royal Blue Silk Saree with Zari Work – Banarasi Style	Size	Free Size	Color	Royal Blue	Blouse	Without Blouse	RBS-ZW-002	5007	India	Warehouse A	A1-02-002	0	0	2	18	20	20
+pink-silk-zari-embroidery	Ishori Pink Silk Saree with Zari Work and Embroidery – Banarasi Look	Size	Free Size	Color	Rani Pink	Blouse	With Blouse	PSK-ZE-001	5007	India	Warehouse A	A1-03-001	0	0	4	26	30	30
+pink-silk-zari-embroidery	Ishori Pink Silk Saree with Zari Work and Embroidery – Banarasi Look	Size	Free Size	Color	Rani Pink	Blouse	Without Blouse	PSK-ZE-002	5007	India	Warehouse A	A1-03-002	0	0	2	23	25	25
+chiffon-handwork-peacock	Ishori Chiffon Handwork Saree with Aari Tari and Peacock Border	Size	Free Size	Color	Deep Red	Blouse	With Blouse	CHF-AP-001	5407	India	Warehouse B	B1-01-001	0	0	3	17	20	20
+chiffon-handwork-peacock	Ishori Chiffon Handwork Saree with Aari Tari and Peacock Border	Size	Free Size	Color	Deep Red	Blouse	Without Blouse	CHF-AP-002	5407	India	Warehouse B	B1-01-002	0	0	1	14	15	15
+green-bandhani-georgette	Ishori Green Bandhani Georgette Saree with Handwork Border	Size	Free Size	Color	Emerald Green	Blouse	With Blouse	GBG-HB-001	5407	India	Warehouse B	B1-02-001	0	0	2	23	25	25
+green-bandhani-georgette	Ishori Green Bandhani Georgette Saree with Handwork Border	Size	Free Size	Color	Emerald Green	Blouse	Without Blouse	GBG-HB-002	5407	India	Warehouse B	B1-02-002	0	0	1	19	20	20
+tussar-silk-kalamkari	Ishori Tussar Silk Kalamkari Block Print Saree with Village Motifs	Size	Free Size	Color	Indigo Blue	Blouse	With Blouse	TSK-IB-001	5007	India	Warehouse A	A1-04-001	0	0	2	13	15	15
+tussar-silk-kalamkari	Ishori Tussar Silk Kalamkari Block Print Saree with Village Motifs	Size	Free Size	Color	Indigo Blue	Blouse	Without Blouse	TSK-IB-002	5007	India	Warehouse A	A1-04-002	0	0	1	9	10	10
+royal-blue-silk-zari	Ishori Royal Blue Silk Saree with Zari Work – Banarasi Style	Size	Free Size	Color	Navy Blue	Blouse	With Blouse	RBS-NV-001	5007	India	Warehouse A	A1-05-001	0	0	2	18	20	20
+royal-blue-silk-zari	Ishori Royal Blue Silk Saree with Zari Work – Banarasi Style	Size	Free Size	Color	Navy Blue	Blouse	Without Blouse	RBS-NV-002	5007	India	Warehouse A	A1-05-002	0	0	1	14	15	15
+pink-silk-zari-embroidery	Ishori Pink Silk Saree with Zari Work and Embroidery – Banarasi Look	Size	Free Size	Color	Light Pink	Blouse	With Blouse	PSK-LP-001	5007	India	Warehouse A	A1-06-001	0	0	3	22	25	25
+pink-silk-zari-embroidery	Ishori Pink Silk Saree with Zari Work and Embroidery – Banarasi Look	Size	Free Size	Color	Light Pink	Blouse	Without Blouse	PSK-LP-002	5007	India	Warehouse A	A1-06-002	0	0	2	18	20	20
+chiffon-handwork-peacock	Ishori Chiffon Handwork Saree with Aari Tari and Peacock Border	Size	Free Size	Color	Maroon	Blouse	With Blouse	CHF-MR-001	5407	India	Warehouse B	B1-03-001	0	0	2	18	20	20
+chiffon-handwork-peacock	Ishori Chiffon Handwork Saree with Aari Tari and Peacock Border	Size	Free Size	Color	Maroon	Blouse	Without Blouse	CHF-MR-002	5407	India	Warehouse B	B1-03-002	0	0	1	14	15	15
+green-bandhani-georgette	Ishori Green Bandhani Georgette Saree with Handwork Border	Size	Free Size	Color	Teal Green	Blouse	With Blouse	GBG-TG-001	5407	India	Warehouse B	B1-04-001	0	0	3	22	25	25
+green-bandhani-georgette	Ishori Green Bandhani Georgette Saree with Handwork Border	Size	Free Size	Color	Teal Green	Blouse	Without Blouse	GBG-TG-002	5407	India	Warehouse B	B1-04-002	0	0	2	18	20	20
+tussar-silk-kalamkari	Ishori Tussar Silk Kalamkari Block Print Saree with Village Motifs	Size	Free Size	Color	Mustard Yellow	Blouse	With Blouse	TSK-MY-001	5007	India	Warehouse A	A1-07-001	0	0	2	23	25	25
+tussar-silk-kalamkari	Ishori Tussar Silk Kalamkari Block Print Saree with Village Motifs	Size	Free Size	Color	Mustard Yellow	Blouse	Without Blouse	TSK-MY-002	5007	India	Warehouse A	A1-07-002	0	0	1	19	20	20
+royal-blue-silk-zari	Ishori Royal Blue Silk Saree with Zari Work – Banarasi Style	Size	Free Size	Color	Cobalt Blue	Blouse	With Blouse	RBS-CB-001	5007	India	Warehouse A	A1-08-001	0	0	3	17	20	20
+royal-blue-silk-zari	Ishori Royal Blue Silk Saree with Zari Work – Banarasi Style	Size	Free Size	Color	Cobalt Blue	Blouse	Without Blouse	RBS-CB-002	5007	India	Warehouse A	A1-08-002	0	0	2	13	15	15
+pink-silk-zari-embroidery	Ishori Pink Silk Saree with Zari Work and Embroidery – Banarasi Look	Size	Free Size	Color	Magenta	Blouse	With Blouse	PSK-MG-001	5007	India	Warehouse A	A1-09-001	0	0	4	21	25	25
+pink-silk-zari-embroidery	Ishori Pink Silk Saree with Zari Work and Embroidery – Banarasi Look	Size	Free Size	Color	Magenta	Blouse	Without Blouse	PSK-MG-002	5007	India	Warehouse A	A1-09-002	0	0	2	18	20	20
+chiffon-handwork-peacock	Ishori Chiffon Handwork Saree with Aari Tari and Peacock Border	Size	Free Size	Color	Wine Red	Blouse	With Blouse	CHF-WR-001	5407	India	Warehouse B	B1-05-001	0	0	2	23	25	25
+chiffon-handwork-peacock	Ishori Chiffon Handwork Saree with Aari Tari and Peacock Border	Size	Free Size	Color	Wine Red	Blouse	Without Blouse	CHF-WR-002	5407	India	Warehouse B	B1-05-002	0	0	1	19	20	20
+green-bandhani-georgette	Ishori Green Bandhani Georgette Saree with Handwork Border	Size	Free Size	Color	Mint Green	Blouse	With Blouse	GBG-MG-001	5407	India	Warehouse B	B1-06-001	0	0	3	22	25	25
+green-bandhani-georgette	Ishori Green Bandhani Georgette Saree with Handwork Border	Size	Free Size	Color	Mint Green	Blouse	Without Blouse	GBG-MG-002	5407	India	Warehouse B	B1-06-002	0	0	2	18	20	20
+tussar-silk-kalamkari	Ishori Tussar Silk Kalamkari Block Print Saree with Village Motifs	Size	Free Size	Color	Rust Orange	Blouse	With Blouse	TSK-RO-001	5007	India	Warehouse A	A1-10-001	0	0	2	18	20	20
+tussar-silk-kalamkari	Ishori Tussar Silk Kalamkari Block Print Saree with Village Motifs	Size	Free Size	Color	Rust Orange	Blouse	Without Blouse	TSK-RO-002	5007	India	Warehouse A	A1-10-002	0	0	1	14	15	15
+royal-blue-silk-zari	Ishori Royal Blue Silk Saree with Zari Work – Banarasi Style	Size	Free Size	Color	Sapphire Blue	Blouse	With Blouse	RBS-SB-001	5007	India	Warehouse A	A1-11-001	0	0	3	22	25	25
+royal-blue-silk-zari	Ishori Royal Blue Silk Saree with Zari Work – Banarasi Style	Size	Free Size	Color	Sapphire Blue	Blouse	Without Blouse	RBS-SB-002	5007	India	Warehouse A	A1-11-002	0	0	2	18	20	20
+pink-silk-zari-embroidery	Ishori Pink Silk Saree with Zari Work and Embroidery – Banarasi Look	Size	Free Size	Color	Peach Pink	Blouse	With Blouse	PSK-PP-001	5007	India	Warehouse A	A1-12-001	0	0	4	26	30	30
+pink-silk-zari-embroidery	Ishori Pink Silk Saree with Zari Work and Embroidery – Banarasi Look	Size	Free Size	Color	Peach Pink	Blouse	Without Blouse	PSK-PP-002	5007	India	Warehouse A	A1-12-002	0	0	2	23	25	25
+chiffon-handwork-peacock	Ishori Chiffon Handwork Saree with Aari Tari and Peacock Border	Size	Free Size	Color	Crimson Red	Blouse	With Blouse	CHF-CR-001	5407	India	Warehouse B	B1-07-001	0	0	2	18	20	20
+chiffon-handwork-peacock	Ishori Chiffon Handwork Saree with Aari Tari and Peacock Border	Size	Free Size	Color	Crimson Red	Blouse	Without Blouse	CHF-CR-002	5407	India	Warehouse B	B1-07-002	0	0	1	14	15	15
+green-bandhani-georgette	Ishori Green Bandhani Georgette Saree with Handwork Border	Size	Free Size	Color	Olive Green	Blouse	With Blouse	GBG-OG-001	5407	India	Warehouse B	B1-08-001	0	0	3	22	25	25
+green-bandhani-georgette	Ishori Green Bandhani Georgette Saree with Handwork Border	Size	Free Size	Color	Olive Green	Blouse	Without Blouse	GBG-OG-002	5407	India	Warehouse B	B1-08-002	0	0	2	18	20	20

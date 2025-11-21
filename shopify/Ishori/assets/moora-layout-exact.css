@@ -1,0 +1,736 @@
+/* MOORA.IN EXACT LAYOUT REPLICATION
+ * This CSS creates the exact layout structure as moora.in
+ * Version: 1.0 - Moora Layout Clone
+ */
+
+/* ================================
+   HERO CATEGORY CARDS (Horizontal 4 Cards)
+   ================================ */
+
+.hero-categories {
+  display: grid !important;
+  grid-template-columns: repeat(4, 1fr) !important;
+  gap: 16px !important;
+  padding: 40px 24px !important;
+  max-width: 1400px !important;
+  margin: 0 auto !important;
+}
+
+@media screen and (max-width: 989px) {
+  .hero-categories {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 12px !important;
+    padding: 24px !important;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .hero-categories {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 10px !important;
+    padding: 16px !important;
+  }
+}
+
+.hero-category-card {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  padding: 32px 16px !important;
+  background: #fff !important;
+  border-radius: 8px !important;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08) !important;
+  transition: all 0.3s ease !important;
+  text-decoration: none !important;
+  min-height: 120px !important;
+}
+
+.hero-category-card:hover {
+  transform: translateY(-4px) !important;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.12) !important;
+}
+
+.hero-category-card h5 {
+  font-size: 16px !important;
+  font-weight: 500 !important;
+  color: #333 !important;
+  margin: 8px 0 0 0 !important;
+  text-transform: capitalize !important;
+}
+
+/* ================================
+   SECTION HEADER (Title + View All)
+   Like Moora's "MULMUL SAREES" with "View All" link
+   ================================ */
+
+.collection-header,
+.section-header {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  margin-bottom: 32px !important;
+  padding: 0 24px !important;
+}
+
+.collection-header h2,
+.section-header h2,
+.section-header .title {
+  font-size: 28px !important;
+  font-weight: 700 !important;
+  letter-spacing: 2px !important;
+  text-transform: uppercase !important;
+  color: #333 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  position: relative !important;
+}
+
+.collection-header h2::after,
+.section-header h2::after,
+.section-header .title::after {
+  display: none !important;
+}
+
+.collection-header .view-all,
+.section-header .view-all,
+.section-header a {
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  color: #666 !important;
+  text-decoration: underline !important;
+  text-transform: capitalize !important;
+  transition: color 0.3s ease !important;
+}
+
+.collection-header .view-all:hover,
+.section-header .view-all:hover {
+  color: #5f0511 !important;
+}
+
+@media screen and (max-width: 749px) {
+  .collection-header h2,
+  .section-header h2 {
+    font-size: 20px !important;
+    letter-spacing: 1px !important;
+  }
+}
+
+/* ================================
+   PRODUCT GRID - 5 COLUMNS (Moora Style)
+   ================================ */
+
+.product-grid-moora,
+.grid--5-col,
+.collection-product-grid {
+  display: grid !important;
+  grid-template-columns: repeat(5, 1fr) !important;
+  gap: 20px !important;
+  padding: 0 24px 60px 24px !important;
+  max-width: 1400px !important;
+  margin: 0 auto !important;
+}
+
+@media screen and (max-width: 1200px) {
+  .product-grid-moora,
+  .grid--5-col {
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 18px !important;
+  }
+}
+
+@media screen and (max-width: 989px) {
+  .product-grid-moora,
+  .grid--5-col {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 16px !important;
+    padding: 0 20px 48px 20px !important;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .product-grid-moora,
+  .grid--5-col {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 12px !important;
+    padding: 0 16px 40px 16px !important;
+  }
+}
+
+/* ================================
+   PRODUCT CARD - MOORA STYLE
+   Minimal shadow, clean design
+   ================================ */
+
+.product-card-moora,
+.card--moora {
+  display: block !important;
+  background: #fff !important;
+  border-radius: 4px !important;
+  overflow: hidden !important;
+  transition: all 0.3s ease !important;
+  text-decoration: none !important;
+  border: 1px solid #f0f0f0 !important;
+}
+
+.product-card-moora:hover,
+.card--moora:hover {
+  transform: translateY(-3px) !important;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08) !important;
+  border-color: #e0e0e0 !important;
+}
+
+/* Product image - Moora uses vertical images */
+.product-card-moora .card__media,
+.card--moora .card__media {
+  aspect-ratio: 2/3 !important;
+  position: relative !important;
+  overflow: hidden !important;
+  background: #fafafa !important;
+}
+
+.product-card-moora img,
+.card--moora img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  transition: transform 0.4s ease !important;
+}
+
+.product-card-moora:hover img,
+.card--moora:hover img {
+  transform: scale(1.05) !important;
+}
+
+/* Product info - Moora style (compact) */
+.product-card-moora .card__information,
+.card--moora .card__information {
+  padding: 12px !important;
+}
+
+.product-card-moora h3,
+.card--moora h3,
+.product-card-moora .card__heading,
+.card--moora .card__heading {
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  line-height: 1.4 !important;
+  color: #333 !important;
+  margin: 0 0 8px 0 !important;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+  text-transform: none !important;
+  min-height: auto !important;
+}
+
+/* Price - Moora compact style */
+.product-card-moora .price,
+.card--moora .price {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  font-size: 14px !important;
+  margin: 0 !important;
+}
+
+.product-card-moora .price__sale,
+.card--moora .price__sale {
+  font-weight: 700 !important;
+  color: #333 !important;
+}
+
+.product-card-moora .price__regular,
+.card--moora .price__regular {
+  font-size: 12px !important;
+  text-decoration: line-through !important;
+  color: #999 !important;
+}
+
+.product-card-moora .price__badge-sale,
+.card--moora .price__badge-sale {
+  font-size: 11px !important;
+  color: #5f0511 !important;
+  font-weight: 500 !important;
+}
+
+/* ================================
+   CATEGORY TABS (Pills/Chips)
+   Like Moora's "MAHESHWARI | NEW ARRIVALS | POCKET SAREE | MULMUL"
+   ================================ */
+
+.category-tabs,
+.collection-tabs {
+  display: flex !important;
+  gap: 16px !important;
+  padding: 0 24px 24px 24px !important;
+  overflow-x: auto !important;
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+}
+
+.category-tabs::-webkit-scrollbar {
+  display: none !important;
+}
+
+.category-tab,
+.collection-tab {
+  padding: 8px 20px !important;
+  background: transparent !important;
+  border: 1px solid #ddd !important;
+  border-radius: 20px !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.5px !important;
+  color: #666 !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+  white-space: nowrap !important;
+  text-decoration: none !important;
+}
+
+.category-tab:hover,
+.collection-tab:hover,
+.category-tab.active,
+.collection-tab.active {
+  background: #5f0511 !important;
+  border-color: #5f0511 !important;
+  color: #fff !important;
+}
+
+/* ================================
+   SHOP BY COLOR SECTION (Moora style)
+   Color swatches in horizontal row
+   ================================ */
+
+.color-swatches {
+  display: flex !important;
+  gap: 12px !important;
+  justify-content: center !important;
+  padding: 0 24px 32px 24px !important;
+  overflow-x: auto !important;
+  scrollbar-width: none !important;
+}
+
+.color-swatches::-webkit-scrollbar {
+  display: none !important;
+}
+
+.color-swatch {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  gap: 8px !important;
+  cursor: pointer !important;
+  transition: transform 0.3s ease !important;
+  text-decoration: none !important;
+}
+
+.color-swatch:hover {
+  transform: scale(1.1) !important;
+}
+
+.color-swatch__circle {
+  width: 50px !important;
+  height: 50px !important;
+  border-radius: 50% !important;
+  border: 2px solid #eee !important;
+  transition: border-color 0.3s ease !important;
+}
+
+.color-swatch:hover .color-swatch__circle,
+.color-swatch.active .color-swatch__circle {
+  border-color: #5f0511 !important;
+  border-width: 3px !important;
+}
+
+@media screen and (max-width: 749px) {
+  .color-swatch__circle {
+    width: 40px !important;
+    height: 40px !important;
+  }
+}
+
+/* ================================
+   WHY SHOP WITH US (4 Columns)
+   Icons + Text like Moora
+   ================================ */
+
+.why-shop-section {
+  padding: 60px 24px !important;
+  background: #f9f9f9 !important;
+}
+
+.why-shop-grid {
+  display: grid !important;
+  grid-template-columns: repeat(4, 1fr) !important;
+  gap: 32px !important;
+  max-width: 1200px !important;
+  margin: 0 auto !important;
+}
+
+@media screen and (max-width: 989px) {
+  .why-shop-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 24px !important;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .why-shop-grid {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+}
+
+.why-shop-item {
+  text-align: center !important;
+  padding: 24px 16px !important;
+}
+
+.why-shop-item h3 {
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  color: #333 !important;
+  margin: 12px 0 0 0 !important;
+  text-transform: none !important;
+}
+
+.why-shop-item h3::after {
+  display: none !important;
+}
+
+/* ================================
+   BRAND STORY (Image Left + Text Right)
+   Like Moora's "Handmade with love" section
+   ================================ */
+
+.brand-story-section {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 60px !important;
+  align-items: center !important;
+  padding: 80px 40px !important;
+  max-width: 1400px !important;
+  margin: 0 auto !important;
+  background: #fff !important;
+}
+
+@media screen and (max-width: 989px) {
+  .brand-story-section {
+    grid-template-columns: 1fr !important;
+    gap: 32px !important;
+    padding: 60px 24px !important;
+  }
+}
+
+.brand-story-image {
+  width: 100% !important;
+  aspect-ratio: 3/4 !important;
+  object-fit: cover !important;
+  border-radius: 8px !important;
+}
+
+.brand-story-content h2 {
+  font-size: 32px !important;
+  font-weight: 600 !important;
+  line-height: 1.3 !important;
+  color: #333 !important;
+  margin: 0 0 20px 0 !important;
+  text-transform: none !important;
+}
+
+.brand-story-content h2::after {
+  display: none !important;
+}
+
+.brand-story-content p {
+  font-size: 16px !important;
+  line-height: 1.7 !important;
+  color: #666 !important;
+  margin: 0 0 16px 0 !important;
+}
+
+@media screen and (max-width: 749px) {
+  .brand-story-content h2 {
+    font-size: 24px !important;
+  }
+  
+  .brand-story-content p {
+    font-size: 14px !important;
+  }
+}
+
+/* ================================
+   TESTIMONIALS (Horizontal Scroll)
+   ================================ */
+
+.testimonials-section {
+  padding: 80px 0 !important;
+  background: #f9f9f9 !important;
+}
+
+.testimonials-section h2 {
+  text-align: center !important;
+  font-size: 28px !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 2px !important;
+  margin: 0 0 48px 0 !important;
+  padding: 0 24px !important;
+}
+
+.testimonials-wrapper {
+  display: flex !important;
+  gap: 24px !important;
+  padding: 0 24px 24px 24px !important;
+  overflow-x: auto !important;
+  scroll-snap-type: x mandatory !important;
+  scrollbar-width: thin !important;
+}
+
+.testimonial-card {
+  flex: 0 0 320px !important;
+  background: #fff !important;
+  padding: 24px !important;
+  border-radius: 8px !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06) !important;
+  scroll-snap-align: start !important;
+}
+
+@media screen and (max-width: 749px) {
+  .testimonial-card {
+    flex: 0 0 280px !important;
+    padding: 20px !important;
+  }
+}
+
+.testimonial-rating {
+  display: flex !important;
+  gap: 4px !important;
+  margin-bottom: 12px !important;
+  color: #ffa500 !important;
+}
+
+.testimonial-name {
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  color: #333 !important;
+  margin-bottom: 8px !important;
+}
+
+.testimonial-text {
+  font-size: 13px !important;
+  line-height: 1.6 !important;
+  color: #666 !important;
+}
+
+/* ================================
+   FEATURED IN (Logo Strip)
+   ================================ */
+
+.featured-in-section {
+  padding: 60px 24px !important;
+  text-align: center !important;
+  background: #fff !important;
+}
+
+.featured-in-section h2 {
+  font-size: 20px !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 1px !important;
+  margin: 0 0 32px 0 !important;
+  color: #333 !important;
+}
+
+.featured-logos {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 48px !important;
+  flex-wrap: wrap !important;
+  max-width: 1000px !important;
+  margin: 0 auto !important;
+}
+
+.featured-logo {
+  opacity: 0.6 !important;
+  transition: opacity 0.3s ease !important;
+  max-height: 40px !important;
+  filter: grayscale(100%) !important;
+}
+
+.featured-logo:hover {
+  opacity: 1 !important;
+  filter: grayscale(0%) !important;
+}
+
+@media screen and (max-width: 749px) {
+  .featured-logos {
+    gap: 24px !important;
+  }
+  
+  .featured-logo {
+    max-height: 30px !important;
+  }
+}
+
+/* ================================
+   OCCASION CARDS (Horizontal 3 Cards)
+   Like Moora's "Haldi | Mehendi | Sangeet"
+   ================================ */
+
+.occasion-cards {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 24px !important;
+  padding: 40px 24px !important;
+  max-width: 1200px !important;
+  margin: 0 auto !important;
+}
+
+@media screen and (max-width: 749px) {
+  .occasion-cards {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+    padding: 24px 16px !important;
+  }
+}
+
+.occasion-card {
+  position: relative !important;
+  aspect-ratio: 4/3 !important;
+  border-radius: 8px !important;
+  overflow: hidden !important;
+  transition: transform 0.3s ease !important;
+  text-decoration: none !important;
+}
+
+.occasion-card:hover {
+  transform: scale(1.02) !important;
+}
+
+.occasion-card img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+}
+
+.occasion-card h3 {
+  position: absolute !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  padding: 20px !important;
+  background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.7) 100%) !important;
+  color: #fff !important;
+  font-size: 20px !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 1px !important;
+  text-align: center !important;
+  margin: 0 !important;
+}
+
+.occasion-card h3::after {
+  display: none !important;
+}
+
+/* ================================
+   UTILITIES & OVERRIDES
+   ================================ */
+
+/* Remove default section padding */
+.section--moora-layout {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* Container width matching Moora */
+.container--moora,
+.page-width--moora {
+  max-width: 1400px !important;
+  margin: 0 auto !important;
+  padding: 0 !important;
+}
+
+/* Smooth scrolling for horizontal sections */
+.scroll-container {
+  scroll-behavior: smooth !important;
+}
+
+/* Hide scrollbar but keep functionality */
+.hide-scrollbar {
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none !important;
+}
+
+/* ================================
+   PEHRIN LAYOUT ADDITIONS
+   ================================ */
+
+/* Marquee Banner */
+.marquee-banner {
+  background: #5f0511 !important;
+  color: #fff !important;
+  padding: 12px 0 !important;
+  overflow: hidden !important;
+}
+
+.marquee-text {
+  display: inline-block !important;
+  padding-left: 100% !important;
+  animation: marquee 30s linear infinite !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0) !important; }
+  100% { transform: translateX(-100%) !important; }
+}
+
+/* Collection Grid 4 Columns */
+.collection-grid-4col {
+  display: grid !important;
+  grid-template-columns: repeat(4, 1fr) !important;
+  gap: 24px !important;
+  padding: 0 24px 60px !important;
+  max-width: 1400px !important;
+  margin: 0 auto !important;
+}
+
+@media screen and (max-width: 989px) {
+  .collection-grid-4col {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+/* Instagram Grid 5 Columns */
+.instagram-grid-5col {
+  display: grid !important;
+  grid-template-columns: repeat(5, 1fr) !important;
+  gap: 12px !important;
+  max-width: 1400px !important;
+  margin: 0 auto !important;
+}
+
+@media screen and (max-width: 989px) {
+  .instagram-grid-5col {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .instagram-grid-5col {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}

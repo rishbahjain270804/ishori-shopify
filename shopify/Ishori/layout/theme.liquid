@@ -28,9 +28,16 @@
 
     {% render 'meta-tags' %}
 
-    <script src="{{ 'constants.js' | asset_url }}"></script>
-    <script src="{{ 'pubsub.js' | asset_url }}"></script>
-    <script src="{{ 'global.js' | asset_url }}"></script>
+    <script src="{{ 'constants.js' | asset_url }}" type="text/javascript"></script>
+    <script src="{{ 'pubsub.js' | asset_url }}" type="text/javascript"></script>
+    <script src="{{ 'global.js' | asset_url }}" type="text/javascript"></script>
+    <script>
+      // Ensure global functions are available
+      if (typeof debounce === 'undefined' || typeof ModalDialog === 'undefined' || typeof removeTrapFocus === 'undefined') {
+        console.error('Critical error: global.js did not load properly. Reloading page...');
+        window.location.reload();
+      }
+    </script>
     <script src="{{ 'details-disclosure.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'details-modal.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'search-form.js' | asset_url }}" defer="defer"></script>

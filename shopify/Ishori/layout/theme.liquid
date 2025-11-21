@@ -28,20 +28,14 @@
 
     {% render 'meta-tags' %}
 
-    <script src="{{ 'constants.js' | asset_url }}" type="text/javascript"></script>
-    <script src="{{ 'pubsub.js' | asset_url }}" type="text/javascript"></script>
-    <script src="{{ 'global.js' | asset_url }}" type="text/javascript"></script>
-    <script>
-      // Ensure global functions are available
-      if (typeof debounce === 'undefined' || typeof ModalDialog === 'undefined' || typeof removeTrapFocus === 'undefined') {
-        console.error('Critical error: global.js did not load properly. Reloading page...');
-        window.location.reload();
-      }
-    </script>
+    <script src="{{ 'constants.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'pubsub.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'global.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'details-disclosure.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'details-modal.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'search-form.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'wishlist.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'theme-optimizations.js' | asset_url }}" defer="defer"></script>
 
     {%- if settings.animations_reveal_on_scroll -%}
       <script src="{{ 'animations.js' | asset_url }}" defer="defer"></script>
@@ -62,6 +56,7 @@
       {{ body_font_bold_italic | font_face: font_display: 'swap' }}
       {{ settings.type_header_font | font_face: font_display: 'swap' }}
 
+      {% assign scheme_classes = '' %}
       {% for scheme in settings.color_schemes -%}
         {% assign scheme_classes = scheme_classes | append: ', .color-' | append: scheme.id %}
         {% if forloop.index == 1 -%}
@@ -264,6 +259,7 @@
     {% endstyle %}
 
     {{ 'base.css' | asset_url | stylesheet_tag }}
+    {{ 'performance-optimizations.css' | asset_url | stylesheet_tag }}
     {{ 'responsive-fixes.css' | asset_url | stylesheet_tag }}
     {{ 'component-hover-effects.css' | asset_url | stylesheet_tag }}
     {{ 'moora-inspired-enhancements.css' | asset_url | stylesheet_tag }}

@@ -125,6 +125,8 @@
               src="{{ section.settings.image | image_url: width: 2000 }}"
               alt="{{ section.settings.image.alt | escape }}"
               class="custom-poster__image-{{ section.id }}"
+              width="2000"
+              height="{{ 2000 | divided_by: section.settings.image.aspect_ratio | round }}"
               loading="lazy"
             >
           </a>
@@ -133,6 +135,8 @@
             src="{{ section.settings.image | image_url: width: 2000 }}"
             alt="{{ section.settings.image.alt | escape }}"
             class="custom-poster__image-{{ section.id }}"
+            width="2000"
+            height="{{ 2000 | divided_by: section.settings.image.aspect_ratio | round }}"
             loading="lazy"
           >
         {% endif %}

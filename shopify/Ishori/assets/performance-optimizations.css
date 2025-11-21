@@ -1,0 +1,601 @@
+/* Performance & Optimization Enhancements
+ * Professional Shopify theme optimization
+ * Version: 1.0
+ */
+
+/* ================================
+   CRITICAL CSS - ABOVE THE FOLD
+   ================================ */
+
+/* Ensure critical rendering path */
+.page-width {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Header optimization */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  will-change: transform;
+}
+
+/* ================================
+   IMAGE OPTIMIZATION
+   ================================ */
+
+/* Native lazy loading support */
+img[loading="lazy"] {
+  content-visibility: auto;
+}
+
+/* Prevent layout shift */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Aspect ratio containers */
+.media-aspect-ratio {
+  position: relative;
+  overflow: hidden;
+}
+
+.media-aspect-ratio::before {
+  content: '';
+  display: block;
+  padding-bottom: var(--aspect-ratio, 100%);
+}
+
+.media-aspect-ratio img,
+.media-aspect-ratio video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ================================
+   PERFORMANCE PATTERNS
+   ================================ */
+
+/* Hardware acceleration */
+.will-transform {
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Reduce paint areas */
+.isolated-layer {
+  isolation: isolate;
+  contain: layout style paint;
+}
+
+/* Optimize animations */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ================================
+   SHOPIFY-SPECIFIC OPTIMIZATIONS
+   ================================ */
+
+/* Predictive search optimization */
+.predictive-search {
+  contain: layout style;
+}
+
+.predictive-search__results {
+  will-change: contents;
+}
+
+/* Cart drawer performance */
+.cart-drawer {
+  contain: layout style paint;
+  will-change: transform;
+}
+
+/* Product card optimization */
+.card-wrapper {
+  contain: layout;
+}
+
+.card__media {
+  contain: layout style;
+  position: relative;
+}
+
+/* ================================
+   LOADING STATES
+   ================================ */
+
+/* Skeleton loading */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    #f0f0f0 25%,
+    #e0e0e0 50%,
+    #f0f0f0 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s ease-in-out infinite;
+}
+
+@keyframes skeleton-loading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Shimmer effect */
+.shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.shimmer::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.4),
+    transparent
+  );
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  to { left: 100%; }
+}
+
+/* ================================
+   FONT LOADING OPTIMIZATION
+   ================================ */
+
+/* Prevent FOUT (Flash of Unstyled Text) */
+.fonts-loading body {
+  visibility: hidden;
+}
+
+.fonts-loaded body {
+  visibility: visible;
+}
+
+/* Font display swap */
+@font-face {
+  font-display: swap;
+}
+
+/* ================================
+   CRITICAL RENDER PATH
+   ================================ */
+
+/* Defer non-critical CSS */
+.deferred-styles {
+  position: absolute;
+  left: -9999px;
+}
+
+/* Inline critical styles */
+.above-fold {
+  display: block;
+  min-height: 100vh;
+}
+
+/* ================================
+   INTERSECTION OBSERVER SUPPORT
+   ================================ */
+
+/* Fade-in animation for observed elements */
+.fade-in-observer {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.fade-in-observer.observed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ================================
+   MOBILE PERFORMANCE
+   ================================ */
+
+/* Touch optimization */
+button,
+a,
+[role="button"] {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Scroll performance */
+.scroll-container {
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+}
+
+/* Mobile menu optimization */
+@media screen and (max-width: 749px) {
+  .mobile-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    will-change: transform;
+    contain: layout style paint;
+  }
+
+  .mobile-menu.active {
+    transform: translateX(0);
+  }
+}
+
+/* ================================
+   GRID & FLEXBOX OPTIMIZATION
+   ================================ */
+
+/* Grid layout optimization */
+.grid {
+  display: grid;
+  gap: var(--grid-gap, 20px);
+  contain: layout;
+}
+
+/* Responsive grid */
+.grid--responsive {
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+/* Flexbox optimization */
+.flex {
+  display: flex;
+  contain: layout;
+}
+
+/* ================================
+   VIDEO OPTIMIZATION
+   ================================ */
+
+/* Lazy load videos */
+video[data-src] {
+  background: #f0f0f0;
+}
+
+/* Autoplay videos */
+video[autoplay] {
+  will-change: auto;
+}
+
+/* Video poster */
+video[poster] {
+  object-fit: cover;
+}
+
+/* ================================
+   PRELOAD & PREFETCH
+   ================================ */
+
+/* DNS prefetch for external resources */
+.dns-prefetch {
+  display: none;
+}
+
+/* Preconnect optimization */
+link[rel="preconnect"] {
+  /* Applied via HTML head */
+}
+
+/* ================================
+   SHOPIFY AJAX CART
+   ================================ */
+
+/* Cart notification optimization */
+.cart-notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+  transform: translateX(400px);
+  transition: transform 0.3s ease;
+  will-change: transform;
+  contain: layout style paint;
+}
+
+.cart-notification.active {
+  transform: translateX(0);
+}
+
+/* ================================
+   COLLECTION & PRODUCT FILTERING
+   ================================ */
+
+/* Facet optimization */
+.facets {
+  contain: layout style;
+}
+
+.facets-container {
+  will-change: contents;
+}
+
+/* Filter results */
+.facets-results {
+  min-height: 400px;
+  contain: layout style;
+}
+
+/* ================================
+   ACCESSIBILITY PERFORMANCE
+   ================================ */
+
+/* Focus visible optimization */
+:focus-visible {
+  outline: 2px solid #5f0511;
+  outline-offset: 2px;
+}
+
+/* Skip to content */
+.skip-to-content {
+  position: absolute;
+  top: -100px;
+  left: 0;
+  z-index: 10000;
+  padding: 10px 20px;
+  background: #5f0511;
+  color: #fff;
+  transition: top 0.3s ease;
+}
+
+.skip-to-content:focus {
+  top: 0;
+}
+
+/* ================================
+   PRINT OPTIMIZATION
+   ================================ */
+
+@media print {
+  /* Remove unnecessary elements */
+  .header,
+  .footer,
+  .cart-drawer,
+  .announcement-bar,
+  button,
+  .social-share {
+    display: none !important;
+  }
+
+  /* Optimize for print */
+  body {
+    font-size: 12pt;
+    line-height: 1.5;
+    color: #000;
+    background: #fff;
+  }
+
+  /* Page breaks */
+  .product,
+  .collection-item {
+    page-break-inside: avoid;
+  }
+}
+
+/* ================================
+   NETWORK PERFORMANCE
+   ================================ */
+
+/* Reduce network requests */
+.batch-load {
+  content-visibility: auto;
+  contain-intrinsic-size: 500px;
+}
+
+/* Progressive enhancement */
+@supports (content-visibility: auto) {
+  .progressive-content {
+    content-visibility: auto;
+  }
+}
+
+/* ================================
+   CACHE OPTIMIZATION
+   ================================ */
+
+/* Service worker support */
+.sw-update-banner {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #5f0511;
+  color: #fff;
+  padding: 15px;
+  text-align: center;
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+  z-index: 10000;
+}
+
+.sw-update-banner.show {
+  transform: translateY(0);
+}
+
+/* ================================
+   ERROR HANDLING
+   ================================ */
+
+/* Fallback styles */
+.error-boundary {
+  padding: 40px 20px;
+  text-align: center;
+  background: #fff2f1;
+  border: 1px solid #5f0511;
+  border-radius: 8px;
+  margin: 20px 0;
+}
+
+.error-message {
+  color: #5f0511;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+/* ================================
+   RESPONSIVE IMAGES
+   ================================ */
+
+/* Picture element optimization */
+picture {
+  display: block;
+  position: relative;
+}
+
+/* Source optimization */
+source {
+  display: none;
+}
+
+/* WebP support */
+@supports (background-image: image-set(url("test.webp") type("image/webp"))) {
+  .webp-supported {
+    /* Use WebP images when supported */
+  }
+}
+
+/* ================================
+   SCROLL PERFORMANCE
+   ================================ */
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Scroll snap */
+.scroll-snap-container {
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+
+.scroll-snap-item {
+  scroll-snap-align: start;
+}
+
+/* ================================
+   FORM OPTIMIZATION
+   ================================ */
+
+/* Input optimization */
+input,
+select,
+textarea {
+  will-change: auto;
+}
+
+/* Autofill styling */
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px #fff inset;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+/* ================================
+   DYNAMIC CONTENT
+   ================================ */
+
+/* Dynamic content loading */
+.dynamic-content {
+  min-height: 200px;
+  position: relative;
+}
+
+.dynamic-content.loading::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 40px;
+  height: 40px;
+  margin: -20px 0 0 -20px;
+  border: 3px solid #f0f0f0;
+  border-top-color: #5f0511;
+  border-radius: 50%;
+  animation: spinner 0.8s linear infinite;
+}
+
+@keyframes spinner {
+  to { transform: rotate(360deg); }
+}
+
+/* ================================
+   BROWSER COMPATIBILITY
+   ================================ */
+
+/* Flexbox fallbacks */
+@supports not (display: grid) {
+  .grid {
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
+
+/* CSS Grid fallbacks */
+@supports (display: grid) {
+  .grid {
+    display: grid;
+  }
+}
+
+/* ================================
+   UTILITY CLASSES
+   ================================ */
+
+/* Visibility utilities */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Loading state */
+.is-loading {
+  pointer-events: none;
+  opacity: 0.6;
+  cursor: wait;
+}
+
+/* Disabled state */
+.is-disabled {
+  pointer-events: none;
+  opacity: 0.5;
+  cursor: not-allowed;
+}

@@ -198,6 +198,8 @@
                     src="{{ product.featured_image | image_url: width: 800 }}"
                     alt="{{ product.title | escape }}"
                     class="product-carousel__image"
+                    width="800"
+                    height="{{ 800 | divided_by: product.featured_image.aspect_ratio | round }}"
                     loading="lazy"
                   >
                 {% else %}

@@ -39,24 +39,25 @@
           {% endif %}
           
           {% if block.settings.image %}
-            <div class="collection-image-wrapper" style="
+            <div class=\"collection-image-wrapper\" style=\"
               aspect-ratio: {{ section.settings.image_ratio }};
               overflow: hidden;
               border-radius: {{ section.settings.image_border_radius }}px;
               margin-bottom: {{ section.settings.image_spacing }}px;
-            ">
+            \">
               <img 
-                src="{{ block.settings.image | image_url: width: 1000 }}"
-                alt="{{ block.settings.image.alt | escape }}"
-                style="transition: transform 0.4s ease;"
-                loading="lazy"
-                style="
+                src=\"{{ block.settings.image | image_url: width: 1000 }}\"
+                alt=\"{{ block.settings.image.alt | escape }}\"
+                width=\"1000\"
+                height=\"{{ 1000 | divided_by: block.settings.image.aspect_ratio | round }}\"
+                loading=\"lazy\"
+                style=\"
                   width: 100%;
                   height: 100%;
                   object-fit: {{ section.settings.image_fit }};
                   object-position: {{ section.settings.image_position }};
                   transition: transform {{ section.settings.hover_zoom_duration }}s ease;
-                "
+                \"
                 {% if section.settings.enable_hover_zoom %}
                   onmouseover="this.style.transform='scale({{ section.settings.hover_zoom_scale }})'"
                   onmouseout="this.style.transform='scale(1)'"

@@ -51,6 +51,18 @@
 
   .ai-instagram-feed__post-{{ ai_gen_id }}:hover {
     transform: translateY(-4px);
+  }
+
+  .ai-instagram-feed__post-{{ ai_gen_id }} img {
+    transition: transform 0.4s ease;
+  }
+
+  .ai-instagram-feed__post-{{ ai_gen_id }}:hover img {
+    transform: scale(1.08);
+  }
+
+  .ai-instagram-feed__post-{{ ai_gen_id }}:hover {
+    transform: translateY(-4px);
     box-shadow: 0 {{ block.settings.shadow_vertical | plus: 4 }}px {{ block.settings.shadow_blur | plus: 8 }}px rgba(0, 0, 0, {{ block.settings.shadow_opacity | plus: 0.05 }});
   }
 

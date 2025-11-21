@@ -1,0 +1,665 @@
+{%- style -%}
+  .custom-poster-{{ section.id }} {
+    padding-top: {{ section.settings.margin_top }}px;
+    padding-bottom: {{ section.settings.margin_bottom }}px;
+    background-color: {{ section.settings.section_bg }};
+  }
+
+  .custom-poster__container-{{ section.id }} {
+    max-width: {{ section.settings.container_width }}%;
+    margin: 0 auto;
+    padding: 0 {{ section.settings.container_padding }}px;
+  }
+
+  .custom-poster__wrapper-{{ section.id }} {
+    position: relative;
+    width: 100%;
+    aspect-ratio: {{ section.settings.aspect_ratio }};
+    overflow: hidden;
+    border-radius: {{ section.settings.border_radius }}px;
+    box-shadow: 0 {{ section.settings.shadow_vertical }}px {{ section.settings.shadow_blur }}px rgba(0, 0, 0, {{ section.settings.shadow_opacity | divided_by: 100.0 }});
+  }
+
+  .custom-poster__image-{{ section.id }} {
+    width: 100%;
+    height: {{ section.settings.image_height }}px;
+    object-fit: {{ section.settings.image_fit }};
+    display: block;
+    transition: transform 0.4s ease;
+  }
+
+  .custom-poster__wrapper-{{ section.id }}:hover .custom-poster__image-{{ section.id }} {
+    transform: scale(1.05);
+  }
+
+  .custom-poster__overlay-{{ section.id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: {{ section.settings.overlay_color }};
+    opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }};
+  }
+
+  .custom-poster__content-{{ section.id }} {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: {{ section.settings.text_alignment }};
+    color: {{ section.settings.text_color }};
+    z-index: 2;
+    width: 90%;
+    max-width: {{ section.settings.content_max_width }}px;
+    padding: {{ section.settings.content_padding }}px;
+  }
+
+  .custom-poster__heading-{{ section.id }} {
+    font-size: {{ section.settings.heading_size }}px;
+    font-weight: {{ section.settings.heading_weight }};
+    margin: 0 0 {{ section.settings.heading_spacing }}px;
+    line-height: 1.2;
+    color: {{ section.settings.heading_color }};
+  }
+
+  .custom-poster__subheading-{{ section.id }} {
+    font-size: {{ section.settings.subheading_size }}px;
+    margin: 0 0 {{ section.settings.subheading_spacing }}px;
+    line-height: 1.5;
+    opacity: {{ section.settings.subheading_opacity | divided_by: 100.0 }};
+  }
+
+  .custom-poster__button-{{ section.id }} {
+    display: inline-block;
+    padding: {{ section.settings.button_padding_vertical }}px {{ section.settings.button_padding_horizontal }}px;
+    background-color: {{ section.settings.button_bg_color }};
+    color: {{ section.settings.button_text_color }};
+    text-decoration: none;
+    border-radius: {{ section.settings.button_border_radius }}px;
+    border: {{ section.settings.button_border_width }}px solid {{ section.settings.button_border_color }};
+    font-size: {{ section.settings.button_font_size }}px;
+    font-weight: {{ section.settings.button_font_weight }};
+    transition: all 0.3s ease;
+  }
+
+  .custom-poster__button-{{ section.id }}:hover {
+    background-color: {{ section.settings.button_hover_bg_color }};
+    color: {{ section.settings.button_hover_text_color }};
+    border-color: {{ section.settings.button_hover_border_color }};
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(95, 5, 17, 0.3);
+  }
+
+  @media screen and (max-width: 989px) {
+    .custom-poster__wrapper-{{ section.id }} {
+      aspect-ratio: {{ section.settings.mobile_aspect_ratio }};
+    }
+
+    .custom-poster__image-{{ section.id }} {
+      height: {{ section.settings.mobile_image_height }}px;
+    }
+
+    .custom-poster__heading-{{ section.id }} {
+      font-size: {{ section.settings.heading_size_mobile }}px;
+    }
+
+    .custom-poster__subheading-{{ section.id }} {
+      font-size: {{ section.settings.subheading_size_mobile }}px;
+    }
+
+    .custom-poster__button-{{ section.id }} {
+      font-size: {{ section.settings.button_font_size_mobile }}px;
+      padding: {{ section.settings.button_padding_vertical_mobile }}px {{ section.settings.button_padding_horizontal_mobile }}px;
+    }
+  }
+{%- endstyle -%}
+
+<div class="custom-poster-{{ section.id }}">
+  <div class="custom-poster__container-{{ section.id }}">
+    <div class="custom-poster__wrapper-{{ section.id }}">
+      {% if section.settings.image != blank %}
+        {% if section.settings.link != blank %}
+          <a href="{{ section.settings.link }}">
+            <img
+              src="{{ section.settings.image | image_url: width: 2000 }}"
+              alt="{{ section.settings.image.alt | escape }}"
+              class="custom-poster__image-{{ section.id }}"
+              loading="lazy"
+            >
+          </a>
+        {% else %}
+          <img
+            src="{{ section.settings.image | image_url: width: 2000 }}"
+            alt="{{ section.settings.image.alt | escape }}"
+            class="custom-poster__image-{{ section.id }}"
+            loading="lazy"
+          >
+        {% endif %}
+      {% else %}
+        <div style="background: {{ section.settings.placeholder_bg_color }}; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: #999;">
+          Select an image
+        </div>
+      {% endif %}
+
+      {% if section.settings.show_overlay %}
+        <div class="custom-poster__overlay-{{ section.id }}"></div>
+      {% endif %}
+
+      {% if section.settings.heading != blank or section.settings.subheading != blank or section.settings.button_text != blank %}
+        <div class="custom-poster__content-{{ section.id }}">
+          {% if section.settings.heading != blank %}
+            <h2 class="custom-poster__heading-{{ section.id }}">{{ section.settings.heading }}</h2>
+          {% endif %}
+          {% if section.settings.subheading != blank %}
+            <p class="custom-poster__subheading-{{ section.id }}">{{ section.settings.subheading }}</p>
+          {% endif %}
+          {% if section.settings.button_text != blank %}
+            <a href="{{ section.settings.button_link }}" class="custom-poster__button-{{ section.id }}">
+              {{ section.settings.button_text }}
+            </a>
+          {% endif %}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Custom Poster/Banner",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Image Settings"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "Image link (optional)"
+    },
+    {
+      "type": "select",
+      "id": "aspect_ratio",
+      "label": "Aspect ratio (Desktop)",
+      "options": [
+        { "value": "21 / 9", "label": "21:9 (Ultra wide)" },
+        { "value": "16 / 9", "label": "16:9 (Wide)" },
+        { "value": "4 / 3", "label": "4:3 (Standard)" },
+        { "value": "3 / 2", "label": "3:2 (Photo)" },
+        { "value": "1 / 1", "label": "1:1 (Square)" },
+        { "value": "2 / 3", "label": "2:3 (Portrait)" }
+      ],
+      "default": "16 / 9"
+    },
+    {
+      "type": "select",
+      "id": "mobile_aspect_ratio",
+      "label": "Aspect ratio (Mobile)",
+      "options": [
+        { "value": "16 / 9", "label": "16:9 (Wide)" },
+        { "value": "4 / 3", "label": "4:3 (Standard)" },
+        { "value": "1 / 1", "label": "1:1 (Square)" },
+        { "value": "3 / 4", "label": "3:4 (Portrait)" }
+      ],
+      "default": "4 / 3"
+    },
+    {
+      "type": "range",
+      "id": "image_height",
+      "min": 200,
+      "max": 1000,
+      "step": 50,
+      "unit": "px",
+      "label": "Image height (Desktop)",
+      "default": 500
+    },
+    {
+      "type": "range",
+      "id": "mobile_image_height",
+      "min": 150,
+      "max": 600,
+      "step": 25,
+      "unit": "px",
+      "label": "Image height (Mobile)",
+      "default": 300
+    },
+    {
+      "type": "select",
+      "id": "image_fit",
+      "label": "Image fit",
+      "options": [
+        { "value": "cover", "label": "Cover" },
+        { "value": "contain", "label": "Contain" },
+        { "value": "fill", "label": "Fill" }
+      ],
+      "default": "cover"
+    },
+    {
+      "type": "color",
+      "id": "placeholder_bg_color",
+      "label": "Placeholder background",
+      "default": "#f4f4f4"
+    },
+    {
+      "type": "header",
+      "content": "Overlay Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_overlay",
+      "label": "Show overlay",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "overlay_color",
+      "label": "Overlay color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Overlay opacity",
+      "default": 30
+    },
+    {
+      "type": "header",
+      "content": "Content Settings"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "range",
+      "id": "content_max_width",
+      "min": 400,
+      "max": 1200,
+      "step": 50,
+      "unit": "px",
+      "label": "Content max width",
+      "default": 800
+    },
+    {
+      "type": "range",
+      "id": "content_padding",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Content padding",
+      "default": 20
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "min": 24,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading size (Desktop)",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "heading_size_mobile",
+      "min": 20,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading size (Mobile)",
+      "default": 32
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "heading_weight",
+      "min": 300,
+      "max": 900,
+      "step": 100,
+      "label": "Heading weight",
+      "default": 700
+    },
+    {
+      "type": "range",
+      "id": "heading_spacing",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading spacing",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "subheading_size",
+      "min": 14,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "label": "Subheading size (Desktop)",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "subheading_size_mobile",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Subheading size (Mobile)",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "subheading_opacity",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Subheading opacity",
+      "default": 90
+    },
+    {
+      "type": "range",
+      "id": "subheading_spacing",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "label": "Subheading spacing",
+      "default": 24
+    },
+    {
+      "type": "header",
+      "content": "Button Settings"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "range",
+      "id": "button_font_size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Button font size (Desktop)",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "button_font_size_mobile",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Button font size (Mobile)",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "button_font_weight",
+      "min": 300,
+      "max": 900,
+      "step": 100,
+      "label": "Button font weight",
+      "default": 600
+    },
+    {
+      "type": "range",
+      "id": "button_padding_vertical",
+      "min": 8,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "label": "Button padding vertical (Desktop)",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "button_padding_horizontal",
+      "min": 16,
+      "max": 60,
+      "step": 4,
+      "unit": "px",
+      "label": "Button padding horizontal (Desktop)",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "button_padding_vertical_mobile",
+      "min": 8,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "label": "Button padding vertical (Mobile)",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "button_padding_horizontal_mobile",
+      "min": 12,
+      "max": 48,
+      "step": 4,
+      "unit": "px",
+      "label": "Button padding horizontal (Mobile)",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "button_border_radius",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "label": "Button border radius",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "button_border_width",
+      "min": 0,
+      "max": 5,
+      "step": 1,
+      "unit": "px",
+      "label": "Button border width",
+      "default": 0
+    },
+    {
+      "type": "color",
+      "id": "button_bg_color",
+      "label": "Button background",
+      "default": "#5f0511"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_border_color",
+      "label": "Button border color",
+      "default": "#5f0511"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_bg_color",
+      "label": "Button hover background",
+      "default": "#8a0a1e"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_text_color",
+      "label": "Button hover text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_border_color",
+      "label": "Button hover border color",
+      "default": "#8a0a1e"
+    },
+    {
+      "type": "range",
+      "id": "button_hover_lift",
+      "min": -10,
+      "max": 0,
+      "step": 1,
+      "unit": "px",
+      "label": "Button hover lift",
+      "default": -2
+    },
+    {
+      "type": "header",
+      "content": "Container Settings"
+    },
+    {
+      "type": "range",
+      "id": "container_width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Container width",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "container_padding",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "unit": "px",
+      "label": "Container padding",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "label": "Border radius",
+      "default": 12
+    },
+    {
+      "type": "color",
+      "id": "section_bg",
+      "label": "Section background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Shadow"
+    },
+    {
+      "type": "range",
+      "id": "shadow_opacity",
+      "min": 0,
+      "max": 50,
+      "step": 5,
+      "unit": "%",
+      "label": "Shadow opacity",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "shadow_vertical",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "label": "Shadow vertical offset",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "shadow_blur",
+      "min": 0,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "label": "Shadow blur",
+      "default": 12
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Margin top",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Margin bottom",
+      "default": 60
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Poster/Banner"
+    }
+  ]
+}
+{% endschema %}

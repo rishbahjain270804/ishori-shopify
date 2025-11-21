@@ -1,0 +1,109 @@
+/* Professional Hover Effects & Transitions - Ishori Theme */
+
+/* Collection Grid Hover */
+.collection-item {
+  transition: transform 0.3s ease;
+}
+
+.collection-item:hover {
+  transform: translateY(-4px);
+}
+
+.collection-image-wrapper img {
+  transition: transform 0.4s ease;
+}
+
+.collection-item:hover .collection-image-wrapper img {
+  transform: scale(1.05);
+}
+
+/* Newsletter Input Focus */
+.newsletter-form input[type="email"] {
+  transition: box-shadow 0.3s ease;
+}
+
+.newsletter-form input[type="email"]:focus {
+  box-shadow: 0 0 0 2px rgba(95, 5, 17, 0.3);
+  outline: none;
+}
+
+/* Button Hover Effects */
+.button,
+button[type="submit"],
+.product-form__submit,
+.newsletter-form button {
+  transition: all 0.3s ease;
+}
+
+.button:hover,
+button[type="submit"]:hover,
+.product-form__submit:hover,
+.newsletter-form button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(95, 5, 17, 0.3);
+}
+
+/* Link Hover */
+.footer a,
+.header__menu-item a {
+  transition: color 0.25s ease;
+}
+
+.footer a:hover,
+.header__menu-item a:hover {
+  color: rgb(95, 5, 17);
+}
+
+/* Card Hover Effects */
+.card,
+.article-card,
+.collection-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover,
+.article-card:hover,
+.collection-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+/* Image Zoom on Hover */
+.card__media img,
+.article-card__image img,
+.media img {
+  transition: transform 0.4s ease;
+}
+
+.card:hover .card__media img,
+.article-card:hover .article-card__image img,
+.media:hover img {
+  transform: scale(1.05);
+}
+
+/* Icon Hover */
+.header__icon,
+.cart-notification__link {
+  transition: color 0.25s ease;
+}
+
+.header__icon:hover,
+.cart-notification__link:hover {
+  color: rgb(95, 5, 17);
+}
+
+/* Smooth Scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Hardware Acceleration */
+.product-carousel__card,
+.collection-item,
+.ai-instagram-feed__post,
+.card,
+.button {
+  will-change: transform;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}

@@ -1,60 +1,42 @@
 {% comment %}
   Universal blocks renderer section
-  This section renders custom AI-generated blocks dynamically
+  Blocks are automatically rendered by Shopify when defined in schema
 {% endcomment %}
 
-<div class="blocks-section" data-section-id="{{ section.id }}" data-section-type="_blocks">
-  {%- if section.blocks.size > 0 -%}
-    {%- for block in section.blocks -%}
-      <div class="block-wrapper" {{ block.shopify_attributes }}>
-        {%- liquid
-          assign block_type = block.type
-          
-          comment
-            Render the appropriate block based on its type
-          endcomment
-          
-          case block_type
-            when 'ai_gen_block_3cbf047'
-              render 'ai_gen_block_3cbf047', block: block
-            when 'ai_gen_block_99fb4e7'
-              render 'ai_gen_block_99fb4e7', block: block
-            when 'ai_gen_block_a39facc'
-              render 'ai_gen_block_a39facc', block: block
-            when 'ai_gen_block_d67d1cd'
-              render 'ai_gen_block_d67d1cd', block: block
-            when 'ai_gen_block_a3f1481'
-              render 'ai_gen_block_a3f1481', block: block
-            when 'ai_gen_block_e4427a5'
-              render 'ai_gen_block_e4427a5', block: block
-            when 'ai_gen_block_ce0de3f'
-              render 'ai_gen_block_ce0de3f', block: block
-            when 'ai_gen_block_1f6cff8'
-              render 'ai_gen_block_1f6cff8', block: block
-            when 'ai_gen_block_030cd68'
-              render 'ai_gen_block_030cd68', block: block
-            when 'ai_gen_block_33c834f'
-              render 'ai_gen_block_33c834f', block: block
-            when 'ai_gen_block_42e9f75'
-              render 'ai_gen_block_42e9f75', block: block
-            when 'ai_gen_block_4590813'
-              render 'ai_gen_block_4590813', block: block
-            when 'ai_gen_block_66a8307'
-              render 'ai_gen_block_66a8307', block: block
-            when 'ai_gen_block_f75f841'
-              render 'ai_gen_block_f75f841', block: block
-            when 'ai_gen_block_fba29cf'
-              render 'ai_gen_block_fba29cf', block: block
-          endcase
-        -%}
-      </div>
-    {%- endfor -%}
-  {%- else -%}
-    <div class="placeholder-section">
-      <p>Add blocks to this section</p>
-    </div>
-  {%- endif -%}
-</div>
+{%- for block in section.blocks -%}
+  {%- case block.type -%}
+    {%- when 'ai_gen_block_3cbf047' -%}
+      {% render 'ai_gen_block_3cbf047', block: block %}
+    {%- when 'ai_gen_block_99fb4e7' -%}
+      {% render 'ai_gen_block_99fb4e7', block: block %}
+    {%- when 'ai_gen_block_a39facc' -%}
+      {% render 'ai_gen_block_a39facc', block: block %}
+    {%- when 'ai_gen_block_d67d1cd' -%}
+      {% render 'ai_gen_block_d67d1cd', block: block %}
+    {%- when 'ai_gen_block_a3f1481' -%}
+      {% render 'ai_gen_block_a3f1481', block: block %}
+    {%- when 'ai_gen_block_e4427a5' -%}
+      {% render 'ai_gen_block_e4427a5', block: block %}
+    {%- when 'ai_gen_block_ce0de3f' -%}
+      {% render 'ai_gen_block_ce0de3f', block: block %}
+    {%- when 'ai_gen_block_1f6cff8' -%}
+      {% render 'ai_gen_block_1f6cff8', block: block %}
+    {%- when 'ai_gen_block_030cd68' -%}
+      {% render 'ai_gen_block_030cd68', block: block %}
+    {%- when 'ai_gen_block_33c834f' -%}
+      {% render 'ai_gen_block_33c834f', block: block %}
+    {%- when 'ai_gen_block_42e9f75' -%}
+      {% render 'ai_gen_block_42e9f75', block: block %}
+    {%- when 'ai_gen_block_4590813' -%}
+      {% render 'ai_gen_block_4590813', block: block %}
+    {%- when 'ai_gen_block_66a8307' -%}
+      {% render 'ai_gen_block_66a8307', block: block %}
+    {%- when 'ai_gen_block_f75f841' -%}
+      {% render 'ai_gen_block_f75f841', block: block %}
+    {%- when 'ai_gen_block_fba29cf' -%}
+      {% render 'ai_gen_block_fba29cf', block: block %}
+  {%- endcase -%}
+{%- endfor -%}
 
 {% style %}
   .blocks-section {

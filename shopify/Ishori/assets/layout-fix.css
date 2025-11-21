@@ -3,6 +3,137 @@
  * Based on Moora.in and Pehrin.com
  */
 
+/* ================================
+   HEADER / NAVBAR FIX
+   ================================ */
+
+.header {
+  background: #fff !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08) !important;
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 100 !important;
+  padding: 16px 24px !important;
+}
+
+.header__inline-menu {
+  display: flex !important;
+  align-items: center !important;
+  gap: 40px !important;
+  list-style: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.header__menu-item {
+  margin: 0 !important;
+}
+
+.header__menu-item a,
+.header__menu-item span {
+  font-size: 15px !important;
+  font-weight: 500 !important;
+  color: #333 !important;
+  text-decoration: none !important;
+  text-transform: capitalize !important;
+  transition: color 0.3s ease !important;
+  letter-spacing: 0.3px !important;
+  position: relative !important;
+  padding: 8px 0 !important;
+}
+
+.header__menu-item a:hover,
+.header__menu-item span:hover {
+  color: #5f0511 !important;
+}
+
+.header__menu-item a::after {
+  content: '' !important;
+  position: absolute !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  width: 0 !important;
+  height: 2px !important;
+  background: #5f0511 !important;
+  transition: width 0.3s ease !important;
+}
+
+.header__menu-item a:hover::after {
+  width: 100% !important;
+}
+
+.header__heading-logo,
+.header__heading-link {
+  text-decoration: none !important;
+}
+
+.header__heading {
+  margin: 0 !important;
+}
+
+.header__heading-logo img,
+.header__heading-logo svg {
+  max-height: 40px !important;
+  width: auto !important;
+}
+
+.header__icons {
+  display: flex !important;
+  align-items: center !important;
+  gap: 20px !important;
+}
+
+.header__icon {
+  color: #333 !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+  position: relative !important;
+  padding: 8px !important;
+}
+
+.header__icon:hover {
+  color: #5f0511 !important;
+  transform: translateY(-2px) !important;
+}
+
+.header__icon svg {
+  width: 20px !important;
+  height: 20px !important;
+}
+
+/* Wishlist badge */
+.wishlist-badge,
+.cart-count-bubble {
+  position: absolute !important;
+  top: 0 !important;
+  right: 0 !important;
+  background: #5f0511 !important;
+  color: #fff !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  width: 18px !important;
+  height: 18px !important;
+  border-radius: 50% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+@media screen and (max-width: 989px) {
+  .header__inline-menu {
+    display: none !important;
+  }
+  
+  .header {
+    padding: 12px 16px !important;
+  }
+  
+  .header__heading-logo img,
+  .header__heading-logo svg {
+    max-height: 32px !important;
+  }
+}
+
 /* Section Background Fix */
 .color-scheme-1,
 .gradient {

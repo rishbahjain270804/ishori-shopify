@@ -1,0 +1,814 @@
+/* Advanced Section Management & Spacing Controls
+ * Professional Shopify theme customization
+ * Version: 1.0
+ * 
+ * This file provides granular control over:
+ * - Spacing (margin, padding, gap)
+ * - Sizing (width, height, max-width)
+ * - Aspect ratios for all media
+ * - Border radius controls
+ * - Responsive adjustments
+ */
+
+/* ================================
+   GLOBAL SPACING SYSTEM
+   ================================ */
+
+:root {
+  /* Spacing scale */
+  --spacing-xs: 8px;
+  --spacing-sm: 12px;
+  --spacing-md: 20px;
+  --spacing-lg: 32px;
+  --spacing-xl: 48px;
+  --spacing-2xl: 64px;
+  --spacing-3xl: 80px;
+
+  /* Container widths */
+  --container-sm: 640px;
+  --container-md: 768px;
+  --container-lg: 1024px;
+  --container-xl: 1280px;
+  --container-2xl: 1440px;
+
+  /* Border radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 24px;
+  --radius-full: 9999px;
+
+  /* Product card aspect ratios */
+  --aspect-ratio-square: 1/1;
+  --aspect-ratio-portrait: 3/4;
+  --aspect-ratio-landscape: 4/3;
+  --aspect-ratio-wide: 16/9;
+  --aspect-ratio-ultra-wide: 21/9;
+
+  /* Gap/Grid spacing */
+  --gap-sm: 12px;
+  --gap-md: 20px;
+  --gap-lg: 32px;
+  --gap-xl: 40px;
+}
+
+/* ================================
+   SECTION CONTAINER MANAGEMENT
+   ================================ */
+
+.section {
+  position: relative;
+  width: 100%;
+}
+
+/* Section padding controls */
+.section--padding-none {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.section--padding-sm {
+  padding-top: var(--spacing-lg);
+  padding-bottom: var(--spacing-lg);
+}
+
+.section--padding-md {
+  padding-top: var(--spacing-xl);
+  padding-bottom: var(--spacing-xl);
+}
+
+.section--padding-lg {
+  padding-top: var(--spacing-2xl);
+  padding-bottom: var(--spacing-2xl);
+}
+
+.section--padding-xl {
+  padding-top: var(--spacing-3xl);
+  padding-bottom: var(--spacing-3xl);
+}
+
+/* Section width controls */
+.section--full-width .page-width {
+  max-width: 100%;
+  padding: 0;
+}
+
+.section--contained .page-width {
+  max-width: var(--container-xl);
+}
+
+.section--narrow .page-width {
+  max-width: var(--container-lg);
+}
+
+/* ================================
+   VIDEO SECTION CONTROLS
+   ================================ */
+
+.video-section {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Video height controls */
+.video-section--height-sm {
+  height: 50vh;
+  min-height: 400px;
+}
+
+.video-section--height-md {
+  height: 65vh;
+  min-height: 500px;
+}
+
+.video-section--height-lg {
+  height: 80vh;
+  min-height: 600px;
+}
+
+.video-section--height-full {
+  height: 100vh;
+}
+
+/* Video aspect ratio containers */
+.video-section__media {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.video-section__media--16-9 {
+  aspect-ratio: 16/9;
+}
+
+.video-section__media--21-9 {
+  aspect-ratio: 21/9;
+}
+
+.video-section__media--4-3 {
+  aspect-ratio: 4/3;
+}
+
+/* Video border radius */
+.video-section--rounded {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.video-section--rounded-lg {
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+}
+
+/* ================================
+   PRODUCT GRID CONTROLS
+   ================================ */
+
+.product-grid {
+  display: grid;
+  gap: var(--gap-md);
+}
+
+/* Product grid gaps */
+.product-grid--gap-sm {
+  gap: var(--gap-sm);
+}
+
+.product-grid--gap-md {
+  gap: var(--gap-md);
+}
+
+.product-grid--gap-lg {
+  gap: var(--gap-lg);
+}
+
+.product-grid--gap-xl {
+  gap: var(--gap-xl);
+}
+
+/* Product grid columns */
+.product-grid--columns-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.product-grid--columns-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.product-grid--columns-4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.product-grid--columns-5 {
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.product-grid--columns-6 {
+  grid-template-columns: repeat(6, 1fr);
+}
+
+/* ================================
+   PRODUCT CARD SIZING
+   ================================ */
+
+.card {
+  position: relative;
+  height: 100%;
+}
+
+.card__inner {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Card media aspect ratios */
+.card__media {
+  position: relative;
+  overflow: hidden;
+  background: #f5f5f5;
+}
+
+.card__media--square {
+  aspect-ratio: var(--aspect-ratio-square);
+}
+
+.card__media--portrait {
+  aspect-ratio: var(--aspect-ratio-portrait);
+}
+
+.card__media--landscape {
+  aspect-ratio: var(--aspect-ratio-landscape);
+}
+
+.card__media--wide {
+  aspect-ratio: var(--aspect-ratio-wide);
+}
+
+/* Card border radius */
+.card--rounded-sm .card__media {
+  border-radius: var(--radius-sm);
+}
+
+.card--rounded-md .card__media {
+  border-radius: var(--radius-md);
+}
+
+.card--rounded-lg .card__media {
+  border-radius: var(--radius-lg);
+}
+
+.card--rounded-xl .card__media {
+  border-radius: var(--radius-xl);
+}
+
+/* Card spacing */
+.card__content {
+  padding: var(--spacing-md);
+}
+
+.card__content--compact {
+  padding: var(--spacing-sm);
+}
+
+.card__content--spacious {
+  padding: var(--spacing-lg);
+}
+
+/* ================================
+   COLLECTION GRID CONTROLS
+   ================================ */
+
+.collection-list {
+  display: grid;
+  gap: var(--gap-md);
+}
+
+/* Collection grid gaps */
+.collection-list--gap-sm {
+  gap: var(--gap-sm);
+}
+
+.collection-list--gap-md {
+  gap: var(--gap-md);
+}
+
+.collection-list--gap-lg {
+  gap: var(--gap-lg);
+}
+
+/* Collection card sizing */
+.collection-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.collection-card__media {
+  position: relative;
+  overflow: hidden;
+  background: #f5f5f5;
+}
+
+/* Collection aspect ratios */
+.collection-card--square .collection-card__media {
+  aspect-ratio: var(--aspect-ratio-square);
+}
+
+.collection-card--portrait .collection-card__media {
+  aspect-ratio: var(--aspect-ratio-portrait);
+}
+
+.collection-card--landscape .collection-card__media {
+  aspect-ratio: var(--aspect-ratio-landscape);
+}
+
+.collection-card--wide .collection-card__media {
+  aspect-ratio: var(--aspect-ratio-wide);
+}
+
+/* Collection border radius */
+.collection-card--rounded-sm {
+  border-radius: var(--radius-sm);
+}
+
+.collection-card--rounded-md {
+  border-radius: var(--radius-md);
+}
+
+.collection-card--rounded-lg {
+  border-radius: var(--radius-lg);
+}
+
+.collection-card--rounded-xl {
+  border-radius: var(--radius-xl);
+}
+
+/* ================================
+   BANNER/IMAGE SECTION CONTROLS
+   ================================ */
+
+.banner {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Banner heights */
+.banner--height-sm {
+  min-height: 300px;
+}
+
+.banner--height-md {
+  min-height: 450px;
+}
+
+.banner--height-lg {
+  min-height: 600px;
+}
+
+.banner--height-xl {
+  min-height: 750px;
+}
+
+/* Banner aspect ratios */
+.banner__media {
+  position: relative;
+  width: 100%;
+}
+
+.banner__media--16-9 {
+  aspect-ratio: 16/9;
+}
+
+.banner__media--21-9 {
+  aspect-ratio: 21/9;
+}
+
+.banner__media--4-3 {
+  aspect-ratio: 4/3;
+}
+
+.banner__media--3-2 {
+  aspect-ratio: 3/2;
+}
+
+/* Banner border radius */
+.banner--rounded-sm {
+  border-radius: var(--radius-sm);
+}
+
+.banner--rounded-md {
+  border-radius: var(--radius-md);
+}
+
+.banner--rounded-lg {
+  border-radius: var(--radius-lg);
+}
+
+.banner--rounded-xl {
+  border-radius: var(--radius-xl);
+}
+
+/* Banner content positioning */
+.banner__content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.banner__content--top-left {
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: var(--spacing-lg);
+}
+
+.banner__content--top-center {
+  align-items: flex-start;
+  justify-content: center;
+  padding: var(--spacing-lg);
+}
+
+.banner__content--top-right {
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding: var(--spacing-lg);
+}
+
+.banner__content--middle-left {
+  align-items: center;
+  justify-content: flex-start;
+  padding: var(--spacing-lg);
+}
+
+.banner__content--middle-center {
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-lg);
+}
+
+.banner__content--middle-right {
+  align-items: center;
+  justify-content: flex-end;
+  padding: var(--spacing-lg);
+}
+
+.banner__content--bottom-left {
+  align-items: flex-end;
+  justify-content: flex-start;
+  padding: var(--spacing-lg);
+}
+
+.banner__content--bottom-center {
+  align-items: flex-end;
+  justify-content: center;
+  padding: var(--spacing-lg);
+}
+
+.banner__content--bottom-right {
+  align-items: flex-end;
+  justify-content: flex-end;
+  padding: var(--spacing-lg);
+}
+
+/* ================================
+   MULTICOLUMN SECTION CONTROLS
+   ================================ */
+
+.multicolumn {
+  display: grid;
+  gap: var(--gap-md);
+}
+
+/* Multicolumn gaps */
+.multicolumn--gap-sm {
+  gap: var(--gap-sm);
+}
+
+.multicolumn--gap-md {
+  gap: var(--gap-md);
+}
+
+.multicolumn--gap-lg {
+  gap: var(--gap-lg);
+}
+
+.multicolumn--gap-xl {
+  gap: var(--gap-xl);
+}
+
+/* Multicolumn columns */
+.multicolumn--columns-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.multicolumn--columns-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.multicolumn--columns-4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.multicolumn--columns-5 {
+  grid-template-columns: repeat(5, 1fr);
+}
+
+/* Multicolumn card */
+.multicolumn-card {
+  padding: var(--spacing-md);
+  border-radius: var(--radius-md);
+}
+
+.multicolumn-card--compact {
+  padding: var(--spacing-sm);
+}
+
+.multicolumn-card--spacious {
+  padding: var(--spacing-lg);
+}
+
+/* ================================
+   SLIDESHOW CONTROLS
+   ================================ */
+
+.slideshow {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Slideshow heights */
+.slideshow--height-sm {
+  height: 400px;
+}
+
+.slideshow--height-md {
+  height: 550px;
+}
+
+.slideshow--height-lg {
+  height: 700px;
+}
+
+.slideshow--height-full {
+  height: 100vh;
+}
+
+/* Slideshow slide */
+.slideshow__slide {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* Slideshow border radius */
+.slideshow--rounded-sm .slideshow__slide {
+  border-radius: var(--radius-sm);
+}
+
+.slideshow--rounded-md .slideshow__slide {
+  border-radius: var(--radius-md);
+}
+
+.slideshow--rounded-lg .slideshow__slide {
+  border-radius: var(--radius-lg);
+}
+
+/* ================================
+   NEWSLETTER SECTION CONTROLS
+   ================================ */
+
+.newsletter {
+  padding: var(--spacing-2xl) var(--spacing-md);
+}
+
+.newsletter--compact {
+  padding: var(--spacing-lg) var(--spacing-md);
+}
+
+.newsletter--spacious {
+  padding: var(--spacing-3xl) var(--spacing-md);
+}
+
+/* Newsletter form width */
+.newsletter__wrapper {
+  max-width: var(--container-md);
+  margin: 0 auto;
+}
+
+.newsletter__wrapper--narrow {
+  max-width: var(--container-sm);
+}
+
+.newsletter__wrapper--wide {
+  max-width: var(--container-lg);
+}
+
+/* Newsletter border radius */
+.newsletter__form .field__input {
+  border-radius: var(--radius-md);
+}
+
+.newsletter__button {
+  border-radius: var(--radius-md);
+}
+
+/* ================================
+   RICH TEXT SECTION CONTROLS
+   ================================ */
+
+.rich-text {
+  padding: var(--spacing-2xl) var(--spacing-md);
+}
+
+.rich-text__blocks {
+  max-width: var(--container-md);
+  margin: 0 auto;
+}
+
+.rich-text__blocks--narrow {
+  max-width: var(--container-sm);
+}
+
+.rich-text__blocks--wide {
+  max-width: var(--container-lg);
+}
+
+/* Rich text spacing */
+.rich-text__heading {
+  margin-bottom: var(--spacing-md);
+}
+
+.rich-text__text {
+  margin-bottom: var(--spacing-lg);
+}
+
+.rich-text__text p:not(:last-child) {
+  margin-bottom: var(--spacing-sm);
+}
+
+/* ================================
+   RESPONSIVE ADJUSTMENTS
+   ================================ */
+
+/* Tablet */
+@media screen and (max-width: 989px) {
+  :root {
+    --spacing-xl: 32px;
+    --spacing-2xl: 48px;
+    --spacing-3xl: 64px;
+    --gap-lg: 24px;
+    --gap-xl: 32px;
+  }
+
+  .product-grid--columns-4,
+  .product-grid--columns-5,
+  .product-grid--columns-6 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .multicolumn--columns-4,
+  .multicolumn--columns-5 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .banner--height-lg {
+    min-height: 500px;
+  }
+
+  .banner--height-xl {
+    min-height: 600px;
+  }
+}
+
+/* Mobile */
+@media screen and (max-width: 749px) {
+  :root {
+    --spacing-lg: 24px;
+    --spacing-xl: 32px;
+    --spacing-2xl: 40px;
+    --spacing-3xl: 48px;
+    --gap-md: 16px;
+    --gap-lg: 20px;
+    --gap-xl: 24px;
+  }
+
+  .product-grid--columns-3,
+  .product-grid--columns-4,
+  .product-grid--columns-5,
+  .product-grid--columns-6 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .multicolumn--columns-3,
+  .multicolumn--columns-4,
+  .multicolumn--columns-5 {
+    grid-template-columns: 1fr;
+  }
+
+  .collection-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .video-section--height-sm {
+    height: 40vh;
+    min-height: 300px;
+  }
+
+  .video-section--height-md {
+    height: 50vh;
+    min-height: 350px;
+  }
+
+  .video-section--height-lg {
+    height: 60vh;
+    min-height: 400px;
+  }
+
+  .banner--height-sm {
+    min-height: 250px;
+  }
+
+  .banner--height-md {
+    min-height: 350px;
+  }
+
+  .banner--height-lg {
+    min-height: 450px;
+  }
+
+  .banner--height-xl {
+    min-height: 500px;
+  }
+
+  .slideshow--height-sm {
+    height: 300px;
+  }
+
+  .slideshow--height-md {
+    height: 400px;
+  }
+
+  .slideshow--height-lg {
+    height: 500px;
+  }
+
+  .card__content,
+  .multicolumn-card {
+    padding: var(--spacing-sm);
+  }
+
+  .banner__content {
+    padding: var(--spacing-md);
+  }
+}
+
+/* ================================
+   UTILITY CLASSES
+   ================================ */
+
+/* Margin utilities */
+.mt-0 { margin-top: 0 !important; }
+.mt-sm { margin-top: var(--spacing-sm) !important; }
+.mt-md { margin-top: var(--spacing-md) !important; }
+.mt-lg { margin-top: var(--spacing-lg) !important; }
+.mt-xl { margin-top: var(--spacing-xl) !important; }
+
+.mb-0 { margin-bottom: 0 !important; }
+.mb-sm { margin-bottom: var(--spacing-sm) !important; }
+.mb-md { margin-bottom: var(--spacing-md) !important; }
+.mb-lg { margin-bottom: var(--spacing-lg) !important; }
+.mb-xl { margin-bottom: var(--spacing-xl) !important; }
+
+/* Padding utilities */
+.pt-0 { padding-top: 0 !important; }
+.pt-sm { padding-top: var(--spacing-sm) !important; }
+.pt-md { padding-top: var(--spacing-md) !important; }
+.pt-lg { padding-top: var(--spacing-lg) !important; }
+.pt-xl { padding-top: var(--spacing-xl) !important; }
+
+.pb-0 { padding-bottom: 0 !important; }
+.pb-sm { padding-bottom: var(--spacing-sm) !important; }
+.pb-md { padding-bottom: var(--spacing-md) !important; }
+.pb-lg { padding-bottom: var(--spacing-lg) !important; }
+.pb-xl { padding-bottom: var(--spacing-xl) !important; }
+
+/* Width utilities */
+.w-full { width: 100% !important; }
+.w-auto { width: auto !important; }
+.max-w-sm { max-width: var(--container-sm) !important; }
+.max-w-md { max-width: var(--container-md) !important; }
+.max-w-lg { max-width: var(--container-lg) !important; }
+.max-w-xl { max-width: var(--container-xl) !important; }
+
+/* Border radius utilities */
+.rounded-none { border-radius: 0 !important; }
+.rounded-sm { border-radius: var(--radius-sm) !important; }
+.rounded-md { border-radius: var(--radius-md) !important; }
+.rounded-lg { border-radius: var(--radius-lg) !important; }
+.rounded-xl { border-radius: var(--radius-xl) !important; }
+.rounded-full { border-radius: var(--radius-full) !important; }

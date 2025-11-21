@@ -1,0 +1,158 @@
+{% comment %}
+  Universal blocks renderer section
+  This section renders custom AI-generated blocks dynamically
+{% endcomment %}
+
+<div class="blocks-section" data-section-id="{{ section.id }}" data-section-type="_blocks">
+  {%- if section.blocks.size > 0 -%}
+    {%- for block in section.blocks -%}
+      <div class="block-wrapper" {{ block.shopify_attributes }}>
+        {%- liquid
+          assign block_type = block.type
+          
+          comment
+            Render the appropriate block based on its type
+          endcomment
+          
+          case block_type
+            when 'ai_gen_block_3cbf047'
+              render 'ai_gen_block_3cbf047', block: block
+            when 'ai_gen_block_99fb4e7'
+              render 'ai_gen_block_99fb4e7', block: block
+            when 'ai_gen_block_a39facc'
+              render 'ai_gen_block_a39facc', block: block
+            when 'ai_gen_block_d67d1cd'
+              render 'ai_gen_block_d67d1cd', block: block
+            when 'ai_gen_block_a3f1481'
+              render 'ai_gen_block_a3f1481', block: block
+            when 'ai_gen_block_e4427a5'
+              render 'ai_gen_block_e4427a5', block: block
+            when 'ai_gen_block_ce0de3f'
+              render 'ai_gen_block_ce0de3f', block: block
+            when 'ai_gen_block_1f6cff8'
+              render 'ai_gen_block_1f6cff8', block: block
+            when 'ai_gen_block_030cd68'
+              render 'ai_gen_block_030cd68', block: block
+            when 'ai_gen_block_33c834f'
+              render 'ai_gen_block_33c834f', block: block
+            when 'ai_gen_block_42e9f75'
+              render 'ai_gen_block_42e9f75', block: block
+            when 'ai_gen_block_4590813'
+              render 'ai_gen_block_4590813', block: block
+            when 'ai_gen_block_66a8307'
+              render 'ai_gen_block_66a8307', block: block
+            when 'ai_gen_block_f75f841'
+              render 'ai_gen_block_f75f841', block: block
+            when 'ai_gen_block_fba29cf'
+              render 'ai_gen_block_fba29cf', block: block
+          endcase
+        -%}
+      </div>
+    {%- endfor -%}
+  {%- else -%}
+    <div class="placeholder-section">
+      <p>Add blocks to this section</p>
+    </div>
+  {%- endif -%}
+</div>
+
+{% style %}
+  .blocks-section {
+    width: 100%;
+  }
+  
+  .block-wrapper {
+    width: 100%;
+  }
+  
+  .placeholder-section {
+    padding: 60px 20px;
+    text-align: center;
+    background-color: #f5f5f5;
+    color: #666;
+  }
+{% endstyle %}
+
+{% schema %}
+{
+  "name": "Custom Blocks",
+  "tag": "section",
+  "class": "section-blocks",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "ai_gen_block_3cbf047",
+      "name": "Hero Video",
+      "limit": 1
+    },
+    {
+      "type": "ai_gen_block_99fb4e7",
+      "name": "Sale Banner",
+      "limit": 1
+    },
+    {
+      "type": "ai_gen_block_a39facc",
+      "name": "About Banner",
+      "limit": 1
+    },
+    {
+      "type": "ai_gen_block_d67d1cd",
+      "name": "Gallery Carousel",
+      "limit": 1
+    },
+    {
+      "type": "ai_gen_block_a3f1481",
+      "name": "Instagram Feed",
+      "limit": 1
+    },
+    {
+      "type": "ai_gen_block_e4427a5",
+      "name": "Footer",
+      "limit": 1
+    },
+    {
+      "type": "ai_gen_block_ce0de3f",
+      "name": "Product Grid",
+      "limit": 1
+    },
+    {
+      "type": "ai_gen_block_1f6cff8",
+      "name": "Wishlist",
+      "limit": 1
+    },
+    {
+      "type": "ai_gen_block_030cd68",
+      "name": "Custom Block 1"
+    },
+    {
+      "type": "ai_gen_block_33c834f",
+      "name": "Custom Block 2"
+    },
+    {
+      "type": "ai_gen_block_42e9f75",
+      "name": "Custom Block 3"
+    },
+    {
+      "type": "ai_gen_block_4590813",
+      "name": "Custom Block 4"
+    },
+    {
+      "type": "ai_gen_block_66a8307",
+      "name": "Custom Block 5"
+    },
+    {
+      "type": "ai_gen_block_f75f841",
+      "name": "Custom Block 6"
+    },
+    {
+      "type": "ai_gen_block_fba29cf",
+      "name": "Custom Block 7"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Blocks"
+    }
+  ]
+}
+{% endschema %}

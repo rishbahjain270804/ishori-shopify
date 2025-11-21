@@ -1,0 +1,1078 @@
+{% doc %}
+  @prompt
+    Create a “Watch & Shop” infinite video carousel for Shopify.
+    Shows portrait 9:16 videos, responsive, clean, modern layout.
+    
+    Layout:
+    – Desktop: 3–4 videos visible.
+    – Tablet: 2–3.
+    – Mobile: 1–2.
+    – Max height: 38vh, width auto to keep 9:16.
+    – Cards include: video, product title, price, compare-at price (strikethrough), green discount badge, border + soft shadow, rounded corners.
+    
+    Video Behavior:
+    – Desktop: play on hover, pause on mouse leave.
+    – Mobile: auto-play when in viewport, pause when scrolled away.
+    – Only visible videos auto-play (max 3 desktop, 1 mobile).
+    
+    Infinite Loop:
+    – Endless scrolling: v1→v2→v3→v4→v1…
+    – Smooth, seamless loop.
+    – Supports drag/swipe + arrow navigation.
+    – Arrows float outside the track, vertically centered.
+    
+    Theme Editor Settings:
+    Per block: video source (Shopify file, asset, YouTube, Vimeo), product title, product link, price, compare price, discount %.
+    Section options: autoplay on/off, autoplay speed, spacing, arrow visibility, number of visible items override.
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-watch-shop-carousel-{{ ai_gen_id }} {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    padding: 40px 0;
+  }
+
+  .ai-watch-shop-carousel__wrapper-{{ ai_gen_id }} {
+    position: relative;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 60px;
+  }
+
+  .ai-watch-shop-carousel__track-{{ ai_gen_id }} {
+    display: flex;
+    gap: {{ block.settings.card_spacing }}px;
+    cursor: grab;
+    user-select: none;
+    transition: transform 0.3s ease;
+  }
+
+  .ai-watch-shop-carousel__track-{{ ai_gen_id }}.dragging {
+    cursor: grabbing;
+    transition: none;
+  }
+
+  .ai-watch-shop-carousel__card-{{ ai_gen_id }} {
+    flex: 0 0 auto;
+    width: calc((100% - ({{ block.settings.desktop_visible }} - 1) * {{ block.settings.card_spacing }}px) / {{ block.settings.desktop_visible }});
+    position: relative;
+    background: {{ block.settings.card_background }};
+    border: {{ block.settings.card_border_width }}px solid {{ block.settings.card_border_color }};
+    border-radius: {{ block.settings.card_border_radius }}px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .ai-watch-shop-carousel__card-{{ ai_gen_id }}:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .ai-watch-shop-carousel__video-wrapper-{{ ai_gen_id }} {
+    position: relative;
+    width: 100%;
+    height: 38vh;
+    background: #000;
+    overflow: hidden;
+  }
+
+  .ai-watch-shop-carousel__video-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .ai-watch-shop-carousel__video-{{ ai_gen_id }}.portrait {
+    object-fit: contain;
+  }
+
+  .ai-watch-shop-carousel__video-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f4f4f4;
+  }
+
+  .ai-watch-shop-carousel__video-placeholder-{{ ai_gen_id }} svg {
+    width: 60%;
+    height: 60%;
+    opacity: 0.3;
+  }
+
+  .ai-watch-shop-carousel__content-{{ ai_gen_id }} {
+    padding: 16px;
+  }
+
+  .ai-watch-shop-carousel__title-{{ ai_gen_id }} {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0 0 8px;
+    color: {{ block.settings.text_color }};
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+
+  .ai-watch-shop-carousel__price-wrapper-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .ai-watch-shop-carousel__price-{{ ai_gen_id }} {
+    font-size: 18px;
+    font-weight: 700;
+    color: {{ block.settings.price_color }};
+  }
+
+  .ai-watch-shop-carousel__compare-price-{{ ai_gen_id }} {
+    font-size: 14px;
+    color: {{ block.settings.compare_price_color }};
+    text-decoration: line-through;
+  }
+
+  .ai-watch-shop-carousel__discount-badge-{{ ai_gen_id }} {
+    display: inline-block;
+    padding: 4px 8px;
+    background: {{ block.settings.discount_badge_bg }};
+    color: {{ block.settings.discount_badge_text }};
+    font-size: 12px;
+    font-weight: 600;
+    border-radius: 4px;
+  }
+
+  .ai-watch-shop-carousel__link-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+
+  .ai-watch-shop-carousel__arrow-{{ ai_gen_id }} {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 44px;
+    height: 44px;
+    background: {{ block.settings.arrow_background }};
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    transition: background 0.3s ease, opacity 0.3s ease;
+    opacity: 0.9;
+  }
+
+  .ai-watch-shop-carousel__arrow-{{ ai_gen_id }}:hover {
+    opacity: 1;
+    background: {{ block.settings.arrow_hover_background }};
+  }
+
+  .ai-watch-shop-carousel__arrow-{{ ai_gen_id }}:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+
+  .ai-watch-shop-carousel__arrow--prev-{{ ai_gen_id }} {
+    left: 0;
+  }
+
+  .ai-watch-shop-carousel__arrow--next-{{ ai_gen_id }} {
+    right: 0;
+  }
+
+  .ai-watch-shop-carousel__arrow-{{ ai_gen_id }} svg {
+    width: 20px;
+    height: 20px;
+    fill: {{ block.settings.arrow_color }};
+  }
+
+  @media screen and (max-width: 989px) {
+    .ai-watch-shop-carousel__card-{{ ai_gen_id }} {
+      width: calc((100% - {{ block.settings.card_spacing }}px) / 2);
+    }
+
+    .ai-watch-shop-carousel__wrapper-{{ ai_gen_id }} {
+      padding: 0 50px;
+    }
+
+    .ai-watch-shop-carousel__arrow-{{ ai_gen_id }} {
+      width: 36px;
+      height: 36px;
+    }
+
+    .ai-watch-shop-carousel__arrow-{{ ai_gen_id }} svg {
+      width: 16px;
+      height: 16px;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-watch-shop-carousel__card-{{ ai_gen_id }} {
+      width: 100%;
+    }
+
+    .ai-watch-shop-carousel__wrapper-{{ ai_gen_id }} {
+      padding: 0 40px;
+    }
+
+    .ai-watch-shop-carousel__video-wrapper-{{ ai_gen_id }} {
+      height: 36vh;
+    }
+
+    .ai-watch-shop-carousel__content-{{ ai_gen_id }} {
+      padding: 12px;
+    }
+
+    .ai-watch-shop-carousel__title-{{ ai_gen_id }} {
+      font-size: 14px;
+    }
+
+    .ai-watch-shop-carousel__price-{{ ai_gen_id }} {
+      font-size: 16px;
+    }
+  }
+{% endstyle %}
+
+<watch-shop-carousel-{{ ai_gen_id }}
+  class="ai-watch-shop-carousel-{{ ai_gen_id }}"
+  data-autoplay="{{ block.settings.autoplay }}"
+  data-autoplay-speed="{{ block.settings.autoplay_speed }}"
+  data-desktop-visible="{{ block.settings.desktop_visible }}"
+  {{ block.shopify_attributes }}
+>
+  <div class="ai-watch-shop-carousel__wrapper-{{ ai_gen_id }}">
+    {% if block.settings.show_arrows %}
+      <button
+        class="ai-watch-shop-carousel__arrow-{{ ai_gen_id }} ai-watch-shop-carousel__arrow--prev-{{ ai_gen_id }}"
+        aria-label="Previous"
+      >
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+        </svg>
+      </button>
+    {% endif %}
+
+    <div class="ai-watch-shop-carousel__track-{{ ai_gen_id }}">
+      {% for i in (1..8) %}
+        {% liquid
+          assign video_key = 'video_' | append: i
+          assign video_url_key = 'video_url_' | append: i
+          assign title_key = 'title_' | append: i
+          assign link_key = 'link_' | append: i
+          assign price_key = 'price_' | append: i
+          assign compare_price_key = 'compare_price_' | append: i
+          assign discount_key = 'discount_' | append: i
+
+          assign video = block.settings[video_key]
+          assign video_url = block.settings[video_url_key]
+          assign title = block.settings[title_key]
+          assign link = block.settings[link_key]
+          assign price = block.settings[price_key]
+          assign compare_price = block.settings[compare_price_key]
+          assign discount = block.settings[discount_key]
+        %}
+
+        {% if video != blank or video_url != blank or title != blank %}
+          <div class="ai-watch-shop-carousel__card-{{ ai_gen_id }}" data-card-index="{{ forloop.index0 }}">
+            <div class="ai-watch-shop-carousel__video-wrapper-{{ ai_gen_id }}">
+              {% if video != blank %}
+                <video
+                  class="ai-watch-shop-carousel__video-{{ ai_gen_id }} portrait"
+                  muted
+                  loop
+                  playsinline
+                  preload="metadata"
+                >
+                  <source src="{{ video }}" type="video/mp4">
+                </video>
+              {% elsif video_url != blank %}
+                {% if video_url contains 'youtube.com' or video_url contains 'youtu.be' %}
+                  {% assign video_id = video_url | split: 'v=' | last | split: '/' | last | split: '&' | first %}
+                  <iframe
+                    class="ai-watch-shop-carousel__video-{{ ai_gen_id }}"
+                    src="https://www.youtube.com/embed/{{ video_id }}?controls=0&modestbranding=1&rel=0&mute=1&loop=1&playlist={{ video_id }}"
+                    frameborder="0"
+                    allow="autoplay; encrypted-media"
+                    allowfullscreen
+                  ></iframe>
+                {% elsif video_url contains 'vimeo.com' %}
+                  {% assign video_id = video_url | split: '/' | last %}
+                  <iframe
+                    class="ai-watch-shop-carousel__video-{{ ai_gen_id }}"
+                    src="https://player.vimeo.com/video/{{ video_id }}?background=1&muted=1&loop=1"
+                    frameborder="0"
+                    allow="autoplay; fullscreen"
+                    allowfullscreen
+                  ></iframe>
+                {% endif %}
+              {% else %}
+                <div class="ai-watch-shop-carousel__video-placeholder-{{ ai_gen_id }}">
+                  {{ 'image' | placeholder_svg_tag }}
+                </div>
+              {% endif %}
+            </div>
+
+            <div class="ai-watch-shop-carousel__content-{{ ai_gen_id }}">
+              {% if title != blank %}
+                <h3 class="ai-watch-shop-carousel__title-{{ ai_gen_id }}">
+                  {{ title }}
+                </h3>
+              {% endif %}
+
+              <div class="ai-watch-shop-carousel__price-wrapper-{{ ai_gen_id }}">
+                {% if price != blank %}
+                  <span class="ai-watch-shop-carousel__price-{{ ai_gen_id }}">
+                    {{ price }}
+                  </span>
+                {% endif %}
+
+                {% if compare_price != blank %}
+                  <span class="ai-watch-shop-carousel__compare-price-{{ ai_gen_id }}">
+                    {{ compare_price }}
+                  </span>
+                {% endif %}
+
+                {% if discount != blank and discount != '0' %}
+                  <span class="ai-watch-shop-carousel__discount-badge-{{ ai_gen_id }}">
+                    {{ discount }}% OFF
+                  </span>
+                {% endif %}
+              </div>
+            </div>
+
+            {% if link != blank %}
+              <a
+                href="{{ link }}"
+                class="ai-watch-shop-carousel__link-{{ ai_gen_id }}"
+                aria-label="{{ title | escape }}"
+              ></a>
+            {% endif %}
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    {% if block.settings.show_arrows %}
+      <button
+        class="ai-watch-shop-carousel__arrow-{{ ai_gen_id }} ai-watch-shop-carousel__arrow--next-{{ ai_gen_id }}"
+        aria-label="Next"
+      >
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12z"/>
+        </svg>
+      </button>
+    {% endif %}
+  </div>
+</watch-shop-carousel-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class WatchShopCarousel{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+        this.track = this.querySelector('.ai-watch-shop-carousel__track-{{ ai_gen_id }}');
+        this.cards = Array.from(this.querySelectorAll('.ai-watch-shop-carousel__card-{{ ai_gen_id }}'));
+        this.prevButton = this.querySelector('.ai-watch-shop-carousel__arrow--prev-{{ ai_gen_id }}');
+        this.nextButton = this.querySelector('.ai-watch-shop-carousel__arrow--next-{{ ai_gen_id }}');
+        this.autoplay = this.dataset.autoplay === 'true';
+        this.autoplaySpeed = parseInt(this.dataset.autoplaySpeed) || 3000;
+        this.desktopVisible = parseInt(this.dataset.desktopVisible) || 3;
+        this.currentIndex = 0;
+        this.isDragging = false;
+        this.startPos = 0;
+        this.currentTranslate = 0;
+        this.prevTranslate = 0;
+        this.autoplayInterval = null;
+        this.visibleVideos = new Set();
+      }
+
+      connectedCallback() {
+        if (this.cards.length === 0) return;
+
+        this.cloneCards();
+        this.setupEventListeners();
+        this.updateCarousel();
+        this.setupIntersectionObserver();
+
+        if (this.autoplay) {
+          this.startAutoplay();
+        }
+      }
+
+      disconnectedCallback() {
+        this.stopAutoplay();
+        if (this.observer) {
+          this.observer.disconnect();
+        }
+      }
+
+      cloneCards() {
+        const originalCards = [...this.cards];
+        const clonesBefore = originalCards.map(card => card.cloneNode(true));
+        const clonesAfter = originalCards.map(card => card.cloneNode(true));
+
+        clonesBefore.forEach(clone => {
+          clone.classList.add('clone');
+          this.track.insertBefore(clone, this.track.firstChild);
+        });
+
+        clonesAfter.forEach(clone => {
+          clone.classList.add('clone');
+          this.track.appendChild(clone);
+        });
+
+        this.allCards = Array.from(this.track.children);
+        this.currentIndex = originalCards.length;
+        this.updateCarousel();
+      }
+
+      setupEventListeners() {
+        if (this.prevButton) {
+          this.prevButton.addEventListener('click', () => this.prev());
+        }
+
+        if (this.nextButton) {
+          this.nextButton.addEventListener('click', () => this.next());
+        }
+
+        this.track.addEventListener('mousedown', this.dragStart.bind(this));
+        this.track.addEventListener('touchstart', this.dragStart.bind(this));
+        this.track.addEventListener('mousemove', this.drag.bind(this));
+        this.track.addEventListener('touchmove', this.drag.bind(this));
+        this.track.addEventListener('mouseup', this.dragEnd.bind(this));
+        this.track.addEventListener('touchend', this.dragEnd.bind(this));
+        this.track.addEventListener('mouseleave', this.dragEnd.bind(this));
+
+        this.allCards.forEach((card) => {
+          const video = card.querySelector('video');
+          if (video) {
+            if (window.innerWidth > 749) {
+              card.addEventListener('mouseenter', () => {
+                if (!this.isDragging) {
+                  video.play().catch(() => {});
+                }
+              });
+              card.addEventListener('mouseleave', () => {
+                video.pause();
+              });
+            }
+          }
+        });
+      }
+
+      setupIntersectionObserver() {
+        if (window.innerWidth <= 749) {
+          const options = {
+            root: null,
+            threshold: 0.5
+          };
+
+          this.observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+              const video = entry.target.querySelector('video');
+              if (video) {
+                if (entry.isIntersecting) {
+                  this.visibleVideos.add(video);
+                  if (this.visibleVideos.size <= 1) {
+                    video.play().catch(() => {});
+                  }
+                } else {
+                  this.visibleVideos.delete(video);
+                  video.pause();
+                }
+              }
+            });
+          }, options);
+
+          this.allCards.forEach(card => {
+            this.observer.observe(card);
+          });
+        }
+      }
+
+      dragStart(e) {
+        this.isDragging = true;
+        this.startPos = this.getPositionX(e);
+        this.track.classList.add('dragging');
+        this.stopAutoplay();
+      }
+
+      drag(e) {
+        if (!this.isDragging) return;
+        const currentPosition = this.getPositionX(e);
+        this.currentTranslate = this.prevTranslate + currentPosition - this.startPos;
+      }
+
+      dragEnd() {
+        if (!this.isDragging) return;
+        this.isDragging = false;
+        this.track.classList.remove('dragging');
+
+        const movedBy = this.currentTranslate - this.prevTranslate;
+        const cardWidth = this.allCards[0].offsetWidth + parseInt('{{ block.settings.card_spacing }}');
+
+        if (movedBy < -cardWidth / 3) {
+          this.next();
+        } else if (movedBy > cardWidth / 3) {
+          this.prev();
+        } else {
+          this.updateCarousel();
+        }
+
+        if (this.autoplay) {
+          this.startAutoplay();
+        }
+      }
+
+      getPositionX(e) {
+        return e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+      }
+
+      prev() {
+        this.currentIndex--;
+        this.updateCarousel();
+        this.checkLoop();
+      }
+
+      next() {
+        this.currentIndex++;
+        this.updateCarousel();
+        this.checkLoop();
+      }
+
+      updateCarousel() {
+        const cardWidth = this.allCards[0].offsetWidth + parseInt('{{ block.settings.card_spacing }}');
+        this.currentTranslate = -this.currentIndex * cardWidth;
+        this.prevTranslate = this.currentTranslate;
+        this.track.style.transform = `translateX(${this.currentTranslate}px)`;
+      }
+
+      checkLoop() {
+        const originalLength = this.cards.length;
+
+        if (this.currentIndex <= 0) {
+          setTimeout(() => {
+            this.track.style.transition = 'none';
+            this.currentIndex = originalLength;
+            this.updateCarousel();
+            setTimeout(() => {
+              this.track.style.transition = '';
+            }, 50);
+          }, 300);
+        } else if (this.currentIndex >= originalLength * 2) {
+          setTimeout(() => {
+            this.track.style.transition = 'none';
+            this.currentIndex = originalLength;
+            this.updateCarousel();
+            setTimeout(() => {
+              this.track.style.transition = '';
+            }, 50);
+          }, 300);
+        }
+      }
+
+      startAutoplay() {
+        this.stopAutoplay();
+        this.autoplayInterval = setInterval(() => {
+          this.next();
+        }, this.autoplaySpeed);
+      }
+
+      stopAutoplay() {
+        if (this.autoplayInterval) {
+          clearInterval(this.autoplayInterval);
+          this.autoplayInterval = null;
+        }
+      }
+    }
+
+    customElements.define('watch-shop-carousel-{{ ai_gen_id }}', WatchShopCarousel{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Watch & Shop carousel",
+  "tag": null,
+  "class": "watch-shop-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "desktop_visible",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "label": "Visible items (desktop)",
+      "default": 3
+    },
+    {
+      "type": "range",
+      "id": "card_spacing",
+      "min": 8,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "label": "Card spacing",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Autoplay"
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Enable autoplay",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "autoplay_speed",
+      "min": 2000,
+      "max": 8000,
+      "step": 500,
+      "unit": "ms",
+      "label": "Autoplay speed",
+      "default": 3000
+    },
+    {
+      "type": "header",
+      "content": "Navigation"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_arrows",
+      "label": "Show arrows",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "arrow_background",
+      "label": "Arrow background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "arrow_hover_background",
+      "label": "Arrow hover background",
+      "default": "#f4f4f4"
+    },
+    {
+      "type": "color",
+      "id": "arrow_color",
+      "label": "Arrow color",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Card style"
+    },
+    {
+      "type": "color",
+      "id": "card_background",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "card_border_color",
+      "label": "Border color",
+      "default": "#e5e5e5"
+    },
+    {
+      "type": "range",
+      "id": "card_border_width",
+      "min": 0,
+      "max": 4,
+      "step": 1,
+      "unit": "px",
+      "label": "Border width",
+      "default": 1
+    },
+    {
+      "type": "range",
+      "id": "card_border_radius",
+      "min": 0,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "label": "Border radius",
+      "default": 12
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "price_color",
+      "label": "Price color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "compare_price_color",
+      "label": "Compare price color",
+      "default": "#999999"
+    },
+    {
+      "type": "color",
+      "id": "discount_badge_bg",
+      "label": "Discount badge background",
+      "default": "#22c55e"
+    },
+    {
+      "type": "color",
+      "id": "discount_badge_text",
+      "label": "Discount badge text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Video 1"
+    },
+    {
+      "type": "video",
+      "id": "video_1",
+      "label": "Video"
+    },
+    {
+      "type": "url",
+      "id": "video_url_1",
+      "label": "Video URL (YouTube/Vimeo)"
+    },
+    {
+      "type": "text",
+      "id": "title_1",
+      "label": "Product title",
+      "default": "Premium Silk Saree"
+    },
+    {
+      "type": "url",
+      "id": "link_1",
+      "label": "Product link"
+    },
+    {
+      "type": "text",
+      "id": "price_1",
+      "label": "Price",
+      "default": "₹12,999"
+    },
+    {
+      "type": "text",
+      "id": "compare_price_1",
+      "label": "Compare at price"
+    },
+    {
+      "type": "text",
+      "id": "discount_1",
+      "label": "Discount %"
+    },
+    {
+      "type": "header",
+      "content": "Video 2"
+    },
+    {
+      "type": "video",
+      "id": "video_2",
+      "label": "Video"
+    },
+    {
+      "type": "url",
+      "id": "video_url_2",
+      "label": "Video URL (YouTube/Vimeo)"
+    },
+    {
+      "type": "text",
+      "id": "title_2",
+      "label": "Product title",
+      "default": "Banarasi Silk Saree"
+    },
+    {
+      "type": "url",
+      "id": "link_2",
+      "label": "Product link"
+    },
+    {
+      "type": "text",
+      "id": "price_2",
+      "label": "Price",
+      "default": "₹15,999"
+    },
+    {
+      "type": "text",
+      "id": "compare_price_2",
+      "label": "Compare at price"
+    },
+    {
+      "type": "text",
+      "id": "discount_2",
+      "label": "Discount %"
+    },
+    {
+      "type": "header",
+      "content": "Video 3"
+    },
+    {
+      "type": "video",
+      "id": "video_3",
+      "label": "Video"
+    },
+    {
+      "type": "url",
+      "id": "video_url_3",
+      "label": "Video URL (YouTube/Vimeo)"
+    },
+    {
+      "type": "text",
+      "id": "title_3",
+      "label": "Product title",
+      "default": "Tussar Silk Saree"
+    },
+    {
+      "type": "url",
+      "id": "link_3",
+      "label": "Product link"
+    },
+    {
+      "type": "text",
+      "id": "price_3",
+      "label": "Price",
+      "default": "₹9,999"
+    },
+    {
+      "type": "text",
+      "id": "compare_price_3",
+      "label": "Compare at price"
+    },
+    {
+      "type": "text",
+      "id": "discount_3",
+      "label": "Discount %"
+    },
+    {
+      "type": "header",
+      "content": "Video 4"
+    },
+    {
+      "type": "video",
+      "id": "video_4",
+      "label": "Video"
+    },
+    {
+      "type": "url",
+      "id": "video_url_4",
+      "label": "Video URL (YouTube/Vimeo)"
+    },
+    {
+      "type": "text",
+      "id": "title_4",
+      "label": "Product title",
+      "default": "Kalamkari Saree"
+    },
+    {
+      "type": "url",
+      "id": "link_4",
+      "label": "Product link"
+    },
+    {
+      "type": "text",
+      "id": "price_4",
+      "label": "Price",
+      "default": "₹11,999"
+    },
+    {
+      "type": "text",
+      "id": "compare_price_4",
+      "label": "Compare at price"
+    },
+    {
+      "type": "text",
+      "id": "discount_4",
+      "label": "Discount %"
+    },
+    {
+      "type": "header",
+      "content": "Video 5"
+    },
+    {
+      "type": "video",
+      "id": "video_5",
+      "label": "Video"
+    },
+    {
+      "type": "url",
+      "id": "video_url_5",
+      "label": "Video URL (YouTube/Vimeo)"
+    },
+    {
+      "type": "text",
+      "id": "title_5",
+      "label": "Product title"
+    },
+    {
+      "type": "url",
+      "id": "link_5",
+      "label": "Product link"
+    },
+    {
+      "type": "text",
+      "id": "price_5",
+      "label": "Price"
+    },
+    {
+      "type": "text",
+      "id": "compare_price_5",
+      "label": "Compare at price"
+    },
+    {
+      "type": "text",
+      "id": "discount_5",
+      "label": "Discount %"
+    },
+    {
+      "type": "header",
+      "content": "Video 6"
+    },
+    {
+      "type": "video",
+      "id": "video_6",
+      "label": "Video"
+    },
+    {
+      "type": "url",
+      "id": "video_url_6",
+      "label": "Video URL (YouTube/Vimeo)"
+    },
+    {
+      "type": "text",
+      "id": "title_6",
+      "label": "Product title"
+    },
+    {
+      "type": "url",
+      "id": "link_6",
+      "label": "Product link"
+    },
+    {
+      "type": "text",
+      "id": "price_6",
+      "label": "Price"
+    },
+    {
+      "type": "text",
+      "id": "compare_price_6",
+      "label": "Compare at price"
+    },
+    {
+      "type": "text",
+      "id": "discount_6",
+      "label": "Discount %"
+    },
+    {
+      "type": "header",
+      "content": "Video 7"
+    },
+    {
+      "type": "video",
+      "id": "video_7",
+      "label": "Video"
+    },
+    {
+      "type": "url",
+      "id": "video_url_7",
+      "label": "Video URL (YouTube/Vimeo)"
+    },
+    {
+      "type": "text",
+      "id": "title_7",
+      "label": "Product title"
+    },
+    {
+      "type": "url",
+      "id": "link_7",
+      "label": "Product link"
+    },
+    {
+      "type": "text",
+      "id": "price_7",
+      "label": "Price"
+    },
+    {
+      "type": "text",
+      "id": "compare_price_7",
+      "label": "Compare at price"
+    },
+    {
+      "type": "text",
+      "id": "discount_7",
+      "label": "Discount %"
+    },
+    {
+      "type": "header",
+      "content": "Video 8"
+    },
+    {
+      "type": "video",
+      "id": "video_8",
+      "label": "Video"
+    },
+    {
+      "type": "url",
+      "id": "video_url_8",
+      "label": "Video URL (YouTube/Vimeo)"
+    },
+    {
+      "type": "text",
+      "id": "title_8",
+      "label": "Product title"
+    },
+    {
+      "type": "url",
+      "id": "link_8",
+      "label": "Product link"
+    },
+    {
+      "type": "text",
+      "id": "price_8",
+      "label": "Price"
+    },
+    {
+      "type": "text",
+      "id": "compare_price_8",
+      "label": "Compare at price"
+    },
+    {
+      "type": "text",
+      "id": "discount_8",
+      "label": "Discount %"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Watch & Shop carousel"
+    }
+  ]
+}
+{% endschema %}

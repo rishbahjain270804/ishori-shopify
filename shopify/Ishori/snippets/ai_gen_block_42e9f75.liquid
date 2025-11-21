@@ -1,0 +1,1015 @@
+{% doc %}
+  @prompt
+    Create a "Watch & Shop" video carousel section that displays 4 videos side-by-side in a horizontal scrollable carousel. Each video card should show: a video (YouTube, Vimeo or uploaded), product title below the video, product price with original price crossed out, discount percentage badge in green, and a subtle border around each card. Include left and right navigation arrows. The carousel should be responsive - showing 4 videos on desktop, 2-3 on tablet, and 1-2 on mobile with smooth horizontal scrolling. Allow customization of video sources, product titles, prices, discount percentages and product links through the theme editor. Use a clean, modern design with proper spacing between cards., video's can be selected from shopify's asset's , video will play automatic when user hover on the video in desktop view and in mobile view view will be played as user come to the section and stop playing when user move  up or down and also one the 3 videos which are on front will play and this is a unlimited croausl view
+    like :
+    we have v1, v2, v3, v4 as example then 
+    v1 v2 and v3 will be on front as loded then user can scroll right and left and in last this v4 comes the in next scroll v4, v1, v2 wil be i think you have what i think, aspect ratio is 9 : 16 in any device 
+    size can be pixel's will be adjusted in this way, set a max height and width.
+    
+    38% height of screen size and adjust weidth according to this, on desktop max video is 3 and on mobile max is 1 more when user will scroll
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-watch-shop-{{ ai_gen_id }} {
+    padding: 40px 0;
+    background-color: {{ block.settings.background_color }};
+  }
+
+  .ai-watch-shop-container-{{ ai_gen_id }} {
+    max-width: {{ block.settings.container_width }}px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .ai-watch-shop-header-{{ ai_gen_id }} {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .ai-watch-shop-title-{{ ai_gen_id }} {
+    font-size: {{ block.settings.title_size }}px;
+    color: {{ block.settings.title_color }};
+    margin: 0 0 10px;
+  }
+
+  .ai-watch-shop-subtitle-{{ ai_gen_id }} {
+    font-size: {{ block.settings.subtitle_size }}px;
+    color: {{ block.settings.subtitle_color }};
+    margin: 0;
+  }
+
+  .ai-watch-shop-carousel-wrapper-{{ ai_gen_id }} {
+    position: relative;
+  }
+
+  .ai-watch-shop-carousel-{{ ai_gen_id }} {
+    display: flex;
+    gap: {{ block.settings.card_gap }}px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding: 10px 0;
+    scroll-snap-type: x mandatory;
+  }
+
+  .ai-watch-shop-carousel-{{ ai_gen_id }}::-webkit-scrollbar {
+    display: none;
+  }
+
+  .ai-watch-shop-card-{{ ai_gen_id }} {
+    flex: 0 0 auto;
+    background-color: {{ block.settings.card_background }};
+    border: {{ block.settings.card_border_width }}px solid {{ block.settings.card_border_color }};
+    border-radius: {{ block.settings.card_border_radius }}px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    scroll-snap-align: start;
+  }
+
+  .ai-watch-shop-card-{{ ai_gen_id }}:hover {
+    transform: translateY(-5px);
+  }
+
+  .ai-watch-shop-video-wrapper-{{ ai_gen_id }} {
+    position: relative;
+    width: auto;
+    height: 38vh;
+    max-height: 38vh;
+    background-color: #000;
+    overflow: hidden;
+  }
+
+  .ai-watch-shop-video-wrapper-{{ ai_gen_id }} iframe,
+  .ai-watch-shop-video-wrapper-{{ ai_gen_id }} video {
+    width: 100%;
+    height: 100%;
+    border: none;
+    object-fit: cover;
+  }
+
+  .ai-watch-shop-badge-{{ ai_gen_id }} {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: {{ block.settings.badge_background }};
+    color: {{ block.settings.badge_text_color }};
+    padding: 6px 12px;
+    border-radius: {{ block.settings.badge_border_radius }}px;
+    font-size: 14px;
+    font-weight: 600;
+    z-index: 2;
+  }
+
+  .ai-watch-shop-card-content-{{ ai_gen_id }} {
+    padding: 20px;
+    width: calc(38vh * 9 / 16);
+  }
+
+  .ai-watch-shop-product-title-{{ ai_gen_id }} {
+    font-size: {{ block.settings.product_title_size }}px;
+    color: {{ block.settings.product_title_color }};
+    margin: 0 0 10px;
+    font-weight: 600;
+  }
+
+  .ai-watch-shop-product-title-{{ ai_gen_id }} a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .ai-watch-shop-product-title-{{ ai_gen_id }} a:hover {
+    text-decoration: underline;
+  }
+
+  .ai-watch-shop-price-wrapper-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .ai-watch-shop-price-{{ ai_gen_id }} {
+    font-size: {{ block.settings.price_size }}px;
+    color: {{ block.settings.price_color }};
+    font-weight: 600;
+  }
+
+  .ai-watch-shop-original-price-{{ ai_gen_id }} {
+    font-size: {{ block.settings.price_size | times: 0.9 }}px;
+    color: {{ block.settings.original_price_color }};
+    text-decoration: line-through;
+  }
+
+  .ai-watch-shop-nav-button-{{ ai_gen_id }} {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: {{ block.settings.nav_button_background }};
+    color: {{ block.settings.nav_button_color }};
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  }
+
+  .ai-watch-shop-nav-button-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.nav_button_hover_background }};
+  }
+
+  .ai-watch-shop-nav-button-{{ ai_gen_id }}.prev {
+    left: -25px;
+  }
+
+  .ai-watch-shop-nav-button-{{ ai_gen_id }}.next {
+    right: -25px;
+  }
+
+  .ai-watch-shop-nav-button-{{ ai_gen_id }} svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .ai-watch-shop-empty-state-{{ ai_gen_id }} {
+    text-align: center;
+    padding: 60px 20px;
+    color: #999;
+  }
+
+  @media screen and (min-width: 991px) {
+    .ai-watch-shop-card-{{ ai_gen_id }} {
+      width: calc((100% - ({{ block.settings.card_gap }}px * 2)) / 3);
+    }
+  }
+
+  @media screen and (max-width: 990px) {
+    .ai-watch-shop-nav-button-{{ ai_gen_id }}.prev {
+      left: 10px;
+    }
+
+    .ai-watch-shop-nav-button-{{ ai_gen_id }}.next {
+      right: 10px;
+    }
+
+    .ai-watch-shop-card-{{ ai_gen_id }} {
+      width: calc(100% - 40px);
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-watch-shop-title-{{ ai_gen_id }} {
+      font-size: {{ block.settings.title_size | times: 0.8 }}px;
+    }
+
+    .ai-watch-shop-subtitle-{{ ai_gen_id }} {
+      font-size: {{ block.settings.subtitle_size | times: 0.9 }}px;
+    }
+
+    .ai-watch-shop-card-content-{{ ai_gen_id }} {
+      padding: 15px;
+    }
+
+    .ai-watch-shop-nav-button-{{ ai_gen_id }} {
+      width: 40px;
+      height: 40px;
+    }
+
+    .ai-watch-shop-nav-button-{{ ai_gen_id }} svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+{% endstyle %}
+
+<watch-shop-carousel-{{ ai_gen_id }} class="ai-watch-shop-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-watch-shop-container-{{ ai_gen_id }}">
+    {% if block.settings.title != blank or block.settings.subtitle != blank %}
+      <div class="ai-watch-shop-header-{{ ai_gen_id }}">
+        {% if block.settings.title != blank %}
+          <h2 class="ai-watch-shop-title-{{ ai_gen_id }}">{{ block.settings.title }}</h2>
+        {% endif %}
+        {% if block.settings.subtitle != blank %}
+          <p class="ai-watch-shop-subtitle-{{ ai_gen_id }}">{{ block.settings.subtitle }}</p>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    {% assign has_videos = false %}
+    {% for i in (1..4) %}
+      {% assign video_key = 'video_' | append: i %}
+      {% assign video_url_key = 'video_url_' | append: i %}
+      {% if block.settings[video_key] != blank or block.settings[video_url_key] != blank %}
+        {% assign has_videos = true %}
+        {% break %}
+      {% endif %}
+    {% endfor %}
+
+    {% if has_videos %}
+      <div class="ai-watch-shop-carousel-wrapper-{{ ai_gen_id }}">
+        <button
+          class="ai-watch-shop-nav-button-{{ ai_gen_id }} prev"
+          aria-label="Previous videos"
+          data-direction="prev"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+        </button>
+
+        <div class="ai-watch-shop-carousel-{{ ai_gen_id }}">
+          {% for i in (1..4) %}
+            {% liquid
+              assign video_key = 'video_' | append: i
+              assign video_url_key = 'video_url_' | append: i
+              assign product_title_key = 'product_title_' | append: i
+              assign product_link_key = 'product_link_' | append: i
+              assign current_price_key = 'current_price_' | append: i
+              assign original_price_key = 'original_price_' | append: i
+              assign discount_key = 'discount_' | append: i
+
+              assign video_file = block.settings[video_key]
+              assign video_url = block.settings[video_url_key]
+              assign product_title = block.settings[product_title_key]
+              assign product_link = block.settings[product_link_key]
+              assign current_price = block.settings[current_price_key]
+              assign original_price = block.settings[original_price_key]
+              assign discount = block.settings[discount_key]
+            %}
+
+            {% if video_file != blank or video_url != blank %}
+              <div class="ai-watch-shop-card-{{ ai_gen_id }}" data-video-index="{{ i }}">
+                <div class="ai-watch-shop-video-wrapper-{{ ai_gen_id }}">
+                  {% if discount != blank and discount > 0 %}
+                    <div class="ai-watch-shop-badge-{{ ai_gen_id }}">-{{ discount }}%</div>
+                  {% endif %}
+
+                  {% if video_file != blank %}
+                    <video loop muted playsinline data-video-element>
+                      {% for source in video_file.sources %}
+                        <source src="{{ source.url }}" type="{{ source.mime_type }}">
+                      {% endfor %}
+                    </video>
+                  {% elsif video_url contains 'youtube.com' or video_url contains 'youtu.be' %}
+                    {% liquid
+                      assign video_id = ''
+                      if video_url contains 'youtube.com/watch?v='
+                        assign video_id = video_url | split: 'v=' | last | split: '&' | first
+                      elsif video_url contains 'youtu.be/'
+                        assign video_id = video_url | split: 'youtu.be/' | last | split: '?' | first
+                      endif
+                    %}
+                    <iframe
+                      src="https://www.youtube.com/embed/{{ video_id }}?enablejsapi=1&mute=1&loop=1&playlist={{ video_id }}"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowfullscreen
+                      loading="lazy"
+                      data-video-element
+                      data-video-type="youtube"
+                    ></iframe>
+                  {% elsif video_url contains 'vimeo.com' %}
+                    {% assign video_id = video_url | split: 'vimeo.com/' | last | split: '/' | first %}
+                    <iframe
+                      src="https://player.vimeo.com/video/{{ video_id }}?background=1&loop=1&muted=1"
+                      allow="autoplay; fullscreen; picture-in-picture"
+                      allowfullscreen
+                      loading="lazy"
+                      data-video-element
+                      data-video-type="vimeo"
+                    ></iframe>
+                  {% elsif video_url != blank %}
+                    <video loop muted playsinline data-video-element>
+                      <source src="{{ video_url }}" type="video/mp4">
+                    </video>
+                  {% endif %}
+                </div>
+
+                <div class="ai-watch-shop-card-content-{{ ai_gen_id }}">
+                  {% if product_title != blank %}
+                    <h3 class="ai-watch-shop-product-title-{{ ai_gen_id }}">
+                      {% if product_link != blank %}
+                        <a href="{{ product_link }}">{{ product_title }}</a>
+                      {% else %}
+                        {{ product_title }}
+                      {% endif %}
+                    </h3>
+                  {% endif %}
+
+                  {% if current_price != blank %}
+                    <div class="ai-watch-shop-price-wrapper-{{ ai_gen_id }}">
+                      <span class="ai-watch-shop-price-{{ ai_gen_id }}">{{ current_price }}</span>
+                      {% if original_price != blank %}
+                        <span class="ai-watch-shop-original-price-{{ ai_gen_id }}">{{ original_price }}</span>
+                      {% endif %}
+                    </div>
+                  {% endif %}
+                </div>
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+
+        <button
+          class="ai-watch-shop-nav-button-{{ ai_gen_id }} next"
+          aria-label="Next videos"
+          data-direction="next"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </button>
+      </div>
+    {% else %}
+      <div class="ai-watch-shop-empty-state-{{ ai_gen_id }}">
+        <p>Add videos to display your Watch & Shop carousel</p>
+      </div>
+    {% endif %}
+  </div>
+</watch-shop-carousel-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class WatchShopCarousel{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+        this.isMobile = window.innerWidth <= 990;
+        this.visibleVideos = new Set();
+        this.currentIndex = 0;
+      }
+
+      connectedCallback() {
+        this.carousel = this.querySelector('.ai-watch-shop-carousel-{{ ai_gen_id }}');
+        this.prevButton = this.querySelector('.ai-watch-shop-nav-button-{{ ai_gen_id }}.prev');
+        this.nextButton = this.querySelector('.ai-watch-shop-nav-button-{{ ai_gen_id }}.next');
+        this.cards = Array.from(this.querySelectorAll('.ai-watch-shop-card-{{ ai_gen_id }}'));
+        this.videos = Array.from(this.querySelectorAll('[data-video-element]'));
+
+        if (this.carousel && this.prevButton && this.nextButton) {
+          this.setupInfiniteCarousel();
+          this.setupNavigation();
+          this.setupVideoPlayback();
+          this.setupIntersectionObserver();
+          
+          window.addEventListener('resize', () => {
+            const wasMobile = this.isMobile;
+            this.isMobile = window.innerWidth <= 990;
+            if (wasMobile !== this.isMobile) {
+              this.pauseAllVideos();
+              this.setupIntersectionObserver();
+            }
+          });
+        }
+      }
+
+      setupInfiniteCarousel() {
+        const originalCards = this.cards.slice();
+        originalCards.forEach(card => {
+          const clone = card.cloneNode(true);
+          const videoElement = clone.querySelector('[data-video-element]');
+          if (videoElement) {
+            if (videoElement.tagName === 'VIDEO') {
+              videoElement.load();
+            }
+          }
+          this.carousel.appendChild(clone);
+        });
+
+        this.cards = Array.from(this.querySelectorAll('.ai-watch-shop-card-{{ ai_gen_id }}'));
+        this.videos = Array.from(this.querySelectorAll('[data-video-element]'));
+      }
+
+      setupNavigation() {
+        this.prevButton.addEventListener('click', () => this.scroll('prev'));
+        this.nextButton.addEventListener('click', () => this.scroll('next'));
+
+        this.carousel.addEventListener('scroll', () => {
+          this.handleInfiniteScroll();
+          if (!this.isMobile) {
+            this.checkVisibleVideos();
+          }
+        });
+      }
+
+      scroll(direction) {
+        const cardWidth = this.cards[0].offsetWidth;
+        const gap = parseInt(getComputedStyle(this.carousel).gap) || 20;
+        const scrollAmount = this.isMobile ? (cardWidth + gap) : (cardWidth + gap) * 3;
+        const currentScroll = this.carousel.scrollLeft;
+
+        if (direction === 'prev') {
+          this.carousel.scrollTo({
+            left: currentScroll - scrollAmount,
+            behavior: 'smooth'
+          });
+        } else {
+          this.carousel.scrollTo({
+            left: currentScroll + scrollAmount,
+            behavior: 'smooth'
+          });
+        }
+      }
+
+      handleInfiniteScroll() {
+        const scrollLeft = this.carousel.scrollLeft;
+        const cardWidth = this.cards[0].offsetWidth;
+        const gap = parseInt(getComputedStyle(this.carousel).gap) || 20;
+        const singleSetWidth = (cardWidth + gap) * (this.cards.length / 2);
+
+        if (scrollLeft >= singleSetWidth) {
+          this.carousel.scrollLeft = scrollLeft - singleSetWidth;
+        } else if (scrollLeft <= 0) {
+          this.carousel.scrollLeft = singleSetWidth;
+        }
+      }
+
+      setupVideoPlayback() {
+        if (!this.isMobile) {
+          this.cards.forEach(card => {
+            const videoElement = card.querySelector('[data-video-element]');
+            if (videoElement) {
+              card.addEventListener('mouseenter', () => {
+                this.playVideo(videoElement);
+              });
+              card.addEventListener('mouseleave', () => {
+                this.pauseVideo(videoElement);
+              });
+            }
+          });
+        }
+      }
+
+      setupIntersectionObserver() {
+        if (this.observer) {
+          this.observer.disconnect();
+        }
+
+        if (this.isMobile) {
+          const options = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.5
+          };
+
+          this.observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+              const videoElement = entry.target.querySelector('[data-video-element]');
+              if (videoElement) {
+                if (entry.isIntersecting) {
+                  this.playVideo(videoElement);
+                } else {
+                  this.pauseVideo(videoElement);
+                }
+              }
+            });
+          }, options);
+
+          this.cards.forEach(card => {
+            this.observer.observe(card);
+          });
+        } else {
+          this.checkVisibleVideos();
+        }
+      }
+
+      checkVisibleVideos() {
+        if (this.isMobile) return;
+
+        const carouselRect = this.carousel.getBoundingClientRect();
+        
+        this.cards.forEach(card => {
+          const cardRect = card.getBoundingClientRect();
+          const videoElement = card.querySelector('[data-video-element]');
+          
+          if (!videoElement) return;
+
+          const isVisible = cardRect.left >= carouselRect.left - 50 && 
+                          cardRect.right <= carouselRect.right + 50;
+
+          const cardId = card.dataset.videoIndex;
+          
+          if (isVisible && !this.visibleVideos.has(cardId)) {
+            this.visibleVideos.add(cardId);
+          } else if (!isVisible && this.visibleVideos.has(cardId)) {
+            this.visibleVideos.delete(cardId);
+            this.pauseVideo(videoElement);
+          }
+        });
+      }
+
+      playVideo(videoElement) {
+        if (!videoElement) return;
+
+        const videoType = videoElement.dataset.videoType;
+
+        if (videoType === 'youtube') {
+          videoElement.contentWindow.postMessage(JSON.stringify({
+            event: 'command',
+            func: 'playVideo',
+            args: ''
+          }), '*');
+        } else if (videoType === 'vimeo') {
+          videoElement.contentWindow.postMessage(JSON.stringify({
+            method: 'play'
+          }), '*');
+        } else if (videoElement.tagName === 'VIDEO') {
+          videoElement.play().catch(() => {});
+        }
+      }
+
+      pauseVideo(videoElement) {
+        if (!videoElement) return;
+
+        const videoType = videoElement.dataset.videoType;
+
+        if (videoType === 'youtube') {
+          videoElement.contentWindow.postMessage(JSON.stringify({
+            event: 'command',
+            func: 'pauseVideo',
+            args: ''
+          }), '*');
+        } else if (videoType === 'vimeo') {
+          videoElement.contentWindow.postMessage(JSON.stringify({
+            method: 'pause'
+          }), '*');
+        } else if (videoElement.tagName === 'VIDEO') {
+          videoElement.pause();
+        }
+      }
+
+      pauseAllVideos() {
+        this.videos.forEach(video => {
+          this.pauseVideo(video);
+        });
+      }
+
+      disconnectedCallback() {
+        if (this.observer) {
+          this.observer.disconnect();
+        }
+      }
+    }
+
+    customElements.define('watch-shop-carousel-{{ ai_gen_id }}', WatchShopCarousel{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Watch & Shop",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section header"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Watch & Shop"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Discover our featured products in action"
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "min": 20,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "label": "Title size",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "subtitle_size",
+      "min": 12,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "label": "Subtitle size",
+      "default": 16
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title color",
+      "default": "#5f0511"
+    },
+    {
+      "type": "color",
+      "id": "subtitle_color",
+      "label": "Subtitle color",
+      "default": "#5f0511"
+    },
+    {
+      "type": "header",
+      "content": "Video 1"
+    },
+    {
+      "type": "video",
+      "id": "video_1",
+      "label": "Video file"
+    },
+    {
+      "type": "text",
+      "id": "video_url_1",
+      "label": "Or video URL",
+      "info": "YouTube or Vimeo URL (used if no video file selected)"
+    },
+    {
+      "type": "text",
+      "id": "product_title_1",
+      "label": "Product title",
+      "default": "Premium Silk Saree"
+    },
+    {
+      "type": "url",
+      "id": "product_link_1",
+      "label": "Product link"
+    },
+    {
+      "type": "text",
+      "id": "current_price_1",
+      "label": "Current price",
+      "default": "₹12,999"
+    },
+    {
+      "type": "text",
+      "id": "original_price_1",
+      "label": "Original price",
+      "default": "₹15,999"
+    },
+    {
+      "type": "range",
+      "id": "discount_1",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Discount percentage",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Video 2"
+    },
+    {
+      "type": "video",
+      "id": "video_2",
+      "label": "Video file"
+    },
+    {
+      "type": "text",
+      "id": "video_url_2",
+      "label": "Or video URL",
+      "info": "YouTube or Vimeo URL (used if no video file selected)"
+    },
+    {
+      "type": "text",
+      "id": "product_title_2",
+      "label": "Product title",
+      "default": "Banarasi Silk Saree"
+    },
+    {
+      "type": "url",
+      "id": "product_link_2",
+      "label": "Product link"
+    },
+    {
+      "type": "text",
+      "id": "current_price_2",
+      "label": "Current price",
+      "default": "₹18,999"
+    },
+    {
+      "type": "text",
+      "id": "original_price_2",
+      "label": "Original price",
+      "default": "₹22,999"
+    },
+    {
+      "type": "range",
+      "id": "discount_2",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Discount percentage",
+      "default": 15
+    },
+    {
+      "type": "header",
+      "content": "Video 3"
+    },
+    {
+      "type": "video",
+      "id": "video_3",
+      "label": "Video file"
+    },
+    {
+      "type": "text",
+      "id": "video_url_3",
+      "label": "Or video URL",
+      "info": "YouTube or Vimeo URL (used if no video file selected)"
+    },
+    {
+      "type": "text",
+      "id": "product_title_3",
+      "label": "Product title",
+      "default": "Tussar Silk Saree"
+    },
+    {
+      "type": "url",
+      "id": "product_link_3",
+      "label": "Product link"
+    },
+    {
+      "type": "text",
+      "id": "current_price_3",
+      "label": "Current price",
+      "default": "₹9,999"
+    },
+    {
+      "type": "text",
+      "id": "original_price_3",
+      "label": "Original price",
+      "default": "₹12,999"
+    },
+    {
+      "type": "range",
+      "id": "discount_3",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Discount percentage",
+      "default": 25
+    },
+    {
+      "type": "header",
+      "content": "Video 4"
+    },
+    {
+      "type": "video",
+      "id": "video_4",
+      "label": "Video file"
+    },
+    {
+      "type": "text",
+      "id": "video_url_4",
+      "label": "Or video URL",
+      "info": "YouTube or Vimeo URL (used if no video file selected)"
+    },
+    {
+      "type": "text",
+      "id": "product_title_4",
+      "label": "Product title",
+      "default": "Kalamkari Saree"
+    },
+    {
+      "type": "url",
+      "id": "product_link_4",
+      "label": "Product link"
+    },
+    {
+      "type": "text",
+      "id": "current_price_4",
+      "label": "Current price",
+      "default": "₹14,999"
+    },
+    {
+      "type": "text",
+      "id": "original_price_4",
+      "label": "Original price",
+      "default": "₹19,999"
+    },
+    {
+      "type": "range",
+      "id": "discount_4",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Discount percentage",
+      "default": 30
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "container_width",
+      "min": 1000,
+      "max": 1600,
+      "step": 100,
+      "unit": "px",
+      "label": "Container width",
+      "default": 1400
+    },
+    {
+      "type": "range",
+      "id": "card_gap",
+      "min": 10,
+      "max": 40,
+      "step": 5,
+      "unit": "px",
+      "label": "Card gap",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Card style"
+    },
+    {
+      "type": "color",
+      "id": "card_background",
+      "label": "Card background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "card_border_width",
+      "min": 0,
+      "max": 5,
+      "step": 1,
+      "unit": "px",
+      "label": "Border width",
+      "default": 1
+    },
+    {
+      "type": "color",
+      "id": "card_border_color",
+      "label": "Border color",
+      "default": "#e5e5e5"
+    },
+    {
+      "type": "range",
+      "id": "card_border_radius",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "label": "Border radius",
+      "default": 12
+    },
+    {
+      "type": "header",
+      "content": "Product details"
+    },
+    {
+      "type": "range",
+      "id": "product_title_size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Title size",
+      "default": 16
+    },
+    {
+      "type": "color",
+      "id": "product_title_color",
+      "label": "Title color",
+      "default": "#5f0511"
+    },
+    {
+      "type": "range",
+      "id": "price_size",
+      "min": 14,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "label": "Price size",
+      "default": 18
+    },
+    {
+      "type": "color",
+      "id": "price_color",
+      "label": "Price color",
+      "default": "#5f0511"
+    },
+    {
+      "type": "color",
+      "id": "original_price_color",
+      "label": "Original price color",
+      "default": "#999999"
+    },
+    {
+      "type": "header",
+      "content": "Discount badge"
+    },
+    {
+      "type": "color",
+      "id": "badge_background",
+      "label": "Background",
+      "default": "#008060"
+    },
+    {
+      "type": "color",
+      "id": "badge_text_color",
+      "label": "Text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "badge_border_radius",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "label": "Border radius",
+      "default": 6
+    },
+    {
+      "type": "header",
+      "content": "Navigation"
+    },
+    {
+      "type": "color",
+      "id": "nav_button_background",
+      "label": "Button background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "nav_button_hover_background",
+      "label": "Button hover background",
+      "default": "#f5f5f5"
+    },
+    {
+      "type": "color",
+      "id": "nav_button_color",
+      "label": "Button icon color",
+      "default": "#5f0511"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#fff2f1"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Watch & Shop"
+    }
+  ]
+}
+{% endschema %}

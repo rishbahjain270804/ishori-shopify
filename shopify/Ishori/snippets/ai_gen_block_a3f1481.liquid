@@ -1,0 +1,1153 @@
+{% doc %}
+  @prompt
+    Create an elegant Instagram feed section with premium minimal design. Include 'Follow us on @ishori' heading, grid of Instagram post blocks (3-4 columns), each with image upload, Instagram username display, like/comment/save icons, and link to post. Add navigation arrows for scrolling. Use clean white background, subtle shadows, and luxury aesthetic matching premium silk saree brand. Fully customizable blocks in sidebar., admin can customize the height and width for both desktop and mobile fully
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-instagram-feed-{{ ai_gen_id }} {
+    padding: {{ block.settings.section_padding_top }}px 0 {{ block.settings.section_padding_bottom }}px;
+    background-color: {{ block.settings.background_color }};
+  }
+
+  .ai-instagram-feed__container-{{ ai_gen_id }} {
+    max-width: {{ block.settings.container_width }}px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .ai-instagram-feed__header-{{ ai_gen_id }} {
+    text-align: center;
+    margin-bottom: {{ block.settings.header_spacing }}px;
+  }
+
+  .ai-instagram-feed__title-{{ ai_gen_id }} {
+    font-size: {{ block.settings.title_size }}px;
+    color: {{ block.settings.title_color }};
+    margin: 0;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+  }
+
+  .ai-instagram-feed__wrapper-{{ ai_gen_id }} {
+    position: relative;
+  }
+
+  .ai-instagram-feed__grid-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: repeat({{ block.settings.columns_desktop }}, 1fr);
+    gap: {{ block.settings.grid_gap }}px;
+    overflow: hidden;
+  }
+
+  .ai-instagram-feed__post-{{ ai_gen_id }} {
+    position: relative;
+    background: {{ block.settings.post_background }};
+    border-radius: {{ block.settings.post_border_radius }}px;
+    overflow: hidden;
+    box-shadow: 0 {{ block.settings.shadow_vertical }}px {{ block.settings.shadow_blur }}px rgba(0, 0, 0, {{ block.settings.shadow_opacity }});
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .ai-instagram-feed__post-{{ ai_gen_id }}:hover {
+    transform: translateY(-4px);
+  }
+
+  .ai-instagram-feed__post-{{ ai_gen_id }} img {
+    transition: transform 0.4s ease;
+  }
+
+  .ai-instagram-feed__post-{{ ai_gen_id }}:hover img {
+    transform: scale(1.08);
+  }
+
+  .ai-instagram-feed__post-{{ ai_gen_id }}:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 {{ block.settings.shadow_vertical | plus: 4 }}px {{ block.settings.shadow_blur | plus: 8 }}px rgba(0, 0, 0, {{ block.settings.shadow_opacity | plus: 0.05 }});
+  }
+
+  .ai-instagram-feed__image-wrapper-{{ ai_gen_id }} {
+    position: relative;
+    width: 100%;
+    padding-bottom: {{ block.settings.image_aspect_desktop }}%;
+    overflow: hidden;
+    background-color: #f4f4f4;
+  }
+
+  .ai-instagram-feed__image-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .ai-instagram-feed__placeholder-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ai-instagram-feed__placeholder-{{ ai_gen_id }} svg {
+    width: 60%;
+    height: 60%;
+    opacity: 0.3;
+  }
+
+  .ai-instagram-feed__overlay-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .ai-instagram-feed__post-{{ ai_gen_id }}:hover .ai-instagram-feed__overlay-{{ ai_gen_id }} {
+    opacity: 1;
+  }
+
+  .ai-instagram-feed__stat-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .ai-instagram-feed__stat-{{ ai_gen_id }} svg {
+    width: 20px;
+    height: 20px;
+    fill: #ffffff;
+  }
+
+  .ai-instagram-feed__info-{{ ai_gen_id }} {
+    padding: {{ block.settings.post_padding }}px;
+  }
+
+  .ai-instagram-feed__username-{{ ai_gen_id }} {
+    font-size: {{ block.settings.username_size }}px;
+    color: {{ block.settings.username_color }};
+    margin: 0;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .ai-instagram-feed__username-{{ ai_gen_id }} svg {
+    width: 16px;
+    height: 16px;
+    fill: currentColor;
+  }
+
+  .ai-instagram-feed__link-{{ ai_gen_id }} {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .ai-instagram-feed__nav-{{ ai_gen_id }} {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: {{ block.settings.arrow_background }};
+    border: none;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 2;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+    opacity: 0;
+  }
+
+  .ai-instagram-feed__wrapper-{{ ai_gen_id }}:hover .ai-instagram-feed__nav-{{ ai_gen_id }} {
+    opacity: 1;
+  }
+
+  .ai-instagram-feed__nav-{{ ai_gen_id }}:hover {
+    background: {{ block.settings.arrow_hover_background }};
+    transform: translateY(-50%) scale(1.1);
+  }
+
+  .ai-instagram-feed__nav-{{ ai_gen_id }} svg {
+    width: 20px;
+    height: 20px;
+    fill: {{ block.settings.arrow_color }};
+  }
+
+  .ai-instagram-feed__nav--prev-{{ ai_gen_id }} {
+    left: -22px;
+  }
+
+  .ai-instagram-feed__nav--next-{{ ai_gen_id }} {
+    right: -22px;
+  }
+
+  .ai-instagram-feed__empty-state-{{ ai_gen_id }} {
+    text-align: center;
+    padding: 40px 20px;
+    color: #999;
+    font-size: 14px;
+  }
+
+  @media screen and (max-width: 989px) and (min-width: 750px) {
+    .ai-instagram-feed-{{ ai_gen_id }} {
+      padding: {{ block.settings.section_padding_top | times: 0.75 }}px 0 {{ block.settings.section_padding_bottom | times: 0.75 }}px;
+    }
+
+    .ai-instagram-feed__header-{{ ai_gen_id }} {
+      margin-bottom: {{ block.settings.header_spacing | times: 0.85 }}px;
+    }
+
+    .ai-instagram-feed__title-{{ ai_gen_id }} {
+      font-size: {{ block.settings.title_size | times: 0.85 }}px;
+    }
+
+    .ai-instagram-feed__grid-{{ ai_gen_id }} {
+      grid-template-columns: repeat({{ block.settings.columns_tablet }}, 1fr);
+      gap: {{ block.settings.grid_gap | times: 0.85 }}px;
+    }
+
+    .ai-instagram-feed__post-{{ ai_gen_id }} {
+      border-radius: {{ block.settings.post_border_radius | times: 0.85 }}px;
+    }
+
+    .ai-instagram-feed__info-{{ ai_gen_id }} {
+      padding: {{ block.settings.post_padding | times: 0.85 }}px;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-instagram-feed-{{ ai_gen_id }} {
+      padding: {{ block.settings.section_padding_top | divided_by: 2 }}px 0 {{ block.settings.section_padding_bottom | divided_by: 2 }}px;
+    }
+
+    .ai-instagram-feed__container-{{ ai_gen_id }} {
+      padding: 0 15px;
+    }
+
+    .ai-instagram-feed__header-{{ ai_gen_id }} {
+      margin-bottom: {{ block.settings.header_spacing | divided_by: 2 }}px;
+    }
+
+    .ai-instagram-feed__title-{{ ai_gen_id }} {
+      font-size: {{ block.settings.title_size | times: 0.65 }}px;
+    }
+
+    .ai-instagram-feed__grid-{{ ai_gen_id }} {
+      grid-template-columns: repeat({{ block.settings.columns_mobile }}, 1fr);
+      gap: {{ block.settings.grid_gap | divided_by: 2 }}px;
+    }
+
+    .ai-instagram-feed__post-{{ ai_gen_id }} {
+      border-radius: {{ block.settings.post_border_radius | times: 0.75 }}px;
+    }
+
+    .ai-instagram-feed__image-wrapper-{{ ai_gen_id }} {
+      padding-bottom: {{ block.settings.image_aspect_mobile }}%;
+    }
+
+    .ai-instagram-feed__info-{{ ai_gen_id }} {
+      padding: {{ block.settings.post_padding | times: 0.75 }}px;
+    }
+
+    .ai-instagram-feed__username-{{ ai_gen_id }} {
+      font-size: {{ block.settings.username_size | times: 0.85 }}px;
+    }
+
+    .ai-instagram-feed__stat-{{ ai_gen_id }} {
+      font-size: 12px;
+      gap: 4px;
+    }
+
+    .ai-instagram-feed__stat-{{ ai_gen_id }} svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .ai-instagram-feed__nav-{{ ai_gen_id }} {
+      width: 36px;
+      height: 36px;
+      opacity: 0.95;
+    }
+
+    .ai-instagram-feed__nav--prev-{{ ai_gen_id }} {
+      left: 5px;
+    }
+
+    .ai-instagram-feed__nav--next-{{ ai_gen_id }} {
+      right: 5px;
+    }
+
+    .ai-instagram-feed__nav-{{ ai_gen_id }} svg {
+      width: 18px;
+      height: 18px;
+    }
+  }
+{% endstyle %}
+
+<instagram-feed-{{ ai_gen_id }} class="ai-instagram-feed-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-instagram-feed__container-{{ ai_gen_id }}">
+    <div class="ai-instagram-feed__header-{{ ai_gen_id }}">
+      <h2 class="ai-instagram-feed__title-{{ ai_gen_id }}">{{ block.settings.heading }}</h2>
+    </div>
+
+    <div class="ai-instagram-feed__wrapper-{{ ai_gen_id }}">
+      <div class="ai-instagram-feed__grid-{{ ai_gen_id }}" data-feed-grid>
+        {% for i in (1..12) %}
+          {% liquid
+            assign image_key = 'post_image_' | append: i
+            assign username_key = 'post_username_' | append: i
+            assign url_key = 'post_url_' | append: i
+            assign likes_key = 'post_likes_' | append: i
+            assign comments_key = 'post_comments_' | append: i
+
+            assign post_image = block.settings[image_key]
+            assign post_username = block.settings[username_key]
+            assign post_url = block.settings[url_key]
+            assign post_likes = block.settings[likes_key]
+            assign post_comments = block.settings[comments_key]
+          %}
+
+          {% if post_image != blank or post_username != blank %}
+            <div class="ai-instagram-feed__post-{{ ai_gen_id }}">
+              {% if post_url != blank %}
+                <a href="{{ post_url }}" class="ai-instagram-feed__link-{{ ai_gen_id }}" target="_blank" rel="noopener noreferrer">
+              {% endif %}
+                <div class="ai-instagram-feed__image-wrapper-{{ ai_gen_id }}">
+                  {% if post_image %}
+                    <img
+                      src="{{ post_image | image_url: width: 600 }}"
+                      alt="{{ post_username | escape }}"
+                      class="ai-instagram-feed__image-{{ ai_gen_id }}"
+                      loading="lazy"
+                      width="600"
+                      height="600"
+                    >
+                  {% else %}
+                    <div class="ai-instagram-feed__placeholder-{{ ai_gen_id }}">
+                      {{ 'image' | placeholder_svg_tag }}
+                    </div>
+                  {% endif %}
+
+                  {% if block.settings.show_overlay %}
+                    <div class="ai-instagram-feed__overlay-{{ ai_gen_id }}">
+                      {% if post_likes != blank %}
+                        <div class="ai-instagram-feed__stat-{{ ai_gen_id }}">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                          </svg>
+                          <span>{{ post_likes }}</span>
+                        </div>
+                      {% endif %}
+                      {% if post_comments != blank %}
+                        <div class="ai-instagram-feed__stat-{{ ai_gen_id }}">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/>
+                          </svg>
+                          <span>{{ post_comments }}</span>
+                        </div>
+                      {% endif %}
+                    </div>
+                  {% endif %}
+                </div>
+
+                {% if block.settings.show_username and post_username != blank %}
+                  <div class="ai-instagram-feed__info-{{ ai_gen_id }}">
+                    <p class="ai-instagram-feed__username-{{ ai_gen_id }}">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8 1.25 1.25 0 0 1 16 6.75a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3z"/>
+                      </svg>
+                      {{ post_username }}
+                    </p>
+                  </div>
+                {% endif %}
+              {% if post_url != blank %}
+                </a>
+              {% endif %}
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+
+      {% if block.settings.show_navigation %}
+        <button class="ai-instagram-feed__nav-{{ ai_gen_id }} ai-instagram-feed__nav--prev-{{ ai_gen_id }}" aria-label="Previous posts" data-nav-prev>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+          </svg>
+        </button>
+        <button class="ai-instagram-feed__nav-{{ ai_gen_id }} ai-instagram-feed__nav--next-{{ ai_gen_id }}" aria-label="Next posts" data-nav-next>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+          </svg>
+        </button>
+      {% endif %}
+    </div>
+  </div>
+</instagram-feed-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class InstagramFeed{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+        this.currentIndex = 0;
+        this.itemsPerPage = {{ block.settings.columns_desktop }};
+      }
+
+      connectedCallback() {
+        this.grid = this.querySelector('[data-feed-grid]');
+        this.prevButton = this.querySelector('[data-nav-prev]');
+        this.nextButton = this.querySelector('[data-nav-next]');
+        this.posts = Array.from(this.querySelectorAll('.ai-instagram-feed__post-{{ ai_gen_id }}'));
+
+        if (this.prevButton && this.nextButton && this.posts.length > this.itemsPerPage) {
+          this.setupNavigation();
+          this.updateDisplay();
+          this.updateNavigation();
+        }
+
+        this.handleResize();
+        window.addEventListener('resize', () => this.handleResize());
+      }
+
+      handleResize() {
+        const width = window.innerWidth;
+        if (width <= 749) {
+          this.itemsPerPage = parseInt('{{ block.settings.columns_mobile }}');
+        } else if (width <= 989) {
+          this.itemsPerPage = parseInt('{{ block.settings.columns_tablet }}');
+        } else {
+          this.itemsPerPage = {{ block.settings.columns_desktop }};
+        }
+        this.updateDisplay();
+        this.updateNavigation();
+      }
+
+      setupNavigation() {
+        this.prevButton.addEventListener('click', () => this.navigate('prev'));
+        this.nextButton.addEventListener('click', () => this.navigate('next'));
+      }
+
+      navigate(direction) {
+        const maxIndex = Math.max(0, this.posts.length - this.itemsPerPage);
+
+        if (direction === 'prev') {
+          this.currentIndex = Math.max(0, this.currentIndex - this.itemsPerPage);
+        } else {
+          this.currentIndex = Math.min(maxIndex, this.currentIndex + this.itemsPerPage);
+        }
+
+        this.updateDisplay();
+        this.updateNavigation();
+      }
+
+      updateDisplay() {
+        this.posts.forEach((post, index) => {
+          if (index >= this.currentIndex && index < this.currentIndex + this.itemsPerPage) {
+            post.style.display = 'block';
+          } else {
+            post.style.display = 'none';
+          }
+        });
+      }
+
+      updateNavigation() {
+        if (!this.prevButton || !this.nextButton) return;
+
+        const maxIndex = Math.max(0, this.posts.length - this.itemsPerPage);
+
+        if (this.currentIndex === 0) {
+          this.prevButton.style.opacity = '0';
+          this.prevButton.style.pointerEvents = 'none';
+        } else {
+          this.prevButton.style.opacity = '';
+          this.prevButton.style.pointerEvents = '';
+        }
+
+        if (this.currentIndex >= maxIndex) {
+          this.nextButton.style.opacity = '0';
+          this.nextButton.style.pointerEvents = 'none';
+        } else {
+          this.nextButton.style.opacity = '';
+          this.nextButton.style.pointerEvents = '';
+        }
+      }
+    }
+
+    customElements.define('instagram-feed-{{ ai_gen_id }}', InstagramFeed{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Instagram feed",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Heading"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Follow us on @ishori"
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "min": 16,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "label": "Title size",
+      "default": 32
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title color",
+      "default": "#5f0511"
+    },
+    {
+      "type": "range",
+      "id": "header_spacing",
+      "min": 20,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "label": "Spacing below heading",
+      "default": 40
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "label": "Columns on desktop",
+      "default": 4
+    },
+    {
+      "type": "select",
+      "id": "columns_tablet",
+      "label": "Columns on tablet",
+      "options": [
+        {
+          "value": "2",
+          "label": "2"
+        },
+        {
+          "value": "3",
+          "label": "3"
+        }
+      ],
+      "default": "3"
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "label": "Columns on mobile",
+      "options": [
+        {
+          "value": "1",
+          "label": "1"
+        },
+        {
+          "value": "2",
+          "label": "2"
+        }
+      ],
+      "default": "2"
+    },
+    {
+      "type": "range",
+      "id": "grid_gap",
+      "min": 8,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "label": "Grid gap",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "container_width",
+      "min": 1000,
+      "max": 1600,
+      "step": 100,
+      "unit": "px",
+      "label": "Container width",
+      "default": 1200
+    },
+    {
+      "type": "header",
+      "content": "Image dimensions"
+    },
+    {
+      "type": "range",
+      "id": "image_aspect_desktop",
+      "min": 50,
+      "max": 150,
+      "step": 5,
+      "unit": "%",
+      "label": "Desktop image height",
+      "default": 100,
+      "info": "100% = square, 75% = landscape, 125% = portrait"
+    },
+    {
+      "type": "range",
+      "id": "image_aspect_mobile",
+      "min": 50,
+      "max": 150,
+      "step": 5,
+      "unit": "%",
+      "label": "Mobile image height",
+      "default": 100,
+      "info": "100% = square, 75% = landscape, 125% = portrait"
+    },
+    {
+      "type": "header",
+      "content": "Post style"
+    },
+    {
+      "type": "color",
+      "id": "post_background",
+      "label": "Post background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "post_border_radius",
+      "min": 0,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "label": "Border radius",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "post_padding",
+      "min": 8,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "label": "Post padding",
+      "default": 12
+    },
+    {
+      "type": "checkbox",
+      "id": "show_username",
+      "label": "Show username",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "username_size",
+      "min": 12,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "label": "Username size",
+      "default": 14
+    },
+    {
+      "type": "color",
+      "id": "username_color",
+      "label": "Username color",
+      "default": "#5f0511"
+    },
+    {
+      "type": "header",
+      "content": "Hover overlay"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_overlay",
+      "label": "Show hover overlay",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Shadow"
+    },
+    {
+      "type": "range",
+      "id": "shadow_opacity",
+      "min": 0,
+      "max": 0.5,
+      "step": 0.1,
+      "label": "Shadow opacity",
+      "default": 0.1
+    },
+    {
+      "type": "range",
+      "id": "shadow_vertical",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "label": "Shadow vertical offset",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "shadow_blur",
+      "min": 0,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "label": "Shadow blur",
+      "default": 12
+    },
+    {
+      "type": "header",
+      "content": "Navigation"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_navigation",
+      "label": "Show navigation arrows",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "arrow_background",
+      "label": "Arrow background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "arrow_hover_background",
+      "label": "Arrow hover background",
+      "default": "#5f0511"
+    },
+    {
+      "type": "color",
+      "id": "arrow_color",
+      "label": "Arrow color",
+      "default": "#5f0511"
+    },
+    {
+      "type": "header",
+      "content": "Section spacing"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 60
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Post 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "post_image_1",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "post_username_1",
+      "label": "Username",
+      "default": "@ishori"
+    },
+    {
+      "type": "url",
+      "id": "post_url_1",
+      "label": "Post URL"
+    },
+    {
+      "type": "text",
+      "id": "post_likes_1",
+      "label": "Likes"
+    },
+    {
+      "type": "text",
+      "id": "post_comments_1",
+      "label": "Comments"
+    },
+    {
+      "type": "header",
+      "content": "Post 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "post_image_2",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "post_username_2",
+      "label": "Username",
+      "default": "@ishori"
+    },
+    {
+      "type": "url",
+      "id": "post_url_2",
+      "label": "Post URL"
+    },
+    {
+      "type": "text",
+      "id": "post_likes_2",
+      "label": "Likes"
+    },
+    {
+      "type": "text",
+      "id": "post_comments_2",
+      "label": "Comments"
+    },
+    {
+      "type": "header",
+      "content": "Post 3"
+    },
+    {
+      "type": "image_picker",
+      "id": "post_image_3",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "post_username_3",
+      "label": "Username",
+      "default": "@ishori"
+    },
+    {
+      "type": "url",
+      "id": "post_url_3",
+      "label": "Post URL"
+    },
+    {
+      "type": "text",
+      "id": "post_likes_3",
+      "label": "Likes"
+    },
+    {
+      "type": "text",
+      "id": "post_comments_3",
+      "label": "Comments"
+    },
+    {
+      "type": "header",
+      "content": "Post 4"
+    },
+    {
+      "type": "image_picker",
+      "id": "post_image_4",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "post_username_4",
+      "label": "Username",
+      "default": "@ishori"
+    },
+    {
+      "type": "url",
+      "id": "post_url_4",
+      "label": "Post URL"
+    },
+    {
+      "type": "text",
+      "id": "post_likes_4",
+      "label": "Likes"
+    },
+    {
+      "type": "text",
+      "id": "post_comments_4",
+      "label": "Comments"
+    },
+    {
+      "type": "header",
+      "content": "Post 5"
+    },
+    {
+      "type": "image_picker",
+      "id": "post_image_5",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "post_username_5",
+      "label": "Username",
+      "default": "@ishori"
+    },
+    {
+      "type": "url",
+      "id": "post_url_5",
+      "label": "Post URL"
+    },
+    {
+      "type": "text",
+      "id": "post_likes_5",
+      "label": "Likes"
+    },
+    {
+      "type": "text",
+      "id": "post_comments_5",
+      "label": "Comments"
+    },
+    {
+      "type": "header",
+      "content": "Post 6"
+    },
+    {
+      "type": "image_picker",
+      "id": "post_image_6",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "post_username_6",
+      "label": "Username",
+      "default": "@ishori"
+    },
+    {
+      "type": "url",
+      "id": "post_url_6",
+      "label": "Post URL"
+    },
+    {
+      "type": "text",
+      "id": "post_likes_6",
+      "label": "Likes"
+    },
+    {
+      "type": "text",
+      "id": "post_comments_6",
+      "label": "Comments"
+    },
+    {
+      "type": "header",
+      "content": "Post 7"
+    },
+    {
+      "type": "image_picker",
+      "id": "post_image_7",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "post_username_7",
+      "label": "Username",
+      "default": "@ishori"
+    },
+    {
+      "type": "url",
+      "id": "post_url_7",
+      "label": "Post URL"
+    },
+    {
+      "type": "text",
+      "id": "post_likes_7",
+      "label": "Likes"
+    },
+    {
+      "type": "text",
+      "id": "post_comments_7",
+      "label": "Comments"
+    },
+    {
+      "type": "header",
+      "content": "Post 8"
+    },
+    {
+      "type": "image_picker",
+      "id": "post_image_8",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "post_username_8",
+      "label": "Username",
+      "default": "@ishori"
+    },
+    {
+      "type": "url",
+      "id": "post_url_8",
+      "label": "Post URL"
+    },
+    {
+      "type": "text",
+      "id": "post_likes_8",
+      "label": "Likes"
+    },
+    {
+      "type": "text",
+      "id": "post_comments_8",
+      "label": "Comments"
+    },
+    {
+      "type": "header",
+      "content": "Post 9"
+    },
+    {
+      "type": "image_picker",
+      "id": "post_image_9",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "post_username_9",
+      "label": "Username",
+      "default": "@ishori"
+    },
+    {
+      "type": "url",
+      "id": "post_url_9",
+      "label": "Post URL"
+    },
+    {
+      "type": "text",
+      "id": "post_likes_9",
+      "label": "Likes"
+    },
+    {
+      "type": "text",
+      "id": "post_comments_9",
+      "label": "Comments"
+    },
+    {
+      "type": "header",
+      "content": "Post 10"
+    },
+    {
+      "type": "image_picker",
+      "id": "post_image_10",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "post_username_10",
+      "label": "Username",
+      "default": "@ishori"
+    },
+    {
+      "type": "url",
+      "id": "post_url_10",
+      "label": "Post URL"
+    },
+    {
+      "type": "text",
+      "id": "post_likes_10",
+      "label": "Likes"
+    },
+    {
+      "type": "text",
+      "id": "post_comments_10",
+      "label": "Comments"
+    },
+    {
+      "type": "header",
+      "content": "Post 11"
+    },
+    {
+      "type": "image_picker",
+      "id": "post_image_11",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "post_username_11",
+      "label": "Username",
+      "default": "@ishori"
+    },
+    {
+      "type": "url",
+      "id": "post_url_11",
+      "label": "Post URL"
+    },
+    {
+      "type": "text",
+      "id": "post_likes_11",
+      "label": "Likes"
+    },
+    {
+      "type": "text",
+      "id": "post_comments_11",
+      "label": "Comments"
+    },
+    {
+      "type": "header",
+      "content": "Post 12"
+    },
+    {
+      "type": "image_picker",
+      "id": "post_image_12",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "post_username_12",
+      "label": "Username",
+      "default": "@ishori"
+    },
+    {
+      "type": "url",
+      "id": "post_url_12",
+      "label": "Post URL"
+    },
+    {
+      "type": "text",
+      "id": "post_likes_12",
+      "label": "Likes"
+    },
+    {
+      "type": "text",
+      "id": "post_comments_12",
+      "label": "Comments"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Instagram feed"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,302 @@
+{
+  "sections": {
+    "hero_video": {
+      "type": "video",
+      "settings": {
+        "heading": "",
+        "heading_size": "h1",
+        "enable_video_looping": true,
+        "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+        "cover_image": "",
+        "description": "",
+        "full_width": true,
+        "color_scheme": "scheme-1",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "product_carousel": {
+      "type": "product-carousel",
+      "settings": {
+        "heading": "Featured Products",
+        "collection": "all",
+        "products_to_show": 12,
+        "desktop_columns": 4,
+        "mobile_columns": 2,
+        "image_max_width": 270,
+        "gap": 24,
+        "card_radius": 12,
+        "show_navigation": true,
+        "enable_autoplay": false,
+        "autoplay_speed": 5000,
+        "heading_size": 36,
+        "heading_color": "#5f0511",
+        "title_size": 16,
+        "title_color": "#5f0511",
+        "price_size": 16,
+        "price_color": "#5f0511",
+        "accent_color": "#8a0a1e",
+        "background_color": "#ffffff",
+        "card_background": "#ffffff",
+        "button_bg": "#5f0511",
+        "button_text_color": "#ffffff",
+        "button_hover_bg": "#3c030b",
+        "button_radius": 40,
+        "nav_bg": "#ffffff",
+        "nav_border": "#5f0511",
+        "nav_color": "#5f0511",
+        "nav_hover_bg": "#5f0511",
+        "nav_hover_color": "#ffffff",
+        "container_width": 1400,
+        "padding_top": 60,
+        "padding_bottom": 60
+      }
+    },
+    "custom_poster_1": {
+      "type": "custom-poster",
+      "settings": {
+        "aspect_ratio": "16 / 9",
+        "mobile_aspect_ratio": "4 / 3",
+        "image_height": 500,
+        "mobile_image_height": 300,
+        "image_fit": "cover",
+        "placeholder_bg_color": "#f4f4f4",
+        "show_overlay": true,
+        "overlay_color": "#000000",
+        "overlay_opacity": 30,
+        "heading": "Discover Our New Collection",
+        "subheading": "Handcrafted with love and tradition",
+        "text_alignment": "center",
+        "content_max_width": 800,
+        "content_padding": 20,
+        "text_color": "#ffffff",
+        "heading_size": 48,
+        "heading_size_mobile": 32,
+        "heading_color": "#ffffff",
+        "heading_weight": 700,
+        "heading_spacing": 16,
+        "subheading_size": 18,
+        "subheading_size_mobile": 16,
+        "subheading_opacity": 90,
+        "subheading_spacing": 24,
+        "button_text": "Explore Now",
+        "button_link": "shopify://collections/all",
+        "button_font_size": 16,
+        "button_font_size_mobile": 14,
+        "button_font_weight": 600,
+        "button_padding_vertical": 14,
+        "button_padding_horizontal": 32,
+        "button_padding_vertical_mobile": 12,
+        "button_padding_horizontal_mobile": 24,
+        "button_border_radius": 40,
+        "button_border_width": 0,
+        "button_bg_color": "#5f0511",
+        "button_text_color": "#ffffff",
+        "button_border_color": "#5f0511",
+        "button_hover_bg_color": "#8a0a1e",
+        "button_hover_text_color": "#ffffff",
+        "button_hover_border_color": "#8a0a1e",
+        "button_hover_lift": -2,
+        "container_width": 80,
+        "container_padding": 20,
+        "border_radius": 12,
+        "section_bg": "#ffffff",
+        "shadow_opacity": 10,
+        "shadow_vertical": 4,
+        "shadow_blur": 12,
+        "margin_top": 60,
+        "margin_bottom": 60
+      }
+    },
+    "featured_collections_grid": {
+      "type": "featured-collections-three",
+      "blocks": {
+        "collection_1": {
+          "type": "collection_item",
+          "settings": {
+            "collection": "all",
+            "text": "Wedding Sarees"
+          }
+        },
+        "collection_2": {
+          "type": "collection_item",
+          "settings": {
+            "collection": "all",
+            "text": "Handcrafted Sarees"
+          }
+        },
+        "collection_3": {
+          "type": "collection_item",
+          "settings": {
+            "collection": "all",
+            "text": "Premium Silk"
+          }
+        },
+        "collection_4": {
+          "type": "collection_item",
+          "settings": {
+            "collection": "all",
+            "text": "Festive Wear"
+          }
+        }
+      },
+      "block_order": ["collection_1", "collection_2", "collection_3", "collection_4"],
+      "settings": {
+        "show_heading": true,
+        "heading": "Shop by Style",
+        "heading_alignment": "center",
+        "heading_size": 36,
+        "heading_color": "#5f0511",
+        "heading_weight": "600",
+        "heading_transform": "capitalize",
+        "heading_letter_spacing": 0,
+        "heading_spacing": 40,
+        "padding_top": 60,
+        "padding_bottom": 60,
+        "background_color": "#ffffff",
+        "container_width": 1400,
+        "container_padding": 20,
+        "grid_gap": 30,
+        "columns_desktop": 4,
+        "columns_tablet": 4,
+        "columns_mobile": 1,
+        "image_ratio": "9/16",
+        "image_fit": "cover",
+        "image_position": "center",
+        "image_border_radius": 12,
+        "image_spacing": 16,
+        "enable_hover_zoom": true,
+        "hover_zoom_scale": 1.1,
+        "hover_zoom_duration": 0.8,
+        "text_size": 18,
+        "text_color": "#5f0511",
+        "text_weight": "500",
+        "text_alignment": "center",
+        "text_transform": "none",
+        "text_spacing": 0
+      }
+    },
+    "custom_poster_2": {
+      "type": "custom-poster",
+      "settings": {
+        "aspect_ratio": "16 / 9",
+        "mobile_aspect_ratio": "4 / 3",
+        "image_height": 500,
+        "mobile_image_height": 300,
+        "image_fit": "cover",
+        "placeholder_bg_color": "#f4f4f4",
+        "show_overlay": true,
+        "overlay_color": "#000000",
+        "overlay_opacity": 30,
+        "heading": "Timeless Elegance",
+        "subheading": "Explore our exclusive handwoven collection",
+        "text_alignment": "center",
+        "content_max_width": 800,
+        "content_padding": 20,
+        "text_color": "#ffffff",
+        "heading_size": 48,
+        "heading_size_mobile": 32,
+        "heading_color": "#ffffff",
+        "heading_weight": 700,
+        "heading_spacing": 16,
+        "subheading_size": 18,
+        "subheading_size_mobile": 16,
+        "subheading_opacity": 90,
+        "subheading_spacing": 24,
+        "button_text": "Shop Collection",
+        "button_link": "shopify://collections/all",
+        "button_font_size": 16,
+        "button_font_size_mobile": 14,
+        "button_font_weight": 600,
+        "button_padding_vertical": 14,
+        "button_padding_horizontal": 32,
+        "button_padding_vertical_mobile": 12,
+        "button_padding_horizontal_mobile": 24,
+        "button_border_radius": 40,
+        "button_border_width": 0,
+        "button_bg_color": "#5f0511",
+        "button_text_color": "#ffffff",
+        "button_border_color": "#5f0511",
+        "button_hover_bg_color": "#8a0a1e",
+        "button_hover_text_color": "#ffffff",
+        "button_hover_border_color": "#8a0a1e",
+        "button_hover_lift": -2,
+        "container_width": 80,
+        "container_padding": 20,
+        "border_radius": 12,
+        "section_bg": "#ffffff",
+        "shadow_opacity": 10,
+        "shadow_vertical": 4,
+        "shadow_blur": 12,
+        "margin_top": 60,
+        "margin_bottom": 60
+      }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Subscribe to our emails",
+            "heading_size": "h1"
+          }
+        },
+        "paragraph": {
+          "type": "paragraph",
+          "settings": {
+            "text": "<p>Be the first to know about new collections and exclusive offers.</p>"
+          }
+        },
+        "email_form": {
+          "type": "email_form",
+          "settings": {}
+        }
+      },
+      "block_order": ["heading", "paragraph", "email_form"],
+      "settings": {
+        "color_scheme": "",
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
+    },
+    "featured_collection": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "Featured products",
+        "heading_size": "h2",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "collection": "all",
+        "products_to_show": 8,
+        "columns_desktop": 4,
+        "full_width": false,
+        "show_view_all": true,
+        "view_all_style": "solid",
+        "enable_desktop_slider": false,
+        "color_scheme": "scheme-1",
+        "image_ratio": "adapt",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "none",
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": [
+    "hero_video",
+    "product_carousel",
+    "custom_poster_1",
+    "featured_collections_grid",
+    "custom_poster_2",
+    "featured_collection",
+    "newsletter"
+  ]
+}

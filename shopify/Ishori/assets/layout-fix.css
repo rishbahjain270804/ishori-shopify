@@ -1,0 +1,201 @@
+/* ISHORI LAYOUT FIX - Simple & Clean
+ * Based on Moora.in and Pehrin.com
+ * Guaranteed to work
+ */
+
+/* Reset & Base */
+* { box-sizing: border-box; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+  line-height: 1.6;
+  color: #333;
+}
+
+/* Container */
+.page-width {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* Section Spacing */
+.section {
+  padding: 60px 0;
+}
+
+/* Section Titles */
+.title,
+h2.title {
+  font-size: 28px;
+  font-weight: 700;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin: 0 0 40px 0;
+  color: #333;
+}
+
+/* Product Grid - 4 Columns */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+@media (max-width: 989px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+}
+
+@media (max-width: 749px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+}
+
+/* Product Cards */
+.card {
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  border: 1px solid #f0f0f0;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+.card__media {
+  position: relative;
+  aspect-ratio: 3/4;
+  overflow: hidden;
+  background: #f9f9f9;
+}
+
+.card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.card:hover .card__media img {
+  transform: scale(1.05);
+}
+
+.card__content,
+.card__information {
+  padding: 16px;
+}
+
+.card__heading {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.4;
+  color: #333;
+  margin: 0 0 8px 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.price {
+  font-size: 16px;
+  font-weight: 600;
+  color: #5f0511;
+}
+
+/* Collection Cards */
+.collection-list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+@media (max-width: 989px) {
+  .collection-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.collection-card {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  aspect-ratio: 3/4;
+}
+
+.collection-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.collection-card:hover img {
+  transform: scale(1.05);
+}
+
+/* Multicolumn */
+.multicolumn-list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+}
+
+@media (max-width: 989px) {
+  .multicolumn-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 749px) {
+  .multicolumn-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+.multicolumn-card {
+  text-align: center;
+  padding: 24px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+/* Buttons */
+.button {
+  display: inline-block;
+  padding: 12px 32px;
+  background: #5f0511;
+  color: #fff;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.button:hover {
+  background: #3c030b;
+  transform: translateY(-2px);
+}
+
+/* Instagram Grid */
+.instagram-feed {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+@media (max-width: 749px) {
+  .instagram-feed {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

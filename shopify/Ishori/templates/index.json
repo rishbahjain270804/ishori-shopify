@@ -1,17 +1,18 @@
 {
   "sections": {
-    "image_banner": {
-      "type": "image-banner",
+    "hero_video": {
+      "type": "video",
       "settings": {
-        "image_height": "large",
-        "desktop_content_position": "middle-center",
-        "show_text_box": true,
-        "desktop_content_alignment": "center",
+        "heading": "Exquisite Handcrafted Sarees",
+        "heading_size": "h1",
+        "enable_video_looping": true,
+        "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+        "cover_image": "",
+        "description": "Celebrating Indian Tradition & Elegance",
+        "full_width": true,
         "color_scheme": "scheme-1",
-        "image_behavior": "none",
-        "mobile_content_alignment": "center",
-        "stack_images_on_mobile": true,
-        "show_text_below": true
+        "padding_top": 0,
+        "padding_bottom": 0
       }
     },
     "featured_collection": {
@@ -44,7 +45,7 @@
     }
   },
   "order": [
-    "image_banner",
+    "hero_video",
     "featured_collection"
   ]
 }

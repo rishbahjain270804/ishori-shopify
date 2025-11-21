@@ -18,6 +18,60 @@ body {
   max-width: 100vw;
 }
 
+/* Hide any debug/block ID text that might appear */
+.shopify-section::after,
+.shopify-section::before {
+  display: none !important;
+}
+
+/* Hide section name/ID overlays */
+.shopify-section[id*="block"]::after,
+.shopify-section > div::after {
+  content: none !important;
+  display: none !important;
+}
+
+/* Hero video section fixes */
+.ai-video-hero {
+  margin-bottom: 0 !important;
+  position: relative !important;
+}
+
+.ai-video-hero + .shopify-section {
+  margin-top: 0 !important;
+}
+
+/* Remove any text overlays appearing after hero section */
+.ai-video-hero ~ * {
+  z-index: 1;
+}
+
+/* Hide any ID text that appears below sections */
+.shopify-section > .section-id,
+.shopify-section > span,
+[class*="ai_gen_id"],
+[class*="block-id"] {
+  display: none !important;
+}
+
+/* Hide the visible block ID text overlay */
+body::after,
+.shopify-section::after {
+  content: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  position: absolute !important;
+  left: -9999px !important;
+}
+
+/* Ensure text nodes containing block IDs are hidden */
+.shopify-section > div::first-line {
+  font-size: 0 !important;
+  line-height: 0 !important;
+  height: 0 !important;
+  opacity: 0 !important;
+}
+
 /* Prevent horizontal scroll issues */
 .shopify-section {
   overflow-x: hidden;
@@ -177,6 +231,9 @@ body {
   .header__icon {
     width: 4rem !important;
     height: 4rem !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
   }
 
   .header__heading-link {
@@ -185,6 +242,32 @@ body {
 
   .header__menu-item {
     padding: 1.2rem 0 !important;
+  }
+
+  /* Ensure mobile menu works */
+  .menu-drawer-container {
+    pointer-events: all !important;
+  }
+
+  .header__icon--menu,
+  .header__icon--cart,
+  .header__icon--search,
+  .header__icon--account {
+    cursor: pointer !important;
+    -webkit-tap-highlight-color: transparent !important;
+    touch-action: manipulation !important;
+  }
+
+  /* Fix mobile menu button */
+  summary.header__icon,
+  button.header__icon {
+    all: unset;
+    width: 4rem !important;
+    height: 4rem !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    cursor: pointer !important;
   }
 }
 
@@ -341,6 +424,41 @@ body {
   /* Better image hover effects */
   .card:hover .media img {
     transform: scale(1.05);
+  }
+
+  /* Fix desktop navigation dropdowns */
+  header-menu details[open] .mega-menu__content,
+  header-menu details[open] > div {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: all !important;
+  }
+
+  .header__menu-item summary {
+    cursor: pointer !important;
+    user-select: none !important;
+  }
+
+  .mega-menu {
+    position: relative !important;
+  }
+
+  .mega-menu__content {
+    position: absolute !important;
+    top: 100% !important;
+    left: 0 !important;
+    z-index: 999 !important;
+  }
+
+  /* Ensure all buttons work */
+  button,
+  .button,
+  summary,
+  [role="button"] {
+    cursor: pointer !important;
+    pointer-events: all !important;
+    user-select: none !important;
   }
 
   /* Improved spacing for wide screens */

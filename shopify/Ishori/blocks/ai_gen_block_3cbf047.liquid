@@ -2,7 +2,12 @@
   @prompt
     create a section where a video play on a loop and also on auto so no need to start as website loaded and video start playing on hero section, Shopify-hosted video
 {% enddoc %}
-{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+{% liquid
+  assign ai_gen_id = block.id | replace: '_', '' | downcase
+  comment
+    Generate unique ID for CSS classes without displaying it
+  endcomment
+%}
 
 {% style %}
   .ai-video-hero-{{ ai_gen_id }} {
@@ -13,6 +18,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-bottom: 0;
   }
 
   .ai-video-hero__video-wrapper-{{ ai_gen_id }} {
@@ -136,6 +142,7 @@
     .ai-video-hero-{{ ai_gen_id }} {
       height: {{ block.settings.mobile_height }}vh;
       min-height: 300px;
+      margin-bottom: 0;
     }
 
     .ai-video-hero__heading-{{ ai_gen_id }} {
@@ -156,6 +163,10 @@
     .ai-video-hero__button-{{ ai_gen_id }} {
       padding: 10px 24px;
       font-size: 14px;
+    }
+    
+    .ai-video-hero__video-{{ ai_gen_id }} {
+      object-position: center center;
     }
   }
 {% endstyle %}

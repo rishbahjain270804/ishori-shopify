@@ -43,6 +43,42 @@
         "padding_bottom": 60
       }
     },
+    "occasion_collections": {
+      "type": "collection-list",
+      "blocks": {
+        "wedding": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "all"
+          }
+        },
+        "festival": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "all"
+          }
+        },
+        "party": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "all"
+          }
+        }
+      },
+      "block_order": ["wedding", "festival", "party"],
+      "settings": {
+        "title": "Shop by Occasion",
+        "heading_size": "h2",
+        "image_ratio": "portrait",
+        "columns_desktop": 3,
+        "color_scheme": "scheme-1",
+        "show_view_all": false,
+        "columns_mobile": "1",
+        "swipe_on_mobile": true,
+        "padding_top": 60,
+        "padding_bottom": 40
+      }
+    },
     "collection_grid": {
       "type": "collection-list",
       "blocks": {
@@ -81,7 +117,7 @@
         "show_view_all": false,
         "columns_mobile": "2",
         "swipe_on_mobile": false,
-        "padding_top": 60,
+        "padding_top": 40,
         "padding_bottom": 60
       }
     },
@@ -105,8 +141,8 @@
         "column_1": {
           "type": "column",
           "settings": {
-            "title": "Free Shipping",
-            "text": "<p>On orders over ₹5000</p>",
+            "title": "Handmade by Artisans",
+            "text": "<p>Each saree is crafted with passion by skilled artisans, celebrating authentic Indian craftsmanship</p>",
             "link_label": "",
             "link": ""
           }
@@ -114,8 +150,8 @@
         "column_2": {
           "type": "column",
           "settings": {
-            "title": "Premium Quality",
-            "text": "<p>Handcrafted with care</p>",
+            "title": "Premium Silk",
+            "text": "<p>Made with the finest quality silk, ensuring luxury and comfort with every drape</p>",
             "link_label": "",
             "link": ""
           }
@@ -123,27 +159,63 @@
         "column_3": {
           "type": "column",
           "settings": {
-            "title": "Easy Returns",
-            "text": "<p>7-day return policy</p>",
+            "title": "Sustainable Fashion",
+            "text": "<p>Supporting traditional weaving techniques and eco-friendly practices</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_4": {
+          "type": "column",
+          "settings": {
+            "title": "Made in India",
+            "text": "<p>Proudly preserving India's textile heritage with every thread</p>",
             "link_label": "",
             "link": ""
           }
         }
       },
-      "block_order": ["column_1", "column_2", "column_3"],
+      "block_order": ["column_1", "column_2", "column_3", "column_4"],
       "settings": {
-        "title": "Why Choose Us",
+        "title": "Why Shop with Ishori",
         "heading_size": "h2",
         "image_width": "full",
         "image_ratio": "adapt",
-        "columns_desktop": 3,
+        "columns_desktop": 4,
         "column_alignment": "center",
-        "background_style": "none",
+        "background_style": "primary",
         "button_label": "",
         "button_link": "",
         "color_scheme": "scheme-1",
         "columns_mobile": "1",
-        "swipe_on_mobile": false,
+        "swipe_on_mobile": true,
+        "padding_top": 60,
+        "padding_bottom": 60
+      }
+    },
+    "brand_story": {
+      "type": "rich-text",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Handmade with Love, Sarees for the Modern Woman",
+            "heading_size": "h1"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Each saree at Ishori is created with passion and dedication by master artisans. We celebrate the artisanal craftsmanship of India, preserving centuries-old weaving traditions while creating contemporary designs for today's woman. Every piece tells a story of heritage, elegance, and timeless beauty.</p>"
+          }
+        }
+      },
+      "block_order": ["heading", "text"],
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-2",
+        "full_width": true,
         "padding_top": 60,
         "padding_bottom": 60
       }
@@ -306,9 +378,11 @@
   "order": [
     "hero_video",
     "featured_products_grid",
+    "occasion_collections",
     "collection_grid",
     "sale_banner",
     "product_showcase",
+    "brand_story",
     "gallery_slideshow",
     "instagram_feed",
     "newsletter"

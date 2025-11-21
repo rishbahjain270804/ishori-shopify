@@ -1,0 +1,399 @@
+/* Moora-Inspired Enhancements for Ishori
+ * Professional, clean design with emphasis on products and storytelling
+ * Version: 1.0
+ */
+
+/* ================================
+   DISCOUNT BADGE STYLING
+   ================================ */
+.price__badge-sale {
+  background: #5f0511;
+  color: #fff;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  margin-left: 8px;
+  display: inline-block;
+  vertical-align: middle;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.85; }
+}
+
+/* Discount percentage display */
+.card__information .price .price__sale .price__sale-percentage {
+  background: #5f0511;
+  color: #fff;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  margin-left: 6px;
+  display: inline-block;
+}
+
+/* ================================
+   SECTION HEADINGS
+   ================================ */
+.collection-list-title,
+.featured-collection .title,
+.multicolumn .title,
+.rich-text__heading {
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: #5f0511;
+  margin-bottom: 20px;
+}
+
+.collection-list-title::after,
+.featured-collection .title::after,
+.multicolumn .title::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, #5f0511, #8a0a1e);
+  margin: 12px auto 0;
+}
+
+/* ================================
+   OCCASION COLLECTIONS STYLING
+   ================================ */
+.collection-list-wrapper .grid__item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.collection-list-wrapper .card {
+  position: relative;
+  height: 100%;
+}
+
+.collection-list-wrapper .card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(95,5,17,0.2) 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.collection-list-wrapper .grid__item:hover .card::before {
+  opacity: 1;
+}
+
+/* ================================
+   PRODUCT SHOWCASE (WHY SHOP)
+   ================================ */
+.multicolumn-card {
+  text-align: center;
+  padding: 30px 20px;
+  background: #fff;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  height: 100%;
+}
+
+.multicolumn-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(95, 5, 17, 0.1);
+}
+
+.multicolumn-card__info .rte h3 {
+  color: #5f0511;
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.multicolumn-card__info .rte p {
+  color: #555;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* ================================
+   BRAND STORY SECTION
+   ================================ */
+.rich-text__blocks {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.rich-text__heading {
+  font-size: 32px;
+  line-height: 1.3;
+  margin-bottom: 24px;
+  color: #5f0511;
+}
+
+.rich-text__text {
+  font-size: 16px;
+  line-height: 1.8;
+  color: #555;
+  text-align: center;
+}
+
+/* ================================
+   PRODUCT CARD ENHANCEMENTS
+   ================================ */
+.card-wrapper {
+  position: relative;
+}
+
+.card__inner {
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.card-wrapper:hover .card__inner {
+  box-shadow: 0 8px 24px rgba(95, 5, 17, 0.12);
+}
+
+/* Product title styling */
+.card__heading {
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+  line-height: 1.4;
+  margin-top: 12px;
+  transition: color 0.25s ease;
+}
+
+.card__heading:hover {
+  color: #5f0511;
+}
+
+/* Price styling */
+.price {
+  font-size: 16px;
+  font-weight: 600;
+  color: #5f0511;
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.price__regular {
+  color: #5f0511;
+}
+
+.price__sale {
+  color: #d32f2f;
+}
+
+.price--on-sale .price__regular {
+  text-decoration: line-through;
+  color: #999;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+/* ================================
+   VIEW ALL BUTTONS
+   ================================ */
+.collection-list-view-all,
+.slider__nav .slider-button,
+button.button,
+.button--primary {
+  background: #5f0511;
+  color: #fff;
+  padding: 12px 28px;
+  border-radius: 4px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  border: 2px solid #5f0511;
+  cursor: pointer;
+}
+
+.collection-list-view-all:hover,
+.slider__nav .slider-button:hover,
+button.button:hover,
+.button--primary:hover {
+  background: #3c030b;
+  border-color: #3c030b;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(95, 5, 17, 0.3);
+}
+
+/* ================================
+   GALLERY/SLIDESHOW ENHANCEMENTS
+   ================================ */
+.slideshow__slide {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.slideshow__media img {
+  transition: transform 0.5s ease;
+}
+
+.slideshow__slide:hover .slideshow__media img {
+  transform: scale(1.02);
+}
+
+/* Slideshow navigation dots */
+.slideshow__controls .slider-counter__link {
+  width: 10px;
+  height: 10px;
+  background: rgba(95, 5, 17, 0.3);
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.slideshow__controls .slider-counter__link--active,
+.slideshow__controls .slider-counter__link:hover {
+  background: #5f0511;
+  transform: scale(1.3);
+}
+
+/* ================================
+   INSTAGRAM FEED STYLING
+   ================================ */
+.multicolumn-list .multicolumn-list__item {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.multicolumn-list .multicolumn-card__image-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+.multicolumn-list .multicolumn-card__image-wrapper::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(95,5,17,0.4) 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.multicolumn-list .multicolumn-list__item:hover .multicolumn-card__image-wrapper::after {
+  opacity: 1;
+}
+
+/* ================================
+   NEWSLETTER SECTION
+   ================================ */
+.newsletter-form__field-wrapper {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.newsletter-form__button {
+  background: #5f0511;
+  color: #fff;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+}
+
+.newsletter-form__button:hover {
+  background: #3c030b;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(95, 5, 17, 0.3);
+}
+
+/* ================================
+   MOBILE RESPONSIVENESS
+   ================================ */
+@media screen and (max-width: 749px) {
+  .rich-text__heading {
+    font-size: 24px;
+  }
+
+  .rich-text__text {
+    font-size: 14px;
+  }
+
+  .multicolumn-card {
+    padding: 20px 15px;
+  }
+
+  .multicolumn-card__info .rte h3 {
+    font-size: 16px;
+  }
+
+  .multicolumn-card__info .rte p {
+    font-size: 13px;
+  }
+
+  .price {
+    font-size: 14px;
+  }
+
+  .card__heading {
+    font-size: 13px;
+  }
+}
+
+/* ================================
+   TABLET RESPONSIVENESS
+   ================================ */
+@media screen and (min-width: 750px) and (max-width: 989px) {
+  .rich-text__heading {
+    font-size: 28px;
+  }
+
+  .multicolumn-card__info .rte h3 {
+    font-size: 17px;
+  }
+}
+
+/* ================================
+   ACCESSIBILITY ENHANCEMENTS
+   ================================ */
+.card-wrapper:focus-within .card__inner,
+.multicolumn-card:focus-within {
+  outline: 2px solid #5f0511;
+  outline-offset: 2px;
+}
+
+/* Smooth scrolling for anchor links */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Loading states */
+.loading {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* ================================
+   PERFORMANCE OPTIMIZATIONS
+   ================================ */
+.card__media img,
+.slideshow__media img,
+.multicolumn-card__image-wrapper img {
+  will-change: transform;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}

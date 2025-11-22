@@ -1,0 +1,141 @@
+/* HOVER MENU - NO CLICK REQUIRED */
+
+/* Desktop Menu Hover */
+@media screen and (min-width: 990px) {
+  /* Make all menu items hoverable */
+  header-menu details {
+    position: relative;
+  }
+
+  /* Show dropdown on hover instead of click */
+  header-menu details:hover > .mega-menu__content,
+  header-menu details:hover > .list-menu--disclosure,
+  header-menu details:hover > div {
+    display: block !important;
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+  }
+
+  /* Remove click requirement - keep dropdown visible on hover */
+  header-menu details .mega-menu__content,
+  header-menu details .list-menu--disclosure {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 999;
+    background: #fff;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+    border-radius: 0 0 4px 4px;
+    min-width: 200px;
+  }
+
+  /* Show on hover */
+  header-menu details:hover .mega-menu__content,
+  header-menu details:hover .list-menu--disclosure {
+    display: block;
+    animation: slideDown 0.3s ease;
+  }
+
+  /* Mega menu full width */
+  .mega-menu .mega-menu__content {
+    left: 0;
+    right: 0;
+    width: 100%;
+    max-width: none;
+  }
+
+  /* Regular dropdown positioning */
+  .list-menu--disclosure {
+    left: 0;
+    min-width: 220px;
+  }
+
+  /* Arrow indicator for dropdowns */
+  header-menu details > summary {
+    position: relative;
+    cursor: pointer;
+  }
+
+  header-menu details > summary::after {
+    content: '';
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: 6px;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 4px solid currentColor;
+    vertical-align: middle;
+    transition: transform 0.2s ease;
+  }
+
+  header-menu details:hover > summary::after {
+    transform: rotate(180deg);
+  }
+
+  /* Remove default details behavior on desktop */
+  header-menu details[open] > summary {
+    pointer-events: none;
+  }
+
+  /* Smooth animation */
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Dropdown link styling */
+  .mega-menu__content .mega-menu__link,
+  .list-menu--disclosure .list-menu__item a {
+    padding: 12px 20px;
+    display: block;
+    color: #333;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .mega-menu__content .mega-menu__link:hover,
+  .list-menu--disclosure .list-menu__item a:hover {
+    background: #f5f5f5;
+    color: #5f0511;
+    padding-left: 24px;
+  }
+
+  /* Submenu positioning */
+  .list-menu--disclosure .list-menu {
+    padding: 8px 0;
+  }
+
+  /* Keep dropdown visible when hovering over content */
+  header-menu details .mega-menu__content:hover,
+  header-menu details .list-menu--disclosure:hover {
+    display: block;
+  }
+
+  /* Prevent details from opening on click */
+  header-menu details > summary {
+    list-style: none;
+    user-select: none;
+  }
+
+  header-menu details > summary::-webkit-details-marker {
+    display: none;
+  }
+}
+
+/* Mobile - keep click behavior */
+@media screen and (max-width: 989px) {
+  /* Mobile menu stays click-based */
+  header-menu details {
+    position: relative;
+  }
+}

@@ -188,6 +188,69 @@
   }
 }
 
+/* Homepage content containers */
+section[id*="__featured_products_grid"],
+section[id*="__occasion_collections"],
+section[id*="__collection_grid"],
+section[id*="__product_showcase"],
+section[id*="__brand_story"],
+section[id*="__instagram_feed"],
+section[id*="__newsletter"] {
+  background: #fff !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+section[id*="__featured_products_grid"] .collection,
+section[id*="__occasion_collections"] .collection-list-wrapper,
+section[id*="__collection_grid"] .collection-list-wrapper,
+section[id*="__product_showcase"] .multicolumn,
+section[id*="__brand_story"] .rich-text,
+section[id*="__instagram_feed"] .instagram,
+section[id*="__newsletter"] .newsletter {
+  max-width: 1200px !important;
+  margin: 0 auto !important;
+}
+
+section[id*="__featured_products_grid"] .collection {
+  background: #fff8f6 !important;
+  border-radius: 24px !important;
+  padding: 40px 32px !important;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08) !important;
+}
+
+section[id*="__featured_products_grid"] .collection__title {
+  margin-bottom: 24px !important;
+}
+
+section[id*="__featured_products_grid"] .product-grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)) !important;
+  gap: 24px !important;
+}
+
+section[id*="__featured_products_grid"] .grid__item {
+  min-width: 0 !important;
+}
+
+section[id*="__occasion_collections"],
+section[id*="__collection_grid"] {
+  background: #fffdf9 !important;
+}
+
+section[id*="__occasion_collections"] .collection-list,
+section[id*="__collection_grid"] .collection-list {
+  gap: 24px !important;
+}
+
+section[id*="__occasion_collections"] .collection-list__item,
+section[id*="__collection_grid"] .collection-list__item {
+  background: #fff8f6 !important;
+  border-radius: 18px !important;
+  padding: 12px !important;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.04) !important;
+}
+
 /* Section Background Fix */
 .color-scheme-1,
 .gradient {
@@ -285,6 +348,9 @@ h2.inline-richtext {
   transition: all 0.3s ease !important;
   background: #fff !important;
   border: 1px solid #f0f0f0 !important;
+  min-height: 380px !important;
+  display: flex !important;
+  flex-direction: column !important;
 }
 
 .card-wrapper:hover .card,
@@ -292,6 +358,12 @@ h2.inline-richtext {
 .grid__item:hover .card {
   box-shadow: 0 8px 20px rgba(0,0,0,0.12) !important;
   border-color: #e0e0e0 !important;
+}
+
+.card__inner {
+  display: flex !important;
+  flex-direction: column !important;
+  height: 100% !important;
 }
 
 /* Enhanced Card Media */
@@ -302,6 +374,8 @@ h2.inline-richtext {
   overflow: hidden !important;
   background: #f9f9f9 !important;
   border-radius: 8px 8px 0 0 !important;
+  aspect-ratio: 3 / 4 !important;
+  min-height: 260px !important;
 }
 
 .card__media img,
@@ -325,6 +399,7 @@ h2.inline-richtext {
 .card-information {
   padding: 12px !important;
   background: #fff !important;
+  flex: 0 0 auto !important;
 }
 
 .card__heading,
@@ -390,6 +465,8 @@ h2.inline-richtext {
 /* Enhanced Collection Cards - EXACT MOORA */
 .collection-list.contains-card,
 .collection-list {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)) !important;
   gap: 20px !important;
   margin: 0 !important;
   padding: 0 !important;
@@ -398,6 +475,7 @@ h2.inline-richtext {
 .collection-list__item {
   transition: transform 0.3s ease !important;
   list-style: none !important;
+  min-width: 0 !important;
 }
 
 .collection-list__item:hover {

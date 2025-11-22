@@ -1,0 +1,524 @@
+/* ============================================
+   ISHORI DESIGN SYSTEM
+   Complete design specifications based on Moora.in
+   All measurements configurable via Shopify admin
+   ============================================ */
+
+/* ============================================
+   CSS CUSTOM PROPERTIES (DESIGN TOKENS)
+   ============================================ */
+:root {
+  /* Brand Colors */
+  --ishori-primary: #5f0511;
+  --ishori-primary-dark: #3c030b;
+  --ishori-primary-light: #8a0a1e;
+  --ishori-accent: #f9f9f9;
+  --ishori-background: #fff;
+  --ishori-background-alt: #fffdf9;
+  --ishori-text: #222;
+  --ishori-text-light: #666;
+  --ishori-border: rgba(95, 5, 17, 0.12);
+
+  /* Typography Scale */
+  --font-size-xs: 12px;
+  --font-size-sm: 13px;
+  --font-size-base: 14px;
+  --font-size-md: 16px;
+  --font-size-lg: 18px;
+  --font-size-xl: 20px;
+  --font-size-2xl: 24px;
+  --font-size-3xl: 28px;
+  --font-size-4xl: 36px;
+  
+  /* Font Weights */
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* Spacing Scale - Moora.in exact measurements */
+  --space-xs: 8px;
+  --space-sm: 12px;
+  --space-md: 16px;
+  --space-lg: 20px;
+  --space-xl: 24px;
+  --space-2xl: 32px;
+  --space-3xl: 40px;
+  --space-4xl: 60px;
+  --space-5xl: 80px;
+
+  /* Border Radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 24px;
+  --radius-round: 50%;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 10px 30px rgba(0, 0, 0, 0.12);
+  --shadow-2xl: 0 20px 60px rgba(0, 0, 0, 0.15);
+
+  /* Grid & Layout */
+  --container-max-width: 1200px;
+  --container-padding: 24px;
+  --grid-gap: 24px;
+  --grid-gap-sm: 16px;
+  --grid-gap-lg: 32px;
+
+  /* Product Card Specifications */
+  --card-aspect-ratio: 3 / 4;
+  --card-image-height: 340px;
+  --card-border-radius: var(--radius-md);
+  --card-padding: var(--space-sm);
+  --card-gap: var(--space-xl);
+
+  /* Collection Card Specifications */
+  --collection-card-aspect-ratio: 4 / 5;
+  --collection-card-height: 280px;
+  --collection-card-border-radius: var(--radius-xl);
+
+  /* Transitions */
+  --transition-fast: 0.2s ease;
+  --transition-base: 0.3s ease;
+  --transition-slow: 0.4s ease;
+
+  /* Breakpoints (for reference in media queries) */
+  --breakpoint-mobile: 749px;
+  --breakpoint-tablet: 990px;
+  --breakpoint-desktop: 1200px;
+}
+
+/* ============================================
+   GLOBAL RESETS & BASE STYLES
+   ============================================ */
+
+/* Remove Shopify's ratio padding hack globally for cards */
+.card .ratio::before,
+.card__inner.ratio::before,
+.media.ratio::before {
+  content: none !important;
+  display: none !important;
+  padding-bottom: 0 !important;
+}
+
+/* ============================================
+   LAYOUT CONTAINERS
+   ============================================ */
+
+/* Main content container */
+.page-width {
+  max-width: var(--container-max-width) !important;
+  margin: 0 auto !important;
+  padding-left: var(--container-padding) !important;
+  padding-right: var(--container-padding) !important;
+}
+
+/* Section spacing */
+.shopify-section {
+  position: relative;
+}
+
+/* ============================================
+   PRODUCT GRID SYSTEM
+   ============================================ */
+
+/* Product Grid - 4 columns desktop, 2 mobile */
+.product-grid,
+.grid.product-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, 1fr) !important;
+  gap: var(--grid-gap-sm) !important;
+  width: 100% !important;
+}
+
+@media screen and (min-width: 750px) {
+  .product-grid,
+  .grid.product-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: var(--grid-gap) !important;
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .product-grid,
+  .grid.product-grid {
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: var(--grid-gap) !important;
+  }
+}
+
+/* Override slider behavior when slider is disabled */
+.slider.product-grid {
+  display: grid !important;
+  overflow: visible !important;
+}
+
+.slider.product-grid .slider__slide {
+  width: 100% !important;
+  min-width: 0 !important;
+}
+
+/* ============================================
+   PRODUCT CARD SPECIFICATIONS
+   ============================================ */
+
+/* Card Container */
+.card-wrapper,
+.grid__item {
+  position: relative !important;
+  width: 100% !important;
+}
+
+.card {
+  display: flex !important;
+  flex-direction: column !important;
+  height: 100% !important;
+  background: var(--ishori-background) !important;
+  border-radius: var(--card-border-radius) !important;
+  overflow: hidden !important;
+  transition: transform var(--transition-base), box-shadow var(--transition-base) !important;
+}
+
+.card:hover {
+  transform: translateY(-4px) !important;
+  box-shadow: var(--shadow-lg) !important;
+}
+
+/* Card Inner - No ratio hack */
+.card__inner {
+  display: flex !important;
+  flex-direction: column !important;
+  height: 100% !important;
+  position: relative !important;
+}
+
+.card__inner.ratio {
+  padding-bottom: 0 !important;
+  position: relative !important;
+}
+
+/* Card Media/Image */
+.card__media,
+.card .media {
+  position: relative !important;
+  width: 100% !important;
+  aspect-ratio: var(--card-aspect-ratio) !important;
+  height: auto !important;
+  min-height: 260px !important;
+  max-height: var(--card-image-height) !important;
+  overflow: hidden !important;
+  background: #f9f9f9 !important;
+  flex-shrink: 0 !important;
+}
+
+.card__media img,
+.card .media img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center !important;
+  transition: transform var(--transition-slow) !important;
+}
+
+.card:hover .card__media img,
+.card:hover .media img {
+  transform: scale(1.05) !important;
+}
+
+/* Card Content */
+.card__content,
+.card__information {
+  flex: 1 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: var(--space-xs) !important;
+  padding: var(--card-padding) !important;
+}
+
+/* Card Title */
+.card__heading,
+.card-information__text,
+.card__information .card__heading {
+  font-size: var(--font-size-base) !important;
+  font-weight: var(--font-weight-semibold) !important;
+  color: var(--ishori-text) !important;
+  line-height: 1.4 !important;
+  margin: 0 !important;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+}
+
+/* Card Price */
+.price,
+.card__information .price {
+  font-size: var(--font-size-md) !important;
+  font-weight: var(--font-weight-bold) !important;
+  color: var(--ishori-primary) !important;
+  margin: 0 !important;
+}
+
+.price__regular {
+  color: var(--ishori-text) !important;
+}
+
+.price__sale {
+  color: var(--ishori-primary) !important;
+}
+
+/* ============================================
+   COLLECTION LIST/GRID SYSTEM
+   ============================================ */
+
+.collection-list {
+  display: grid !important;
+  grid-template-columns: repeat(2, 1fr) !important;
+  gap: var(--grid-gap-sm) !important;
+  width: 100% !important;
+}
+
+@media screen and (min-width: 750px) {
+  .collection-list {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: var(--grid-gap) !important;
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .collection-list {
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: var(--grid-gap) !important;
+  }
+}
+
+/* Collection Card */
+.card--collection {
+  display: flex !important;
+  flex-direction: column !important;
+  height: 100% !important;
+  background: var(--ishori-background) !important;
+  border-radius: var(--collection-card-border-radius) !important;
+  overflow: hidden !important;
+  transition: transform var(--transition-base), box-shadow var(--transition-base) !important;
+  border: 1px solid var(--ishori-border) !important;
+}
+
+.card--collection:hover {
+  transform: translateY(-4px) !important;
+  box-shadow: var(--shadow-lg) !important;
+}
+
+.card--collection .card__media {
+  aspect-ratio: var(--collection-card-aspect-ratio) !important;
+  min-height: var(--collection-card-height) !important;
+}
+
+/* ============================================
+   MULTICOLUMN / FEATURE GRID
+   ============================================ */
+
+.multicolumn-list {
+  display: grid !important;
+  grid-template-columns: repeat(2, 1fr) !important;
+  gap: var(--grid-gap-sm) !important;
+}
+
+@media screen and (min-width: 750px) {
+  .multicolumn-list {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: var(--grid-gap) !important;
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .multicolumn-list {
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: var(--grid-gap) !important;
+  }
+}
+
+.multicolumn-card {
+  background: var(--ishori-background) !important;
+  border-radius: var(--radius-lg) !important;
+  padding: var(--space-2xl) var(--space-lg) !important;
+  text-align: center !important;
+  border: 1px solid var(--ishori-border) !important;
+  transition: all var(--transition-base) !important;
+}
+
+.multicolumn-card:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: var(--shadow-md) !important;
+}
+
+.multicolumn-card h3 {
+  font-size: var(--font-size-md) !important;
+  font-weight: var(--font-weight-semibold) !important;
+  color: var(--ishori-text) !important;
+  margin-bottom: var(--space-sm) !important;
+}
+
+.multicolumn-card p {
+  font-size: var(--font-size-sm) !important;
+  color: var(--ishori-text-light) !important;
+  line-height: 1.6 !important;
+}
+
+/* ============================================
+   SECTION TITLE STYLING
+   ============================================ */
+
+.title-wrapper {
+  margin-bottom: var(--space-xl) !important;
+  text-align: center !important;
+}
+
+.title,
+h2.title {
+  font-size: var(--font-size-2xl) !important;
+  font-weight: var(--font-weight-bold) !important;
+  color: var(--ishori-text) !important;
+  letter-spacing: 0.5px !important;
+  text-transform: uppercase !important;
+  margin-bottom: var(--space-lg) !important;
+}
+
+@media screen and (min-width: 750px) {
+  .title,
+  h2.title {
+    font-size: var(--font-size-3xl) !important;
+  }
+}
+
+/* ============================================
+   BUTTON SYSTEM
+   ============================================ */
+
+.button,
+.button--primary {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: var(--space-sm) var(--space-2xl) !important;
+  font-size: var(--font-size-base) !important;
+  font-weight: var(--font-weight-semibold) !important;
+  color: var(--ishori-background) !important;
+  background: var(--ishori-primary) !important;
+  border: none !important;
+  border-radius: var(--radius-md) !important;
+  text-transform: uppercase !important;
+  letter-spacing: 1px !important;
+  transition: all var(--transition-base) !important;
+  cursor: pointer !important;
+}
+
+.button:hover,
+.button--primary:hover {
+  background: var(--ishori-primary-dark) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: var(--shadow-lg) !important;
+}
+
+.button--secondary {
+  background: transparent !important;
+  color: var(--ishori-primary) !important;
+  border: 2px solid var(--ishori-primary) !important;
+}
+
+.button--secondary:hover {
+  background: var(--ishori-primary) !important;
+  color: var(--ishori-background) !important;
+}
+
+/* ============================================
+   RESPONSIVE UTILITIES
+   ============================================ */
+
+/* Mobile only */
+@media screen and (max-width: 749px) {
+  .desktop-only {
+    display: none !important;
+  }
+  
+  :root {
+    --container-padding: 16px;
+    --grid-gap: 16px;
+  }
+}
+
+/* Desktop only */
+@media screen and (min-width: 750px) {
+  .mobile-only {
+    display: none !important;
+  }
+}
+
+/* ============================================
+   SLIDER OVERRIDES (when slider is enabled)
+   ============================================ */
+
+slider-component .slider {
+  display: flex !important;
+  overflow-x: auto !important;
+  scroll-snap-type: x mandatory !important;
+  -webkit-overflow-scrolling: touch !important;
+  gap: var(--grid-gap) !important;
+}
+
+slider-component .slider__slide {
+  scroll-snap-align: start !important;
+  flex-shrink: 0 !important;
+}
+
+/* Hide scrollbar but keep functionality */
+slider-component .slider::-webkit-scrollbar {
+  display: none !important;
+}
+
+slider-component .slider {
+  -ms-overflow-style: none !important;
+  scrollbar-width: none !important;
+}
+
+/* ============================================
+   ANIMATION UTILITIES
+   ============================================ */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+/* ============================================
+   LOADING STATES
+   ============================================ */
+
+.loading-skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s ease-in-out infinite;
+}
+
+@keyframes loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}

@@ -14,6 +14,19 @@
       padding-bottom: {{ section.settings.padding_bottom }}px;
     }
   }
+
+  /* Custom collection card styling */
+  #shopify-section-{{ section.id }} .collection-list {
+    gap: {{ section.settings.card_gap | default: 24 }}px !important;
+  }
+
+  #shopify-section-{{ section.id }} .card--collection {
+    border-radius: {{ section.settings.card_border_radius | default: 16 }}px !important;
+  }
+
+  #shopify-section-{{ section.id }} .card--collection .card__media {
+    min-height: {{ section.settings.card_min_height | default: 280 }}px !important;
+  }
 {%- endstyle -%}
 
 {%- liquid
@@ -249,6 +262,40 @@
       "id": "swipe_on_mobile",
       "default": false,
       "label": "t:sections.collection-list.settings.swipe_on_mobile.label"
+    },
+    {
+      "type": "header",
+      "content": "Collection Card Styling"
+    },
+    {
+      "type": "range",
+      "id": "card_gap",
+      "min": 8,
+      "max": 48,
+      "step": 4,
+      "unit": "px",
+      "label": "Gap between cards",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "card_border_radius",
+      "min": 0,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "label": "Card border radius",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "card_min_height",
+      "min": 200,
+      "max": 400,
+      "step": 20,
+      "unit": "px",
+      "label": "Card image height",
+      "default": 280
     },
     {
       "type": "header",

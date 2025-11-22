@@ -36,6 +36,25 @@
       padding-bottom: {{ section.settings.padding_bottom }}px;
     }
   }
+
+  /* Custom admin-controlled spacing */
+  #shopify-section-{{ section.id }} .product-grid,
+  #shopify-section-{{ section.id }} .grid.product-grid {
+    gap: {{ section.settings.card_gap | default: 24 }}px !important;
+  }
+
+  #shopify-section-{{ section.id }} .card {
+    border-radius: {{ section.settings.card_border_radius | default: 8 }}px !important;
+  }
+
+  #shopify-section-{{ section.id }} .card__content,
+  #shopify-section-{{ section.id }} .card__information {
+    padding: {{ section.settings.card_padding | default: 12 }}px !important;
+  }
+
+  #shopify-section-{{ section.id }} .card__media {
+    max-height: {{ section.settings.card_image_height | default: 340 }}px !important;
+  }
 {%- endstyle -%}
 
 {%- liquid
@@ -493,6 +512,54 @@
       "id": "swipe_on_mobile",
       "default": false,
       "label": "t:sections.featured-collection.settings.swipe_on_mobile.label"
+    },
+    {
+      "type": "header",
+      "content": "Card Spacing & Layout"
+    },
+    {
+      "type": "range",
+      "id": "card_gap",
+      "min": 8,
+      "max": 48,
+      "step": 4,
+      "unit": "px",
+      "label": "Gap between cards",
+      "default": 24,
+      "info": "Space between product cards"
+    },
+    {
+      "type": "range",
+      "id": "card_padding",
+      "min": 0,
+      "max": 32,
+      "step": 4,
+      "unit": "px",
+      "label": "Card content padding",
+      "default": 12,
+      "info": "Padding inside each card"
+    },
+    {
+      "type": "range",
+      "id": "card_border_radius",
+      "min": 0,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "label": "Card border radius",
+      "default": 8,
+      "info": "Rounded corners for cards"
+    },
+    {
+      "type": "range",
+      "id": "card_image_height",
+      "min": 200,
+      "max": 500,
+      "step": 20,
+      "unit": "px",
+      "label": "Card image max height",
+      "default": 340,
+      "info": "Maximum height for product images"
     },          
     {
       "type": "header",

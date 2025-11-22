@@ -254,8 +254,14 @@ section[id*="__featured_products_grid"] .collection__title {
 
 section[id*="__featured_products_grid"] .product-grid {
   display: grid !important;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)) !important;
+  grid-template-columns: repeat(2, 1fr) !important;
   gap: 24px !important;
+}
+
+@media screen and (min-width: 750px) {
+  section[id*="__featured_products_grid"] .product-grid {
+    grid-template-columns: repeat(4, 1fr) !important;
+  }
 }
 
 section[id*="__featured_products_grid"] .grid__item {
@@ -265,9 +271,15 @@ section[id*="__featured_products_grid"] .grid__item {
 
 section[id*="__featured_products_grid"] slider-component .slider {
   display: grid !important;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)) !important;
+  grid-template-columns: repeat(2, 1fr) !important;
   gap: 24px !important;
   padding: 0 !important;
+}
+
+@media screen and (min-width: 750px) {
+  section[id*="__featured_products_grid"] slider-component .slider {
+    grid-template-columns: repeat(4, 1fr) !important;
+  }
 }
 
 section[id*="__featured_products_grid"] .slider__slide {
@@ -459,7 +471,7 @@ h2.inline-richtext {
   inset: auto !important;
 }
 
-/* Enhanced Card Media */
+/* Enhanced Card Media - 9:16 ASPECT RATIO */
 .card__media,
 .card .media,
 .card__inner .card__media {
@@ -467,9 +479,17 @@ h2.inline-richtext {
   overflow: hidden !important;
   background: #f9f9f9 !important;
   border-radius: 8px 8px 0 0 !important;
-  aspect-ratio: 3 / 4 !important;
-  min-height: 260px !important;
+  aspect-ratio: 9 / 16 !important;
+  min-height: 320px !important;
   flex: 0 0 auto !important;
+}
+
+@media screen and (min-width: 990px) {
+  .card__media,
+  .card .media,
+  .card__inner .card__media {
+    min-height: 380px !important;
+  }
 }
 
 .card__media img,

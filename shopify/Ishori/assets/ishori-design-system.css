@@ -70,15 +70,15 @@
   --grid-gap-lg: 32px;
 
   /* Product Card Specifications */
-  --card-aspect-ratio: 3 / 4;
-  --card-image-height: 340px;
+  --card-aspect-ratio: 9 / 16;
+  --card-image-height: 450px;
   --card-border-radius: var(--radius-md);
   --card-padding: var(--space-sm);
   --card-gap: var(--space-xl);
 
   /* Collection Card Specifications */
-  --collection-card-aspect-ratio: 4 / 5;
-  --collection-card-height: 280px;
+  --collection-card-aspect-ratio: 9 / 16;
+  --collection-card-height: 380px;
   --collection-card-border-radius: var(--radius-xl);
 
   /* Transitions */
@@ -126,40 +126,62 @@
    PRODUCT GRID SYSTEM
    ============================================ */
 
-/* Product Grid - 4 columns desktop, 2 mobile */
+/* Product Grid - ALWAYS 4 columns desktop, 2 mobile */
 .product-grid,
-.grid.product-grid {
+.grid.product-grid,
+.slider.product-grid,
+slider-component .slider {
   display: grid !important;
   grid-template-columns: repeat(2, 1fr) !important;
   gap: var(--grid-gap-sm) !important;
   width: 100% !important;
+  overflow: visible !important;
 }
 
 @media screen and (min-width: 750px) {
   .product-grid,
-  .grid.product-grid {
-    grid-template-columns: repeat(3, 1fr) !important;
+  .grid.product-grid,
+  .slider.product-grid,
+  slider-component .slider {
+    grid-template-columns: repeat(4, 1fr) !important;
     gap: var(--grid-gap) !important;
   }
 }
 
 @media screen and (min-width: 990px) {
   .product-grid,
-  .grid.product-grid {
+  .grid.product-grid,
+  .slider.product-grid,
+  slider-component .slider {
     grid-template-columns: repeat(4, 1fr) !important;
     gap: var(--grid-gap) !important;
   }
 }
 
-/* Override slider behavior when slider is disabled */
-.slider.product-grid {
+/* Override ALL slider behavior - force grid on desktop */
+.slider.product-grid,
+slider-component .slider,
+.collection-list slider-component .slider {
   display: grid !important;
   overflow: visible !important;
+  scroll-snap-type: none !important;
 }
 
-.slider.product-grid .slider__slide {
+.slider.product-grid .slider__slide,
+slider-component .slider__slide,
+.grid__item {
   width: 100% !important;
   min-width: 0 !important;
+  flex: none !important;
+}
+
+@media screen and (min-width: 990px) {
+  /* Force 4-column grid on desktop */
+  .slider.product-grid,
+  slider-component .slider,
+  .collection-list slider-component .slider {
+    grid-template-columns: repeat(4, 1fr) !important;
+  }
 }
 
 /* ============================================
@@ -201,18 +223,25 @@
   position: relative !important;
 }
 
-/* Card Media/Image */
+/* Card Media/Image - 9:16 Aspect Ratio */
 .card__media,
 .card .media {
   position: relative !important;
   width: 100% !important;
-  aspect-ratio: var(--card-aspect-ratio) !important;
+  aspect-ratio: 9 / 16 !important;
   height: auto !important;
-  min-height: 260px !important;
+  min-height: 320px !important;
   max-height: var(--card-image-height) !important;
   overflow: hidden !important;
   background: #f9f9f9 !important;
   flex-shrink: 0 !important;
+}
+
+@media screen and (min-width: 990px) {
+  .card__media,
+  .card .media {
+    min-height: 380px !important;
+  }
 }
 
 .card__media img,
@@ -268,23 +297,27 @@
 }
 
 .price__sale {
-  color: var(--ishori-primary) !important;
-}
-
-/* ============================================
-   COLLECTION LIST/GRID SYSTEM
-   ============================================ */
-
-.collection-list {
+.collection-list,
+.collection-list .slider {
   display: grid !important;
   grid-template-columns: repeat(2, 1fr) !important;
   gap: var(--grid-gap-sm) !important;
   width: 100% !important;
+  overflow: visible !important;
 }
 
 @media screen and (min-width: 750px) {
-  .collection-list {
-    grid-template-columns: repeat(3, 1fr) !important;
+  .collection-list,
+  .collection-list .slider {
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: var(--grid-gap) !important;
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .collection-list,
+  .collection-list .slider {
+    grid-template-columns: repeat(4, 1fr) !important;
     gap: var(--grid-gap) !important;
   }
 }
@@ -309,10 +342,16 @@
 }
 
 .card--collection:hover {
-  transform: translateY(-4px) !important;
-  box-shadow: var(--shadow-lg) !important;
+.card--collection .card__media {
+  aspect-ratio: 9 / 16 !important;
+  min-height: 280px !important;
 }
 
+@media screen and (min-width: 990px) {
+  .card--collection .card__media {
+    min-height: 380px !important;
+  }
+}
 .card--collection .card__media {
   aspect-ratio: var(--collection-card-aspect-ratio) !important;
   min-height: var(--collection-card-height) !important;

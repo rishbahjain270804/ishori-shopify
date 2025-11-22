@@ -474,22 +474,19 @@ h2.inline-richtext {
 /* Enhanced Card Media - 9:16 ASPECT RATIO */
 .card__media,
 .card .media,
-.card__inner .card__media {
+.card__inner .card__media,
+.media--transparent {
   position: relative !important;
   overflow: hidden !important;
   background: #f9f9f9 !important;
   border-radius: 8px 8px 0 0 !important;
   aspect-ratio: 9 / 16 !important;
-  min-height: 320px !important;
+  width: 100% !important;
+  height: auto !important;
   flex: 0 0 auto !important;
-}
-
-@media screen and (min-width: 990px) {
-  .card__media,
-  .card .media,
-  .card__inner .card__media {
-    min-height: 380px !important;
-  }
+  padding-bottom: 0 !important;
+  min-height: unset !important;
+  max-height: none !important;
 }
 
 .card__media img,

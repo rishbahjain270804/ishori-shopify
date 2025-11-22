@@ -99,10 +99,19 @@
 /* Remove Shopify's ratio padding hack globally for cards */
 .card .ratio::before,
 .card__inner.ratio::before,
-.media.ratio::before {
+.media.ratio::before,
+.card__media.ratio::before {
   content: none !important;
   display: none !important;
   padding-bottom: 0 !important;
+}
+
+.card .ratio,
+.card__inner.ratio,
+.media.ratio,
+.card__media.ratio {
+  padding-bottom: 0 !important;
+  position: relative !important;
 }
 
 /* ============================================
@@ -130,12 +139,16 @@
 .product-grid,
 .grid.product-grid,
 .slider.product-grid,
-slider-component .slider {
+slider-component .slider,
+.collection .slider {
   display: grid !important;
   grid-template-columns: repeat(2, 1fr) !important;
   gap: var(--grid-gap-sm) !important;
   width: 100% !important;
   overflow: visible !important;
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
 }
 
 @media screen and (min-width: 750px) {
@@ -169,10 +182,14 @@ slider-component .slider,
 
 .slider.product-grid .slider__slide,
 slider-component .slider__slide,
-.grid__item {
+.grid__item,
+.collection .slider .grid__item {
   width: 100% !important;
   min-width: 0 !important;
+  max-width: 100% !important;
   flex: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
 @media screen and (min-width: 990px) {
@@ -193,6 +210,7 @@ slider-component .slider__slide,
 .grid__item {
   position: relative !important;
   width: 100% !important;
+  min-width: 0 !important;
 }
 
 .card {
@@ -203,6 +221,7 @@ slider-component .slider__slide,
   border-radius: var(--card-border-radius) !important;
   overflow: hidden !important;
   transition: transform var(--transition-base), box-shadow var(--transition-base) !important;
+  box-shadow: var(--shadow-sm) !important;
 }
 
 .card:hover {
@@ -216,41 +235,52 @@ slider-component .slider__slide,
   flex-direction: column !important;
   height: 100% !important;
   position: relative !important;
+  width: 100% !important;
 }
 
 .card__inner.ratio {
   padding-bottom: 0 !important;
   position: relative !important;
+  height: auto !important;
 }
 
 /* Card Media/Image - 9:16 Aspect Ratio */
 .card__media,
-.card .media {
+.card .media,
+.card__inner .media,
+.media--transparent,
+.card .card__media {
   position: relative !important;
   width: 100% !important;
   aspect-ratio: 9 / 16 !important;
   height: auto !important;
-  min-height: 320px !important;
-  max-height: var(--card-image-height) !important;
+  min-height: unset !important;
+  max-height: none !important;
   overflow: hidden !important;
   background: #f9f9f9 !important;
   flex-shrink: 0 !important;
+  padding-bottom: 0 !important;
+  display: block !important;
 }
 
-@media screen and (min-width: 990px) {
-  .card__media,
-  .card .media {
-    min-height: 380px !important;
-  }
+/* Ensure images load properly */
+.card__media > img,
+.media > img,
+img.motion-reduce {
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
 .card__media img,
-.card .media img {
+.card .media img,
+.media img {
   width: 100% !important;
   height: 100% !important;
   object-fit: cover !important;
   object-position: center !important;
   transition: transform var(--transition-slow) !important;
+  display: block !important;
+  position: relative !important;
 }
 
 .card:hover .card__media img,

@@ -1,3 +1,14 @@
+* {
+  max-width: 100%;
+}
+
+html,
+body {
+  overflow-x: hidden !important;
+  width: 100% !important;
+  position: relative !important;
+}
+
 :root {
   --alpha-button-background: 1;
   --alpha-button-border: 1;

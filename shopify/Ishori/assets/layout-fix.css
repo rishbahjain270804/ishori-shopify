@@ -7,17 +7,22 @@
    HEADER / NAVBAR FIX
    ================================ */
 
-/* Fix section-header wrapper */
+/* Fix section-header wrapper - NO CONTAINER */
 .section-header,
 .header-wrapper {
   position: relative !important;
   z-index: 999 !important;
+  width: 100% !important;
+  max-width: none !important;
+  overflow: visible !important;
 }
 
 .shopify-section-header-sticky {
   position: sticky !important;
   top: 0 !important;
   z-index: 999 !important;
+  width: 100% !important;
+  max-width: none !important;
 }
 
 .header {
@@ -26,6 +31,8 @@
   position: relative !important;
   padding: 16px 24px !important;
   width: 100% !important;
+  max-width: none !important;
+  overflow: visible !important;
 }
 
 .header__inline-menu {

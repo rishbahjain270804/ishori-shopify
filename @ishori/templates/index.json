@@ -1,0 +1,26 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero-banner",
+      "settings": {
+        "title": "Exquisite Handcrafted Sarees",
+        "subtitle": "Celebrating Indian Tradition & Elegance",
+        "button_text": "Shop Now",
+        "button_link": "/collections/all"
+      }
+    },
+    "featured-collection": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "New Arrivals",
+        "description": "Discover our latest collection of traditional sarees",
+        "products_to_show": 8,
+        "show_view_all": true
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "featured-collection"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "general": {
+    "search": {
+      "search": "Search"
+    }
+  },
+  "sections": {
+    "header": {
+      "menu": "Menu"
+    }
+  },
+  "customer": {
+    "account_fallback": "Account",
+    "log_in": "Log in"
+  },
+  "templates": {
+    "cart": {
+      "cart": "Cart",
+      "items": "items"
+    }
+  }
+}

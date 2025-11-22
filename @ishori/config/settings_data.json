@@ -1,0 +1,31 @@
+{
+  "current": {
+    "color_primary": "#5f0511",
+    "color_dark": "#3c030b",
+    "color_accent": "#8a0a1e",
+    "color_background": "#fff2f1",
+    "color_white": "#ffffff",
+    "font_heading": "serif",
+    "font_body": "sans_serif",
+    "font_size_base": 16,
+    "logo_width": 120,
+    "main_menu": "main-menu",
+    "footer_about_text": "Exquisite handcrafted sarees celebrating Indian tradition and elegance.",
+    "footer_menu": "footer",
+    "social_facebook": "",
+    "social_instagram": "",
+    "social_twitter": "",
+    "social_pinterest": "",
+    "cart_type": "drawer",
+    "sections": {
+      "header": {
+        "type": "header",
+        "settings": {}
+      },
+      "footer": {
+        "type": "footer",
+        "settings": {}
+      }
+    }
+  }
+}

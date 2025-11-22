@@ -1,0 +1,234 @@
+<div class="product-page">
+  <div class="container">
+    <div class="product-layout">
+      <!-- Product Images -->
+      <div class="product-images">
+        {% if product.images.size > 0 %}
+          <div class="product-main-image">
+            <img src="{{ product.featured_image | image_url: width: 800 }}" 
+                 alt="{{ product.title }}" 
+                 id="main-product-image">
+          </div>
+          
+          {% if product.images.size > 1 %}
+            <div class="product-thumbnails">
+              {% for image in product.images limit: 5 %}
+                <img src="{{ image | image_url: width: 150 }}" 
+                     alt="{{ product.title }}"
+                     class="thumbnail {% if forloop.first %}active{% endif %}"
+                     data-image="{{ image | image_url: width: 800 }}">
+              {% endfor %}
+            </div>
+          {% endif %}
+        {% endif %}
+      </div>
+
+      <!-- Product Info -->
+      <div class="product-details">
+        <h1 class="product-title">{{ product.title }}</h1>
+        
+        <div class="product-price-wrapper">
+          {% if product.compare_at_price > product.price %}
+            <span class="price-compare">{{ product.compare_at_price | money }}</span>
+            <span class="price-sale">{{ product.price | money }}</span>
+            <span class="price-badge">Save {{ product.compare_at_price | minus: product.price | money }}</span>
+          {% else %}
+            <span class="price-regular">{{ product.price | money }}</span>
+          {% endif %}
+        </div>
+
+        {% if product.description != blank %}
+          <div class="product-description">
+            {{ product.description }}
+          </div>
+        {% endif %}
+
+        <!-- Product Form -->
+        {% form 'product', product %}
+          <div class="product-variants">
+            {% unless product.has_only_default_variant %}
+              {% for option in product.options_with_values %}
+                <div class="variant-selector">
+                  <label>{{ option.name }}</label>
+                  <select name="options[{{ option.name }}]" class="variant-select">
+                    {% for value in option.values %}
+                      <option value="{{ value }}">{{ value }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+              {% endfor %}
+            {% endunless %}
+          </div>
+
+          <div class="product-quantity">
+            <label>Quantity</label>
+            <input type="number" name="quantity" value="1" min="1" class="quantity-input">
+          </div>
+
+          <button type="submit" name="add" class="btn btn-primary btn-large btn-add-to-cart">
+            {% if product.available %}
+              Add to Cart
+            {% else %}
+              Sold Out
+            {% endif %}
+          </button>
+        {% endform %}
+
+        <!-- Product Meta -->
+        {% if product.vendor != blank %}
+          <div class="product-meta">
+            <span><strong>Vendor:</strong> {{ product.vendor }}</span>
+          </div>
+        {% endif %}
+        
+        {% if product.type != blank %}
+          <div class="product-meta">
+            <span><strong>Type:</strong> {{ product.type }}</span>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .product-page {
+    padding: 6rem 0;
+  }
+
+  .product-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+  }
+
+  .product-main-image img {
+    width: 100%;
+    border-radius: 18px;
+  }
+
+  .product-thumbnails {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+
+  .thumbnail {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: border-color 0.2s ease;
+  }
+
+  .thumbnail.active,
+  .thumbnail:hover {
+    border-color: var(--color-brand-primary);
+  }
+
+  .product-title {
+    font-size: 3.6rem;
+    color: var(--color-brand-primary);
+    margin-bottom: 2rem;
+  }
+
+  .product-price-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+    font-size: 2.4rem;
+    font-weight: 700;
+  }
+
+  .price-badge {
+    background: var(--color-brand-accent);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 1.4rem;
+  }
+
+  .product-description {
+    margin-bottom: 3rem;
+    line-height: 1.8;
+    color: var(--color-brand-dark);
+  }
+
+  .variant-selector {
+    margin-bottom: 2rem;
+  }
+
+  .variant-selector label {
+    display: block;
+    margin-bottom: 0.8rem;
+    font-weight: 600;
+  }
+
+  .variant-select,
+  .quantity-input {
+    width: 100%;
+    padding: 1.2rem;
+    border: 1px solid rgba(95, 5, 17, 0.2);
+    border-radius: 8px;
+    font-size: 1.6rem;
+  }
+
+  .product-quantity {
+    margin-bottom: 2rem;
+  }
+
+  .product-quantity label {
+    display: block;
+    margin-bottom: 0.8rem;
+    font-weight: 600;
+  }
+
+  .quantity-input {
+    max-width: 120px;
+  }
+
+  .btn-add-to-cart {
+    width: 100%;
+    margin-bottom: 2rem;
+  }
+
+  .product-meta {
+    padding: 1.5rem 0;
+    border-top: 1px solid rgba(95, 5, 17, 0.1);
+  }
+
+  @media (max-width: 768px) {
+    .product-layout {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+
+    .product-title {
+      font-size: 2.8rem;
+    }
+  }
+</style>
+
+<script>
+  // Thumbnail click handler
+  const thumbnails = document.querySelectorAll('.thumbnail');
+  const mainImage = document.getElementById('main-product-image');
+  
+  thumbnails.forEach(thumb => {
+    thumb.addEventListener('click', function() {
+      thumbnails.forEach(t => t.classList.remove('active'));
+      this.classList.add('active');
+      mainImage.src = this.dataset.image;
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Product Page",
+  "settings": []
+}
+{% endschema %}

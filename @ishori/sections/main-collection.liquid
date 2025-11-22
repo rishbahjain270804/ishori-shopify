@@ -1,0 +1,185 @@
+<div class="collection-page">
+  <div class="container">
+    <!-- Collection Header -->
+    <div class="collection-header text-center">
+      <h1>{{ collection.title }}</h1>
+      {% if collection.description != blank %}
+        <p>{{ collection.description }}</p>
+      {% endif %}
+    </div>
+
+    <!-- Product Grid -->
+    <div class="product-grid">
+      {% for product in collection.products %}
+        <div class="product-card">
+          <a href="{{ product.url }}" class="product-card-link">
+            {% if product.featured_image %}
+              <img src="{{ product.featured_image | image_url: width: 600 }}" 
+                   alt="{{ product.title }}" 
+                   loading="lazy"
+                   class="product-image">
+            {% else %}
+              <div class="product-image-placeholder">No image</div>
+            {% endif %}
+            
+            <div class="product-info">
+              <h3 class="product-title">{{ product.title }}</h3>
+              <div class="product-price">
+                {% if product.compare_at_price > product.price %}
+                  <span class="price-compare">{{ product.compare_at_price | money }}</span>
+                  <span class="price-sale">{{ product.price | money }}</span>
+                {% else %}
+                  <span class="price-regular">{{ product.price | money }}</span>
+                {% endif %}
+              </div>
+            </div>
+
+            {% if product.available == false %}
+              <span class="product-badge badge-sold-out">Sold Out</span>
+            {% elsif product.compare_at_price > product.price %}
+              <span class="product-badge badge-sale">Sale</span>
+            {% endif %}
+          </a>
+
+          <button class="btn btn-secondary btn-quick-add" data-product-id="{{ product.variants.first.id }}">
+            Quick Add
+          </button>
+        </div>
+      {% else %}
+        <p class="text-center" style="grid-column: 1 / -1;">No products in this collection.</p>
+      {% endfor %}
+    </div>
+
+    <!-- Pagination -->
+    {% if paginate.pages > 1 %}
+      <div class="pagination">
+        {% if paginate.previous %}
+          <a href="{{ paginate.previous.url }}" class="pagination-btn">Previous</a>
+        {% endif %}
+
+        {% for part in paginate.parts %}
+          {% if part.is_link %}
+            <a href="{{ part.url }}" class="pagination-number">{{ part.title }}</a>
+          {% else %}
+            <span class="pagination-number active">{{ part.title }}</span>
+          {% endif %}
+        {% endfor %}
+
+        {% if paginate.next %}
+          <a href="{{ paginate.next.url }}" class="pagination-btn">Next</a>
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+<style>
+  .collection-page {
+    padding: 6rem 0;
+  }
+
+  .collection-header {
+    margin-bottom: 6rem;
+  }
+
+  .collection-header h1 {
+    font-size: 4.8rem;
+    color: var(--color-brand-primary);
+    margin-bottom: 1.5rem;
+  }
+
+  .collection-header p {
+    font-size: 1.8rem;
+    color: var(--color-brand-dark);
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .btn-quick-add {
+    width: calc(100% - 4rem);
+    margin: 0 2rem 2rem;
+  }
+
+  .pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 6rem;
+  }
+
+  .pagination-btn,
+  .pagination-number {
+    padding: 1rem 1.5rem;
+    border: 1px solid rgba(95, 5, 17, 0.2);
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--color-brand-dark);
+    transition: all 0.2s ease;
+  }
+
+  .pagination-btn:hover,
+  .pagination-number:hover {
+    background: var(--color-brand-primary);
+    color: white;
+    border-color: var(--color-brand-primary);
+  }
+
+  .pagination-number.active {
+    background: var(--color-brand-primary);
+    color: white;
+    border-color: var(--color-brand-primary);
+  }
+
+  @media (max-width: 768px) {
+    .collection-header h1 {
+      font-size: 3.2rem;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const quickAddButtons = document.querySelectorAll('.btn-quick-add');
+    
+    quickAddButtons.forEach(button => {
+      button.addEventListener('click', async function(e) {
+        e.preventDefault();
+        const variantId = this.dataset.productId;
+        
+        try {
+          const response = await fetch('/cart/add.js', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              items: [{
+                id: variantId,
+                quantity: 1
+              }]
+            })
+          });
+
+          if (response.ok) {
+            const cart = await fetch('/cart.js').then(r => r.json());
+            document.getElementById('cart-count').textContent = cart.item_count;
+            this.textContent = 'Added!';
+            setTimeout(() => {
+              this.textContent = 'Quick Add';
+            }, 2000);
+          }
+        } catch (error) {
+          console.error('Error adding to cart:', error);
+        }
+      });
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Collection Page",
+  "settings": []
+}
+{% endschema %}

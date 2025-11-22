@@ -1,0 +1,168 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Ishori",
+    "theme_version": "1.0.0",
+    "theme_author": "Ishori Team",
+    "theme_documentation_url": "",
+    "theme_support_url": ""
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Brand Colors"
+      },
+      {
+        "type": "color",
+        "id": "color_primary",
+        "label": "Primary Color",
+        "default": "#5f0511"
+      },
+      {
+        "type": "color",
+        "id": "color_dark",
+        "label": "Dark Color",
+        "default": "#3c030b"
+      },
+      {
+        "type": "color",
+        "id": "color_accent",
+        "label": "Accent Color",
+        "default": "#8a0a1e"
+      },
+      {
+        "type": "color",
+        "id": "color_background",
+        "label": "Background Color",
+        "default": "#fff2f1"
+      },
+      {
+        "type": "color",
+        "id": "color_white",
+        "label": "White Color",
+        "default": "#ffffff"
+      }
+    ]
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Font Settings"
+      },
+      {
+        "type": "font_picker",
+        "id": "font_heading",
+        "label": "Heading Font",
+        "default": "serif"
+      },
+      {
+        "type": "font_picker",
+        "id": "font_body",
+        "label": "Body Font",
+        "default": "sans_serif"
+      },
+      {
+        "type": "range",
+        "id": "font_size_base",
+        "label": "Base Font Size",
+        "min": 12,
+        "max": 20,
+        "step": 1,
+        "unit": "px",
+        "default": 16
+      }
+    ]
+  },
+  {
+    "name": "Header",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Logo"
+      },
+      {
+        "type": "range",
+        "id": "logo_width",
+        "label": "Logo Width",
+        "min": 40,
+        "max": 200,
+        "step": 10,
+        "unit": "px",
+        "default": 120
+      },
+      {
+        "type": "link_list",
+        "id": "main_menu",
+        "label": "Main Menu",
+        "default": "main-menu"
+      }
+    ]
+  },
+  {
+    "name": "Footer",
+    "settings": [
+      {
+        "type": "textarea",
+        "id": "footer_about_text",
+        "label": "About Text",
+        "default": "Exquisite handcrafted sarees celebrating Indian tradition and elegance."
+      },
+      {
+        "type": "link_list",
+        "id": "footer_menu",
+        "label": "Footer Menu",
+        "default": "footer"
+      },
+      {
+        "type": "header",
+        "content": "Social Media"
+      },
+      {
+        "type": "url",
+        "id": "social_facebook",
+        "label": "Facebook URL"
+      },
+      {
+        "type": "url",
+        "id": "social_instagram",
+        "label": "Instagram URL"
+      },
+      {
+        "type": "url",
+        "id": "social_twitter",
+        "label": "Twitter URL"
+      },
+      {
+        "type": "url",
+        "id": "social_pinterest",
+        "label": "Pinterest URL"
+      }
+    ]
+  },
+  {
+    "name": "Cart",
+    "settings": [
+      {
+        "type": "select",
+        "id": "cart_type",
+        "label": "Cart Type",
+        "options": [
+          {
+            "value": "page",
+            "label": "Page"
+          },
+          {
+            "value": "drawer",
+            "label": "Drawer"
+          }
+        ],
+        "default": "drawer"
+      }
+    ]
+  }
+]

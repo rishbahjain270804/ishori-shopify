@@ -1,0 +1,169 @@
+<menu-drawer class="mobile-menu-drawer">
+  <details>
+    <summary class="mobile-menu-summary" aria-label="Open mobile menu">
+      <span class="mobile-menu-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </span>
+    </summary>
+
+    <div class="mobile-menu-panel">
+      <div class="mobile-menu-header">
+        <span class="mobile-menu-title">Menu</span>
+        <button class="mobile-menu-close" aria-label="Close menu">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <nav class="mobile-menu-nav">
+        <ul class="mobile-menu-list">
+          {% for link in linklists.main-menu.links %}
+            <li>
+              <a href="{{ link.url }}" class="mobile-menu-link">
+                {{ link.title }}
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+
+        <div class="mobile-menu-footer">
+          <a href="{{ routes.account_url }}" class="mobile-menu-link">My Account</a>
+          <a href="{{ routes.search_url }}" class="mobile-menu-link">Search</a>
+        </div>
+      </nav>
+    </div>
+  </details>
+</menu-drawer>
+
+<style>
+  .mobile-menu-drawer {
+    display: none;
+  }
+
+  @media (max-width: 768px) {
+    .mobile-menu-drawer {
+      display: block;
+    }
+
+    .mobile-menu-summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 1rem;
+    }
+
+    .mobile-menu-summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .mobile-menu-icon svg {
+      width: 2.4rem;
+      height: 2.4rem;
+      color: var(--color-brand-primary);
+    }
+
+    .mobile-menu-panel {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 80%;
+      max-width: 400px;
+      height: 100vh;
+      background: white;
+      z-index: 9999;
+      box-shadow: -4px 0 12px rgba(0, 0, 0, 0.1);
+      overflow-y: auto;
+    }
+
+    .mobile-menu-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 2rem;
+      border-bottom: 1px solid rgba(95, 5, 17, 0.1);
+    }
+
+    .mobile-menu-title {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--color-brand-primary);
+    }
+
+    .mobile-menu-close {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.5rem;
+    }
+
+    .mobile-menu-close svg {
+      width: 2.4rem;
+      height: 2.4rem;
+      color: var(--color-brand-dark);
+    }
+
+    .mobile-menu-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .mobile-menu-link {
+      display: block;
+      padding: 1.5rem 2rem;
+      color: var(--color-brand-dark);
+      text-decoration: none;
+      font-size: 1.6rem;
+      border-bottom: 1px solid rgba(95, 5, 17, 0.05);
+      transition: background-color 0.2s ease;
+    }
+
+    .mobile-menu-link:hover {
+      background-color: var(--color-background);
+    }
+
+    .mobile-menu-footer {
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(95, 5, 17, 0.1);
+    }
+  }
+</style>
+
+<script>
+  if (!customElements.get('menu-drawer')) {
+    class MenuDrawer extends HTMLElement {
+      constructor() {
+        super();
+        this.details = this.querySelector('details');
+        this.closeButton = this.querySelector('.mobile-menu-close');
+        
+        if (this.closeButton) {
+          this.closeButton.addEventListener('click', () => {
+            this.details.removeAttribute('open');
+          });
+        }
+
+        // Close on overlay click
+        this.details.addEventListener('click', (e) => {
+          if (e.target === this.details) {
+            this.details.removeAttribute('open');
+          }
+        });
+      }
+    }
+    customElements.define('menu-drawer', MenuDrawer);
+  }
+</script>
+
+{% schema %}
+{
+  "name": "Mobile Menu",
+  "settings": []
+}
+{% endschema %}

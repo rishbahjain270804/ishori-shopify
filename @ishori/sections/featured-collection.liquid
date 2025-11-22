@@ -1,0 +1,277 @@
+<div class="collection-section">
+  <div class="container">
+    <div class="section-header text-center">
+      <h2>{{ section.settings.title | default: 'Featured Collection' }}</h2>
+      {% if section.settings.description != blank %}
+        <p>{{ section.settings.description }}</p>
+      {% endif %}
+    </div>
+
+    {% if section.settings.collection != blank %}
+      {% assign collection = collections[section.settings.collection] %}
+      
+      <div class="product-grid">
+        {% for product in collection.products limit: section.settings.products_to_show %}
+          <div class="product-card">
+            <a href="{{ product.url }}" class="product-card-link">
+              {% if product.featured_image %}
+                <img src="{{ product.featured_image | image_url: width: 600 }}" 
+                     alt="{{ product.title }}" 
+                     loading="lazy"
+                     class="product-image">
+              {% else %}
+                <div class="product-image-placeholder">No image</div>
+              {% endif %}
+              
+              <div class="product-info">
+                <h3 class="product-title">{{ product.title }}</h3>
+                <div class="product-price">
+                  {% if product.compare_at_price > product.price %}
+                    <span class="price-compare">{{ product.compare_at_price | money }}</span>
+                    <span class="price-sale">{{ product.price | money }}</span>
+                  {% else %}
+                    <span class="price-regular">{{ product.price | money }}</span>
+                  {% endif %}
+                </div>
+              </div>
+
+              {% if product.available == false %}
+                <span class="product-badge badge-sold-out">Sold Out</span>
+              {% elsif product.compare_at_price > product.price %}
+                <span class="product-badge badge-sale">Sale</span>
+              {% endif %}
+            </a>
+
+            <button class="btn btn-secondary btn-add-to-cart" data-product-id="{{ product.variants.first.id }}">
+              Add to Cart
+            </button>
+          </div>
+        {% endfor %}
+      </div>
+
+      {% if section.settings.show_view_all %}
+        <div class="text-center" style="margin-top: 4rem;">
+          <a href="{{ collection.url }}" class="btn btn-primary">View All Products</a>
+        </div>
+      {% endif %}
+    {% else %}
+      <p class="text-center">Please select a collection in theme settings.</p>
+    {% endif %}
+  </div>
+</div>
+
+<style>
+  .collection-section {
+    padding: 8rem 0;
+  }
+
+  .section-header {
+    margin-bottom: 6rem;
+  }
+
+  .section-header h2 {
+    font-size: 4.8rem;
+    color: var(--color-brand-primary);
+    margin-bottom: 1.5rem;
+  }
+
+  .section-header p {
+    font-size: 1.8rem;
+    color: var(--color-brand-dark);
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .product-card {
+    position: relative;
+    background: white;
+    border-radius: 18px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .product-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 24px rgba(95, 5, 17, 0.15);
+  }
+
+  .product-card-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .product-image {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    display: block;
+  }
+
+  .product-image-placeholder {
+    width: 100%;
+    height: 400px;
+    background: #f5f5f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #999;
+  }
+
+  .product-info {
+    padding: 2rem;
+  }
+
+  .product-title {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    color: var(--color-brand-dark);
+  }
+
+  .product-price {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 1.8rem;
+    font-weight: 700;
+  }
+
+  .price-regular {
+    color: var(--color-brand-primary);
+  }
+
+  .price-sale {
+    color: var(--color-brand-accent);
+  }
+
+  .price-compare {
+    color: #999;
+    text-decoration: line-through;
+    font-size: 1.6rem;
+  }
+
+  .product-badge {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    padding: 0.8rem 1.6rem;
+    border-radius: 20px;
+    font-size: 1.3rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    z-index: 2;
+  }
+
+  .badge-sale {
+    background: var(--color-brand-accent);
+    color: white;
+  }
+
+  .badge-sold-out {
+    background: #999;
+    color: white;
+  }
+
+  .btn-add-to-cart {
+    width: calc(100% - 4rem);
+    margin: 0 2rem 2rem;
+  }
+
+  @media (max-width: 768px) {
+    .collection-section {
+      padding: 5rem 0;
+    }
+
+    .section-header h2 {
+      font-size: 3.2rem;
+    }
+
+    .product-image {
+      height: 300px;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const addToCartButtons = document.querySelectorAll('.btn-add-to-cart');
+    
+    addToCartButtons.forEach(button => {
+      button.addEventListener('click', async function(e) {
+        e.preventDefault();
+        const variantId = this.dataset.productId;
+        
+        try {
+          const response = await fetch('/cart/add.js', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              items: [{
+                id: variantId,
+                quantity: 1
+              }]
+            })
+          });
+
+          if (response.ok) {
+            const cart = await fetch('/cart.js').then(r => r.json());
+            document.getElementById('cart-count').textContent = cart.item_count;
+            this.textContent = 'Added!';
+            setTimeout(() => {
+              this.textContent = 'Add to Cart';
+            }, 2000);
+          }
+        } catch (error) {
+          console.error('Error adding to cart:', error);
+        }
+      });
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Featured Collection",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "Featured Collection"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Section Description"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "label": "Products to Show",
+      "min": 2,
+      "max": 12,
+      "step": 1,
+      "default": 8
+    },
+    {
+      "type": "checkbox",
+      "id": "show_view_all",
+      "label": "Show 'View All' Button",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured Collection"
+    }
+  ]
+}
+{% endschema %}

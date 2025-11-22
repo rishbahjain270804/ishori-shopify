@@ -101,13 +101,13 @@ body {
   -webkit-overflow-scrolling: touch !important;
 }
 
-/* Handle menu open state */
+/* Handle menu open state - FIX: Remove position fixed to prevent inner scroll */
 body.overflow-hidden,
 body.overflow-hidden-tablet,
 body.overflow-hidden-mobile,
 body[class*="overflow-hidden"] {
-  overflow: hidden !important;
-  position: fixed !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
   width: 100% !important;
 }
 

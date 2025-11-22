@@ -7,13 +7,25 @@
    HEADER / NAVBAR FIX
    ================================ */
 
+/* Fix section-header wrapper */
+.section-header,
+.header-wrapper {
+  position: relative !important;
+  z-index: 999 !important;
+}
+
+.shopify-section-header-sticky {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 999 !important;
+}
+
 .header {
   background: #fff !important;
   box-shadow: 0 2px 8px rgba(0,0,0,0.08) !important;
-  position: sticky !important;
-  top: 0 !important;
-  z-index: 100 !important;
+  position: relative !important;
   padding: 16px 24px !important;
+  width: 100% !important;
 }
 
 .header__inline-menu {
@@ -134,25 +146,54 @@
   }
 }
 
+/* EXACT MOORA SPACING */
+.page-width {
+  max-width: 1400px !important;
+  margin: 0 auto !important;
+  padding: 0 40px !important;
+}
+
+@media screen and (max-width: 749px) {
+  .page-width {
+    padding: 0 16px !important;
+  }
+}
+
+/* Section Spacing - EXACT MOORA */
+.section,
+[class*="section-"] {
+  padding-top: 60px !important;
+  padding-bottom: 60px !important;
+}
+
+@media screen and (max-width: 749px) {
+  .section,
+  [class*="section-"] {
+    padding-top: 40px !important;
+    padding-bottom: 40px !important;
+  }
+}
+
 /* Section Background Fix */
 .color-scheme-1,
 .gradient {
   background: #fff;
 }
 
-/* Enhanced Section Titles - STRONG specificity */
+/* Enhanced Section Titles - EXACT MOORA SIZING */
 .collection-list-title,
 .title-wrapper h2,
 .title-wrapper-with-link h2,
 h2.h2,
 h2.inline-richtext {
-  font-size: 28px !important;
+  font-size: 24px !important;
   font-weight: 700 !important;
   text-align: center !important;
   text-transform: uppercase !important;
-  letter-spacing: 2px !important;
-  color: #333 !important;
-  margin-bottom: 40px !important;
+  letter-spacing: 3px !important;
+  color: #222 !important;
+  margin: 0 0 32px 0 !important;
+  padding-bottom: 0 !important;
 }
 
 /* Title underline effect */
@@ -160,44 +201,53 @@ h2.inline-richtext {
 .title-wrapper h2::after {
   content: '';
   display: block;
-  width: 80px;
-  height: 3px;
-  background: linear-gradient(90deg, #5f0511, #8a0a1e);
-  margin: 16px auto 0;
-  border-radius: 2px;
+  width: 60px;
+  height: 2px;
+  background: #5f0511;
+  margin: 12px auto 0;
+  border-radius: 1px;
 }
 
 @media (max-width: 749px) {
   .collection-list-title,
   .title-wrapper h2 {
-    font-size: 20px !important;
-    letter-spacing: 1px !important;
+    font-size: 18px !important;
+    letter-spacing: 2px !important;
+    margin-bottom: 24px !important;
   }
 }
 
-/* Enhanced Grid Layout - Works with existing .grid classes */
-.grid--4-col-desktop {
-  grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
+/* Enhanced Grid Layout - EXACT MOORA SPACING */
+.grid,
+.grid--4-col-desktop,
+.product-grid {
+  grid-template-columns: repeat(4, 1fr) !important;
+  gap: 20px !important;
+  row-gap: 32px !important;
 }
 
 .grid--3-col-desktop {
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 20px !important;
+  row-gap: 32px !important;
 }
 
 @media screen and (min-width: 750px) and (max-width: 989px) {
+  .grid,
   .grid--4-col-desktop {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 16px !important;
+    row-gap: 28px !important;
   }
 }
 
 @media screen and (max-width: 749px) {
+  .grid,
   .grid--4-col-desktop,
   .grid--3-col-desktop {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 12px !important;
+    row-gap: 20px !important;
   }
 }
 
@@ -255,23 +305,29 @@ h2.inline-richtext {
   transform: scale(1.05) !important;
 }
 
-/* Enhanced Card Content */
+/* Enhanced Card Content - EXACT MOORA */
 .card__information,
 .card__content,
 .card-information {
-  padding: 16px !important;
+  padding: 12px !important;
   background: #fff !important;
 }
 
 .card__heading,
 .card-information__text h3,
 .full-unstyled-link {
-  font-size: 14px !important;
+  font-size: 13px !important;
   font-weight: 500 !important;
-  line-height: 1.4 !important;
+  line-height: 1.5 !important;
   color: #333 !important;
-  margin: 0 0 8px 0 !important;
+  margin: 0 0 6px 0 !important;
   text-decoration: none !important;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2 !important;
+  line-clamp: 2 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+  min-height: 40px !important;
 }
 
 .card__heading:hover,
@@ -279,36 +335,48 @@ h2.inline-richtext {
   color: #5f0511 !important;
 }
 
-/* Enhanced Price Display */
+/* Enhanced Price Display - EXACT MOORA */
 .price,
 .price__container {
-  font-size: 16px !important;
-  font-weight: 600 !important;
-  color: #5f0511 !important;
-  margin-top: 8px !important;
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  color: #222 !important;
+  margin-top: 4px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
 }
 
 .price__regular {
-  font-size: 16px !important;
-  color: #5f0511 !important;
+  font-size: 15px !important;
+  color: #222 !important;
+  font-weight: 700 !important;
 }
 
 .price__sale {
-  font-size: 16px !important;
-  color: #d32f2f !important;
+  font-size: 15px !important;
+  color: #222 !important;
   font-weight: 700 !important;
 }
 
 .price--on-sale .price__regular {
   text-decoration: line-through !important;
   color: #999 !important;
-  font-size: 14px !important;
+  font-size: 13px !important;
+  font-weight: 400 !important;
 }
 
-/* Enhanced Collection Cards - STRONG specificity */
+.price__badge-sale {
+  font-size: 11px !important;
+  color: #d32f2f !important;
+  font-weight: 500 !important;
+  margin-left: 4px !important;
+}
+
+/* Enhanced Collection Cards - EXACT MOORA */
 .collection-list.contains-card,
 .collection-list {
-  gap: 24px !important;
+  gap: 20px !important;
   margin: 0 !important;
   padding: 0 !important;
 }
@@ -319,21 +387,20 @@ h2.inline-richtext {
 }
 
 .collection-list__item:hover {
-  transform: translateY(-4px) !important;
+  transform: translateY(-3px) !important;
 }
 
 .card--collection {
-  border-radius: 8px !important;
+  border-radius: 4px !important;
   overflow: hidden !important;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.06) !important;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08) !important;
   transition: all 0.3s ease !important;
   background: #fff !important;
-  border: 1px solid #f0f0f0 !important;
+  border: none !important;
 }
 
 .collection-list__item:hover .card--collection {
-  box-shadow: 0 8px 20px rgba(0,0,0,0.12) !important;
-  border-color: #e0e0e0 !important;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.12) !important;
 }
 
 .card--collection .card__media,
@@ -342,7 +409,7 @@ h2.inline-richtext {
   overflow: hidden !important;
   aspect-ratio: 3/4 !important;
   background: #f9f9f9 !important;
-  border-radius: 8px 8px 0 0 !important;
+  border-radius: 4px 4px 0 0 !important;
 }
 
 .card--collection .card__media img,
@@ -361,7 +428,7 @@ h2.inline-richtext {
 /* Collection card overlay/title */
 .card--collection .card__content,
 .card--collection .card__information {
-  padding: 16px !important;
+  padding: 14px !important;
   background: #fff !important;
   text-align: center !important;
 }
@@ -380,9 +447,9 @@ h2.inline-richtext {
   color: #5f0511 !important;
 }
 
-/* Enhanced Multicolumn - STRONG specificity */
+/* Enhanced Multicolumn - EXACT MOORA */
 .multicolumn-list {
-  gap: 32px !important;
+  gap: 28px !important;
   display: grid !important;
   grid-template-columns: repeat(4, 1fr) !important;
 }
@@ -390,45 +457,45 @@ h2.inline-richtext {
 @media screen and (max-width: 989px) {
   .multicolumn-list {
     grid-template-columns: repeat(2, 1fr) !important;
-    gap: 24px !important;
+    gap: 20px !important;
   }
 }
 
 @media screen and (max-width: 749px) {
   .multicolumn-list {
     grid-template-columns: 1fr !important;
-    gap: 20px !important;
+    gap: 16px !important;
   }
 }
 
 .multicolumn-card {
   text-align: center !important;
-  padding: 32px 24px !important;
+  padding: 24px 16px !important;
   background: #fff !important;
-  border-radius: 8px !important;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.06) !important;
+  border-radius: 4px !important;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05) !important;
   transition: all 0.3s ease !important;
-  border: 1px solid #f5f5f5 !important;
+  border: none !important;
 }
 
 .multicolumn-card:hover {
-  transform: translateY(-3px) !important;
-  box-shadow: 0 6px 16px rgba(95, 5, 17, 0.12) !important;
-  border-color: #eee !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08) !important;
 }
 
 .multicolumn-card__info h3,
 .multicolumn-card h3 {
-  font-size: 18px !important;
+  font-size: 16px !important;
   font-weight: 600 !important;
-  color: #5f0511 !important;
-  margin: 0 0 12px 0 !important;
+  color: #222 !important;
+  margin: 0 0 8px 0 !important;
   text-transform: none !important;
+  letter-spacing: 0 !important;
 }
 
 .multicolumn-card__info p,
 .multicolumn-card p {
-  font-size: 14px !important;
+  font-size: 13px !important;
   line-height: 1.6 !important;
   color: #666 !important;
   margin: 0 !important;
@@ -491,47 +558,48 @@ h2.inline-richtext {
   }
 }
 
-/* Newsletter Enhancement */
+/* Newsletter Enhancement - EXACT MOORA */
 .newsletter {
   background: #fff2f1 !important;
-  padding: 60px 24px !important;
+  padding: 50px 24px !important;
 }
 
 .newsletter__wrapper {
-  max-width: 700px !important;
+  max-width: 600px !important;
   margin: 0 auto !important;
   text-align: center !important;
 }
 
 .newsletter h2 {
-  font-size: 28px !important;
+  font-size: 24px !important;
   font-weight: 700 !important;
-  color: #333 !important;
-  margin-bottom: 16px !important;
+  color: #222 !important;
+  margin-bottom: 12px !important;
   text-transform: uppercase !important;
-  letter-spacing: 2px !important;
+  letter-spacing: 3px !important;
 }
 
 .newsletter-form__field-wrapper {
   display: flex !important;
-  gap: 12px !important;
-  max-width: 550px !important;
-  margin: 24px auto 0 !important;
+  gap: 8px !important;
+  max-width: 480px !important;
+  margin: 20px auto 0 !important;
 }
 
 @media screen and (max-width: 749px) {
   .newsletter-form__field-wrapper {
     flex-direction: column !important;
+    gap: 12px !important;
   }
 }
 
 .newsletter-form__field-wrapper input[type="email"],
 .field__input {
   flex: 1 !important;
-  padding: 14px 20px !important;
-  border-radius: 6px !important;
+  padding: 12px 16px !important;
+  border-radius: 3px !important;
   border: 1px solid #ddd !important;
-  font-size: 15px !important;
+  font-size: 14px !important;
 }
 
 .newsletter-form__button,
@@ -539,7 +607,7 @@ h2.inline-richtext {
   background: #5f0511 !important;
   color: #fff !important;
   font-weight: 600 !important;
-  padding: 14px 32px !important;
+  padding: 12px 28px !important;
   border-radius: 6px !important;
   border: none !important;
   transition: all 0.3s ease !important;

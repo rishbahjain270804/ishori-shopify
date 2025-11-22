@@ -126,9 +126,25 @@
   padding-right: var(--container-padding) !important;
 }
 
-/* Section spacing */
+/* Section spacing - REDUCED for tighter layout */
 .shopify-section {
   position: relative;
+  margin-bottom: 0 !important;
+}
+
+/* Remove excessive section padding */
+.shopify-section .section-padding,
+[class*="section-"][class*="-padding"] {
+  padding-top: 24px !important;
+  padding-bottom: 24px !important;
+}
+
+@media screen and (min-width: 750px) {
+  .shopify-section .section-padding,
+  [class*="section-"][class*="-padding"] {
+    padding-top: 32px !important;
+    padding-bottom: 32px !important;
+  }
 }
 
 /* ============================================
@@ -443,7 +459,7 @@ img.motion-reduce {
    ============================================ */
 
 .title-wrapper {
-  margin-bottom: var(--space-xl) !important;
+  margin-bottom: var(--space-md) !important;
   text-align: center !important;
 }
 
@@ -454,7 +470,8 @@ h2.title {
   color: var(--ishori-text) !important;
   letter-spacing: 0.5px !important;
   text-transform: uppercase !important;
-  margin-bottom: var(--space-lg) !important;
+  margin-bottom: var(--space-sm) !important;
+  margin-top: 0 !important;
 }
 
 @media screen and (min-width: 750px) {

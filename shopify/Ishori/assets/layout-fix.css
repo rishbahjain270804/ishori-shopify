@@ -212,6 +212,35 @@ section[id*="__newsletter"] .newsletter {
   margin: 0 auto !important;
 }
 
+section[id*="__product_showcase"] {
+  background: #fffdf4 !important;
+}
+
+section[id*="__product_showcase"] .multicolumn {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)) !important;
+  gap: 24px !important;
+}
+
+section[id*="__product_showcase"] .multicolumn-card {
+  padding: 24px 20px !important;
+  min-height: 180px !important;
+  border: 1px solid rgba(95, 5, 17, 0.12) !important;
+  border-radius: 16px !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05) !important;
+  background: #fff !important;
+}
+
+section[id*="__brand_story"] {
+  background: #fff8f6 !important;
+}
+
+section[id*="__brand_story"] .rich-text {
+  max-width: 900px !important;
+  text-align: center !important;
+  padding: 40px 20px !important;
+}
+
 section[id*="__featured_products_grid"] .collection {
   background: #fff8f6 !important;
   border-radius: 24px !important;
@@ -231,6 +260,24 @@ section[id*="__featured_products_grid"] .product-grid {
 
 section[id*="__featured_products_grid"] .grid__item {
   min-width: 0 !important;
+  width: 100% !important;
+}
+
+section[id*="__featured_products_grid"] slider-component .slider {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)) !important;
+  gap: 24px !important;
+  padding: 0 !important;
+}
+
+section[id*="__featured_products_grid"] .slider__slide {
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+section[id*="__featured_products_grid"] .slider-buttons {
+  display: none !important;
 }
 
 section[id*="__occasion_collections"],
@@ -249,6 +296,26 @@ section[id*="__collection_grid"] .collection-list__item {
   border-radius: 18px !important;
   padding: 12px !important;
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.04) !important;
+  display: flex !important;
+}
+
+section[id*="__occasion_collections"] .card--collection,
+section[id*="__collection_grid"] .card--collection {
+  display: flex !important;
+  flex-direction: column !important;
+  height: 100% !important;
+  border-radius: 16px !important;
+  border: 1px solid rgba(95, 5, 17, 0.08) !important;
+  background: #fff !important;
+}
+
+section[id*="__occasion_collections"] .card__information--collection,
+section[id*="__collection_grid"] .card__information--collection {
+  flex: 1 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
 }
 
 /* Section Background Fix */

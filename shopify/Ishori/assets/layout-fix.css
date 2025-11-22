@@ -433,6 +433,19 @@ h2.inline-richtext {
   height: 100% !important;
 }
 
+.card__inner.ratio,
+.card__inner[class*="ratio"] {
+  padding-bottom: 0 !important;
+  height: auto !important;
+  position: static !important;
+}
+
+.card__inner.ratio > *,
+.card__inner[class*="ratio"] > * {
+  position: static !important;
+  inset: auto !important;
+}
+
 /* Enhanced Card Media */
 .card__media,
 .card .media,
@@ -443,6 +456,7 @@ h2.inline-richtext {
   border-radius: 8px 8px 0 0 !important;
   aspect-ratio: 3 / 4 !important;
   min-height: 260px !important;
+  flex: 0 0 auto !important;
 }
 
 .card__media img,
